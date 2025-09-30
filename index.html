@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DJ Profile</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; }
+    .split { position: fixed; width: 50%; height: 100vh; top: 0; }
+    .left {
+      left: 0; background: #8B0000; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .right {
+      right: 0; background: #fff; color: #333; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    }
+    .button {
+      padding: 18px 44px; border: none; font-size: 22px; margin-top: 40px; cursor: pointer; border-radius: 9px;
+      transition: background 0.2s;
+    }
+    .left .button { background: #fff; color: #8B0000; }
+    .left .button:hover { background: #a83232; color: #fff; }
+    .right .button { background: #8B0000; color: #fff; }
+    .right .button:hover { background: #fff; color: #8B0000; border: 2px solid #8B0000; }
+  </style>
+</head>
+<body>
+  <div class="split left">
+      <h1>RaiBeat</h1>
+      <p>Dark, rebellious bass<br>Bass House, Moombahtoon, DnB, Hip Hop</p>
+      <button class="button" onclick="window.location.href='raibeat.html'">Enter RaiBeat</button>
+  </div>
+  <div class="split right">
+      <h1>Яsh</h1>
+      <p>Vibrant beach vibes<br>Deep House, Afro Tech, Afro House, Melodic Techno</p>
+      <button class="button" onclick="window.location.href='rsh.html'">Enter Яsh</button>
+  </div>
+</body>
+</html>
+add index.html
