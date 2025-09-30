@@ -1,44 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>raiBeat & Яsh</title>
   <style>
-    html, body { height: 100%; margin: 0; padding: 0; }
-    body {
-      width: 100vw; height: 100vh;
-      display: flex; flex-direction: row;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       font-family: 'Arial', sans-serif;
     }
+    body {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+    }
     .half {
-      width: 50vw; height: 100vh;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 0 20px;
+      box-sizing: border-box;
     }
     .left {
       background: #1a0000;
       color: #ff3333;
+      background-image: url(''); /* add subtle textured background if you want */
     }
     .right {
-      background: #009198;
+      background: linear-gradient(135deg, #0b7a84 0%, #009898 100%);
       color: #b9ffff;
+      background-image: url(''); /* add subtle textured background if you want */
     }
     .main-title {
       font-size: 5em;
       font-weight: bold;
       line-height: 0.9em;
-      letter-spacing: 2px;
+      letter-spacing: 1.8px;
       margin-bottom: 32px;
       border: 3px solid currentColor;
       padding: 0.1em 0.4em;
-      background: transparent;
       border-radius: 8px;
+      background: transparent;
+      font-family: 'Arial Black', Arial, sans-serif;
+    }
+    .left .main-title {
+      filter: brightness(1.3);
+      /* For rebellious effect, slight tilt */
+      transform: rotate(-2deg);
     }
     .subtitle {
       font-size: 2em;
       font-style: italic;
       opacity: 0.9;
       margin-bottom: 44px;
+      text-align: center;
     }
     .button {
       font-size: 2em;
@@ -59,7 +80,7 @@
     }
     .right .button:hover {
       background: #b9ffff;
-      color: #009198;
+      color: #00776d;
     }
   </style>
 </head>
