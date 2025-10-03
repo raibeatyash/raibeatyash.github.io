@@ -40,7 +40,8 @@
       letter-spacing: 3px;
       margin: 0;
       text-transform: capitalize;
-      animation: flicker 3s infinite;
+      position: relative;
+      animation: glitch 2s infinite;
     }
 
     .left .tagline {
@@ -50,14 +51,14 @@
       font-style: italic;
     }
 
-    /* Neon Flicker Effect */
-    @keyframes flicker {
-      0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        text-shadow: 0 0 4px #ff3333, 0 0 10px #ff0000, 0 0 20px #ff3333;
-      }
-      20%, 24%, 55% {
-        text-shadow: none;
-      }
+    /* Glitch effect */
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #ff3333, -2px -2px #fff; }
+      20% { text-shadow: -2px -2px #ff0000, 2px 2px #fff; }
+      40% { text-shadow: 2px -2px #ff6666, -2px 2px #ff0000; }
+      60% { text-shadow: -2px 2px #ff3333, 2px -2px #fff; }
+      80% { text-shadow: 2px 2px #ff0000, -2px -2px #ff6666; }
+      100% { text-shadow: none; }
     }
 
     /* Right side - Яsh */
