@@ -11,6 +11,7 @@
       font-family: Arial, sans-serif;
       overflow: hidden;
       display: flex;
+      position: relative;
     }
 
     /* Split screen */
@@ -26,6 +27,7 @@
       color: #fff;
       transition: width 1.2s ease, opacity 1.2s ease, background 1.2s ease;
       overflow: hidden;
+      z-index: 1;
     }
 
     /* Left side - raiBeat */
@@ -97,6 +99,7 @@
       cursor: pointer;
       margin-top: 20px;
       opacity: 1;
+      z-index: 2;
     }
     .enter-btn:hover, .back-btn:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -141,6 +144,16 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Ripple canvas */
+    #ripple-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -161,7 +174,7 @@
       <p>Exclusive underground sets and mixes.</p>
 
       <h2>📩 Contact</h2>
-      <p>Bookings and collabs: <a href="mailto:djraibeat@gmail.com">djraibeat@gmail.com</a></p>
+      <p>Bookings and collabs: <a href="mailto:raibeat@example.com">raibeat@example.com</a></p>
 
       <button class="back-btn" onclick="resetView()">⬅ Back</button>
     </div>
@@ -184,13 +197,50 @@
       <p>Join intimate beach vibes and soulful sessions.</p>
 
       <h2>📩 Contact</h2>
-      <p>Collabs and vibes: <a href="mailto:djraibeat@gmail.com">djraibeat@gmail.com</a></p>
+      <p>Collabs and vibes: <a href="mailto:yash@example.com">yash@example.com</a></p>
 
       <button class="back-btn" onclick="resetView()">⬅ Back</button>
     </div>
   </div>
 
+  <canvas id="ripple-canvas"></canvas>
+
   <script>
+    // Ripple canvas setup
+    const canvas = document.getElementById('ripple-canvas');
+    const ctx = canvas.getContext('2d');
+    let ripples = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Add ripple on mouse move
+    document.addEventListener('mousemove', e => {
+      ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.2});
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ripples.forEach((ripple, i) => {
+        ctx.beginPath();
+        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
+        ctx.lineWidth = 3;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+        ctx.stroke();
+        ripple.r += 1.8;
+        ripple.opacity -= 0.007;
+      });
+      ripples = ripples.filter(r => r.opacity > 0);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
     function expandSide(side) {
       if (side === 'left') {
         document.getElementById('left').classList.add('expanded');
@@ -225,7 +275,6 @@
       document.getElementById('raibeat-details').style.display = 'none';
       document.getElementById('yash-details').style.display = 'none';
 
-      // Reload the page when clicking back button
       location.reload();
     }
   </script>
