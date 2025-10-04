@@ -1,4 +1,10 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>raiBeat | Яsh</title>
+ <style>
   body {
     margin: 0;
     height: 100vh;
@@ -120,3 +126,131 @@
   animate();
 </script>
 </body>
+</head>
+<body>
+  <!-- Left Side: raiBeat -->
+  <div class="split left" id="left">
+    <h1>raiBeat</h1>
+    <p class="tagline" id="left-tagline">Raw. Rebellious. Rumble.</p>
+    <button class="enter-btn" id="left-enter" onclick="expandSide('left')">Enter</button>
+
+    <div class="details" id="raibeat-details">
+      <h2>🔥 Music Uploads</h2>
+      <p>Check out my rebellious and raw drops.</p>
+
+      <h2>⚡ Upcoming Events</h2>
+      <p>Stay updated with live gigs, events, and tour dates.</p>
+
+      <h2>🎛️ Mixes</h2>
+      <p>Exclusive underground sets and mixes.</p>
+
+      <h2>📩 Contact</h2>
+      <p>Bookings and collabs: <a href="mailto:raibeat@example.com">raibeat@example.com</a></p>
+
+      <button class="back-btn" onclick="resetView()">⬅ Back</button>
+    </div>
+  </div>
+
+  <!-- Right Side: Яsh -->
+  <div class="split right" id="right">
+    <h1>Яsh</h1>
+    <p class="tagline" id="right-tagline">Melodic Rhythm Therapy</p>
+    <button class="enter-btn" id="right-enter" onclick="expandSide('right')">Enter</button>
+
+    <div class="details" id="yash-details">
+      <h2>🎶 Chill Beats</h2>
+      <p>Relax and flow with melodic soundscapes.</p>
+
+      <h2>🌊 Rhythm Therapy</h2>
+      <p>Find peace in waves of rhythm and harmony.</p>
+
+      <h2>☀️ Events & Gatherings</h2>
+      <p>Join intimate beach vibes and soulful sessions.</p>
+
+      <h2>📩 Contact</h2>
+      <p>Collabs and vibes: <a href="mailto:yash@example.com">yash@example.com</a></p>
+
+      <button class="back-btn" onclick="resetView()">⬅ Back</button>
+    </div>
+  </div>
+
+  <canvas id="ripple-canvas"></canvas>
+
+  <script>
+    // Ripple canvas setup
+    const canvas = document.getElementById('ripple-canvas');
+    const ctx = canvas.getContext('2d');
+    let ripples = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Add ripple on mouse move
+    document.addEventListener('mousemove', e => {
+      ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.2});
+    });
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ripples.forEach((ripple, i) => {
+        ctx.beginPath();
+        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
+        ctx.lineWidth = 3;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+        ctx.stroke();
+        ripple.r += 1.8;
+        ripple.opacity -= 0.007;
+      });
+      ripples = ripples.filter(r => r.opacity > 0);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    function expandSide(side) {
+      if (side === 'left') {
+        document.getElementById('left').classList.add('expanded');
+        document.getElementById('right').classList.add('collapsed');
+        document.getElementById('left-tagline').classList.add('fade-out');
+        document.getElementById('left-enter').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('raibeat-details').classList.add('active');
+        }, 500);
+      } else {
+        document.getElementById('right').classList.add('expanded');
+        document.getElementById('left').classList.add('collapsed');
+        document.getElementById('right-tagline').classList.add('fade-out');
+        document.getElementById('right-enter').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('yash-details').classList.add('active');
+        }, 500);
+      }
+    }
+
+    function resetView() {
+      document.getElementById('left').classList.remove('expanded', 'collapsed');
+      document.getElementById('right').classList.remove('expanded', 'collapsed');
+
+      document.getElementById('left-tagline').classList.remove('fade-out');
+      document.getElementById('left-enter').classList.remove('fade-out');
+      document.getElementById('right-tagline').classList.remove('fade-out');
+      document.getElementById('right-enter').classList.remove('fade-out');
+
+      document.getElementById('raibeat-details').classList.remove('active');
+      document.getElementById('yash-details').classList.remove('active');
+      document.getElementById('raibeat-details').style.display = 'none';
+      document.getElementById('yash-details').style.display = 'none';
+
+      location.reload();
+    }
+  </script>
+</body>
+</html>
+
+
+
