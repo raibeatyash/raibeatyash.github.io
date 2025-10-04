@@ -1,131 +1,131 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>raiBeat | Яsh</title>
- <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-    display: flex;
-    position: relative;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-    animation: gradientShift 20s ease infinite;
-    background-size: 400% 400%;
-  }
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+    }
 
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+    /* Split screen */
+    .split {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+      color: #fff;
+      transition: width 0.8s ease, opacity 0.8s ease;
+      overflow: hidden;
+    }
 
-  /* Keep your split-screen styles here (unchanged)... */
+    /* Left side - raiBeat */
+    .left {
+      background: #1a0000;
+    }
+    .left h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      color: transparent;
+      -webkit-text-stroke: 2px #ff3333;
+      margin: 0;
+      text-transform: capitalize;
+    }
+    .left .tagline {
+      font-size: 1.2rem;
+      margin: 10px 0 20px 0;
+      color: #ff3333;
+      font-style: italic;
+    }
 
-  /* ===== Custom Cursor ===== */
-  #cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
-    z-index: 9999;
-    mix-blend-mode: difference;
-  }
+    /* Right side - Яsh */
+    .right {
+      background: linear-gradient(135deg, #007788, #00b5b5);
+    }
+    .right h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      color: transparent;
+      -webkit-text-stroke: 2px #6ee7b7;
+      margin: 0;
+    }
+    .right .tagline {
+      font-size: 1.2rem;
+      margin: 10px 0 20px 0;
+      color: #c9f5eb;
+      font-style: italic;
+    }
 
-  #cursor.click {
-    width: 40px;
-    height: 40px;
-    opacity: 0.6;
-  }
+    /* Transparent buttons */
+    .enter-btn, .back-btn {
+      display: inline-block;
+      padding: 10px 30px;
+      border: 2px solid currentColor;
+      background: transparent;
+      color: inherit;
+      font-weight: bold;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-top: 20px;
+      opacity: 1;
+    }
+    .enter-btn:hover, .back-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-  /* ===== Scroll reveal animation ===== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s ease;
-  }
+    /* Expanded/Collapsed */
+    .expanded {
+      width: 100% !important;
+    }
+    .collapsed {
+      width: 0 !important;
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
+    /* Fade-out elements */
+    .fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
 
-<body>
-  <!-- keep your split sections here -->
+    /* Details content */
+    .details {
+      max-width: 800px;
+      margin-top: 40px;
+      display: none;
+      opacity: 0;
+    }
+    .details.active {
+      display: block;
+      animation: fadeIn 1s ease forwards;
+    }
+    .details h2 {
+      margin: 20px 0 10px;
+    }
+    #raibeat-details h2 { color: #ff3333; }
+    #yash-details h2 { color: #6ee7b7; }
 
-  <!-- Custom Cursor -->
-  <div id="cursor"></div>
-
-  <canvas id="ripple-canvas"></canvas>
-
-<script>
-  // ===== Custom Cursor =====
-  const cursor = document.getElementById("cursor");
-  document.addEventListener("mousemove", e => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-  });
-  document.addEventListener("click", () => {
-    cursor.classList.add("click");
-    setTimeout(() => cursor.classList.remove("click"), 200);
-  });
-
-  // ===== Scroll Reveal =====
-  const reveals = document.querySelectorAll(".reveal");
-  function revealOnScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
-    reveals.forEach(el => {
-      const boxTop = el.getBoundingClientRect().top;
-      if (boxTop < triggerBottom) el.classList.add("active");
-    });
-  }
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll();
-
-  // ===== Canvas Ripples (same as before but glowing) =====
-  const canvas = document.getElementById('ripple-canvas');
-  const ctx = canvas.getContext('2d');
-  let ripples = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
-
-  document.addEventListener('mousemove', e => {
-    ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.5});
-  });
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ripples.forEach(ripple => {
-      ctx.beginPath();
-      const wave = Math.sin(ripple.r * 0.2) * 5;
-      ctx.arc(ripple.x, ripple.y, ripple.r + wave, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
-      ctx.lineWidth = 2;
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = "rgba(255,255,255,0.7)";
-      ctx.stroke();
-      ripple.r += 2;
-      ripple.opacity -= 0.01;
-    });
-    ripples = ripples.filter(r => r.opacity > 0);
-    requestAnimationFrame(animate);
-  }
-  animate();
-</script>
-</body>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
   <!-- Left Side: raiBeat -->
@@ -174,44 +174,7 @@
     </div>
   </div>
 
-  <canvas id="ripple-canvas"></canvas>
-
   <script>
-    // Ripple canvas setup
-    const canvas = document.getElementById('ripple-canvas');
-    const ctx = canvas.getContext('2d');
-    let ripples = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Add ripple on mouse move
-    document.addEventListener('mousemove', e => {
-      ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.2});
-    });
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ripples.forEach((ripple, i) => {
-        ctx.beginPath();
-        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI*2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
-        ctx.lineWidth = 3;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
-        ctx.stroke();
-        ripple.r += 1.8;
-        ripple.opacity -= 0.007;
-      });
-      ripples = ripples.filter(r => r.opacity > 0);
-      requestAnimationFrame(animate);
-    }
-    animate();
-
     function expandSide(side) {
       if (side === 'left') {
         document.getElementById('left').classList.add('expanded');
@@ -236,21 +199,18 @@
       document.getElementById('left').classList.remove('expanded', 'collapsed');
       document.getElementById('right').classList.remove('expanded', 'collapsed');
 
+      // Reset taglines and buttons
       document.getElementById('left-tagline').classList.remove('fade-out');
       document.getElementById('left-enter').classList.remove('fade-out');
       document.getElementById('right-tagline').classList.remove('fade-out');
       document.getElementById('right-enter').classList.remove('fade-out');
 
+      // Hide details
       document.getElementById('raibeat-details').classList.remove('active');
       document.getElementById('yash-details').classList.remove('active');
       document.getElementById('raibeat-details').style.display = 'none';
       document.getElementById('yash-details').style.display = 'none';
-
-      location.reload();
     }
   </script>
 </body>
 </html>
-
-
-
