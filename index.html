@@ -204,55 +204,82 @@
   </div>
 
   <canvas id="ripple-canvas"></canvas>
-<script>
-  const canvas = document.getElementById('ripple-canvas');
-  const ctx = canvas.getContext('2d');
-  let ripples = [];
 
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeCanvas);
-  resizeCanvas();
+  <script>
+    // Ripple canvas setup
+    const canvas = document.getElementById('ripple-canvas');
+    const ctx = canvas.getContext('2d');
+    let ripples = [];
 
-  // Water droplet effect on mouse move
-  document.addEventListener('mousemove', e => {
-    ripples.push({
-      x: e.clientX,
-      y: e.clientY,
-      r: 0,
-      opacity: 0.6
-    });
-  });
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ripples.forEach((ripple, i) => {
-      ctx.beginPath();
-
-      // Create a lifting water-like ripple using sine wave distortion
-      const wave = Math.sin(ripple.r * 0.2) * 5;
-
-      ctx.arc(ripple.x, ripple.y, ripple.r + wave, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
-      ctx.lineWidth = 2.5;
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = "rgba(255,255,255,0.6)";
-      ctx.stroke();
-
-      ripple.r += 2; // ripple expansion speed
-      ripple.opacity -= 0.007; // fade out
+    // Add ripple on mouse move
+    document.addEventListener('mousemove', e => {
+      ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.2});
     });
 
-    ripples = ripples.filter(r => r.opacity > 0);
-    requestAnimationFrame(animate);
-  }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ripples.forEach((ripple, i) => {
+        ctx.beginPath();
+        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
+        ctx.lineWidth = 3;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+        ctx.stroke();
+        ripple.r += 1.8;
+        ripple.opacity -= 0.007;
+      });
+      ripples = ripples.filter(r => r.opacity > 0);
+      requestAnimationFrame(animate);
+    }
+    animate();
 
-  animate();
+    function expandSide(side) {
+      if (side === 'left') {
+        document.getElementById('left').classList.add('expanded');
+        document.getElementById('right').classList.add('collapsed');
+        document.getElementById('left-tagline').classList.add('fade-out');
+        document.getElementById('left-enter').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('raibeat-details').classList.add('active');
+        }, 500);
+      } else {
+        document.getElementById('right').classList.add('expanded');
+        document.getElementById('left').classList.add('collapsed');
+        document.getElementById('right-tagline').classList.add('fade-out');
+        document.getElementById('right-enter').classList.add('fade-out');
+        setTimeout(() => {
+          document.getElementById('yash-details').classList.add('active');
+        }, 500);
+      }
+    }
 
-  // --- keep your expandSide() and resetView() functions here ---
-</script>
+    function resetView() {
+      document.getElementById('left').classList.remove('expanded', 'collapsed');
+      document.getElementById('right').classList.remove('expanded', 'collapsed');
+
+      document.getElementById('left-tagline').classList.remove('fade-out');
+      document.getElementById('left-enter').classList.remove('fade-out');
+      document.getElementById('right-tagline').classList.remove('fade-out');
+      document.getElementById('right-enter').classList.remove('fade-out');
+
+      document.getElementById('raibeat-details').classList.remove('active');
+      document.getElementById('yash-details').classList.remove('active');
+      document.getElementById('raibeat-details').style.display = 'none';
+      document.getElementById('yash-details').style.display = 'none';
+
+      location.reload();
+    }
+  </script>
 </body>
 </html>
+
+
+
