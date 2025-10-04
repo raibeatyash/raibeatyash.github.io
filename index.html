@@ -204,79 +204,98 @@
   </div>
 
   <canvas id="ripple-canvas"></canvas>
+<script>
+const canvas = document.getElementById("ripple-canvas");
+const ctx = canvas.getContext("2d");
 
-  <script>
-    // Ripple canvas setup
-    const canvas = document.getElementById('ripple-canvas');
-    const ctx = canvas.getContext('2d');
-    let ripples = [];
+let width, height;
+function resizeCanvas() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+// Two buffers for ripple propagation
+let buffer1, buffer2;
+function initBuffers() {
+  buffer1 = new Uint16Array(width * height);
+  buffer2 = new Uint16Array(width * height);
+}
+initBuffers();
 
-    // Add ripple on mouse move
-    document.addEventListener('mousemove', e => {
-      ripples.push({x: e.clientX, y: e.clientY, r: 0, opacity: 0.2});
-    });
+// Background gradient (temporary, you can snapshot your DOM instead)
+let bg = ctx.createLinearGradient(0, 0, width, height);
+bg.addColorStop(0, "#111");
+bg.addColorStop(1, "#333");
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ripples.forEach((ripple, i) => {
-        ctx.beginPath();
-        ctx.arc(ripple.x, ripple.y, ripple.r, 0, Math.PI*2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${ripple.opacity})`;
-        ctx.lineWidth = 3;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
-        ctx.stroke();
-        ripple.r += 1.8;
-        ripple.opacity -= 0.007;
-      });
-      ripples = ripples.filter(r => r.opacity > 0);
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    function expandSide(side) {
-      if (side === 'left') {
-        document.getElementById('left').classList.add('expanded');
-        document.getElementById('right').classList.add('collapsed');
-        document.getElementById('left-tagline').classList.add('fade-out');
-        document.getElementById('left-enter').classList.add('fade-out');
-        setTimeout(() => {
-          document.getElementById('raibeat-details').classList.add('active');
-        }, 500);
-      } else {
-        document.getElementById('right').classList.add('expanded');
-        document.getElementById('left').classList.add('collapsed');
-        document.getElementById('right-tagline').classList.add('fade-out');
-        document.getElementById('right-enter').classList.add('fade-out');
-        setTimeout(() => {
-          document.getElementById('yash-details').classList.add('active');
-        }, 500);
+// Add droplet at (x, y)
+function addDrop(x, y, strength = 256, radius = 15) {
+  for (let j = -radius; j < radius; j++) {
+    for (let i = -radius; i < radius; i++) {
+      if (x + i < 0 || x + i >= width || y + j < 0 || y + j >= height) continue;
+      if (i * i + j * j < radius * radius) {
+        buffer1[(y + j) * width + (x + i)] += strength;
       }
     }
+  }
+}
 
-    function resetView() {
-      document.getElementById('left').classList.remove('expanded', 'collapsed');
-      document.getElementById('right').classList.remove('expanded', 'collapsed');
+// Ripple simulation
+function ripple() {
+  const image = ctx.getImageData(0, 0, width, height);
+  const data = image.data;
 
-      document.getElementById('left-tagline').classList.remove('fade-out');
-      document.getElementById('left-enter').classList.remove('fade-out');
-      document.getElementById('right-tagline').classList.remove('fade-out');
-      document.getElementById('right-enter').classList.remove('fade-out');
+  for (let y = 1; y < height - 1; y++) {
+    for (let x = 1; x < width - 1; x++) {
+      const idx = y * width + x;
 
-      document.getElementById('raibeat-details').classList.remove('active');
-      document.getElementById('yash-details').classList.remove('active');
-      document.getElementById('raibeat-details').style.display = 'none';
-      document.getElementById('yash-details').style.display = 'none';
+      buffer2[idx] =
+        ((buffer1[idx - 1] +
+          buffer1[idx + 1] +
+          buffer1[idx - width] +
+          buffer1[idx + width]) >> 1) - buffer2[idx];
 
-      location.reload();
+      buffer2[idx] -= buffer2[idx] >> 6; // damping
+
+      const dx = (buffer2[idx - 1] - buffer2[idx + 1]) >> 4;
+      const dy = (buffer2[idx - width] - buffer2[idx + width]) >> 4;
+
+      let tx = x + dx, ty = y + dy;
+      if (tx < 0) tx = 0;
+      if (tx >= width) tx = width - 1;
+      if (ty < 0) ty = 0;
+      if (ty >= height) ty = height - 1;
+
+      const src = (ty * width + tx) * 4;
+      const dst = (idx) * 4;
+
+      data[dst] = data[src];
+      data[dst + 1] = data[src + 1];
+      data[dst + 2] = data[src + 2];
     }
-  </script>
+  }
+
+  ctx.putImageData(image, 0, 0);
+
+  const temp = buffer1;
+  buffer1 = buffer2;
+  buffer2 = temp;
+
+  requestAnimationFrame(ripple);
+}
+
+// Initial canvas fill
+ctx.fillStyle = bg;
+ctx.fillRect(0, 0, width, height);
+
+// Mousemove interaction
+document.addEventListener("mousemove", e => {
+  addDrop(e.clientX, e.clientY);
+});
+
+// Start ripples
+ripple();
+</script>
 </body>
 </html>
