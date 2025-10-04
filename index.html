@@ -4,117 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>raiBeat | Яsh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      height: 100vh;
-      display: flex;
       font-family: 'Orbitron', sans-serif;
+      display: flex;
+      height: 100vh;
       overflow: hidden;
+      color: #fff;
     }
 
-    /* Wrapper for diagonal split */
     .split {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      color: #fff;
-      text-align: center;
-      position: relative;
       transition: flex 0.6s ease;
-      overflow: hidden;
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      position: relative;
     }
 
-    /* Hover expand effect */
     .split:hover {
       flex: 1.2;
     }
 
-    /* Left Side - raiBeat */
     .left {
-      background: linear-gradient(135deg, #000000, #330000, #ff0000);
-      clip-path: polygon(0 0, 50% 0, 45% 100%, 0% 100%);
+      background: linear-gradient(120deg, #0f0f0f, #1a0000, #330000);
+    }
+
+    .right {
+      background: linear-gradient(120deg, #001a1a, #003333, #004d4d);
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 3px;
     }
 
     .left h1 {
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #ff3333;
+      color: #ff3333;
+      text-shadow: 0 0 15px rgba(255, 51, 51, 0.8);
       animation: flicker 3s infinite;
-      margin: 0;
-    }
-
-    .left .tagline {
-      color: #ff4444;
-      margin: 15px 0 30px;
-      font-style: italic;
-    }
-
-    /* Right Side - Яsh */
-    .right {
-      background: linear-gradient(135deg, #007788, #00b5b5, #00e0e0);
-      clip-path: polygon(50% 0, 100% 0, 100% 100%, 45% 100%);
     }
 
     .right h1 {
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #6ee7b7;
-      margin: 0;
+      color: #33fff0;
+      text-shadow: 0 0 15px rgba(51, 255, 240, 0.8);
+      animation: glow 3s infinite alternate;
     }
 
-    .right .tagline {
-      color: #c9f5eb;
-      margin: 15px 0 30px;
-      font-style: italic;
+    .tagline {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      opacity: 0.8;
     }
 
-    /* Enter Buttons */
     .enter-btn {
+      margin-top: 20px;
       padding: 12px 32px;
-      border: 2px solid currentColor;
-      color: inherit;
+      border: 2px solid #fff;
       background: transparent;
-      font-weight: bold;
+      color: #fff;
       text-transform: uppercase;
-      border-radius: 6px;
+      letter-spacing: 2px;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-weight: bold;
+      text-decoration: none;
     }
 
-    .left .enter-btn:hover {
-      background: rgba(255, 51, 51, 0.2);
-      box-shadow: 0 0 15px #ff3333;
+    .enter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
     }
 
-    .right .enter-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 0 15px #6ee7b7;
-    }
-
-    /* Neon Flicker Animation */
+    /* Animations */
     @keyframes flicker {
       0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        text-shadow: 0 0 4px #ff3333, 0 0 10px #ff0000, 0 0 20px #ff3333;
+        opacity: 1;
+        text-shadow: 0 0 5px #ff3333, 0 0 20px #ff0000, 0 0 40px #ff3333;
       }
       20%, 24%, 55% {
+        opacity: 0.7;
         text-shadow: none;
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #33fff0, 0 0 20px #00cccc, 0 0 40px #00cccc;
+      }
+      to {
+        text-shadow: 0 0 20px #66ffff, 0 0 40px #33fff0, 0 0 80px #00ffff;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Left Side: raiBeat -->
   <div class="split left">
     <h1>raiBeat</h1>
     <p class="tagline">Raw. Rebellious. Rumble.</p>
     <a href="raibeat.html" class="enter-btn">Enter</a>
   </div>
 
-  <!-- Right Side: Яsh -->
   <div class="split right">
     <h1>Яsh</h1>
     <p class="tagline">Melodic Rhythm Therapy</p>
