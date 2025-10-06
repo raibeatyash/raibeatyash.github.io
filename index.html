@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Artist</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Oswald:wght@700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -13,62 +13,119 @@
       font-family: 'Montserrat', Arial, sans-serif;
       color: #fff;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
     }
-    .artist-name {
-      font-size: 3em;
-      font-family: 'Oswald', sans-serif;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-      margin-bottom: 0.45em;
-      margin-top: 2em;
-      text-shadow: 0 2px 28px #222b, 0 2px 2px #c72c4180;
+    .split-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
     }
-    .aliases-intro {
-      max-width: 520px;
-      margin: 0 auto 2.5em auto;
-      font-size: 1.16em;
-      letter-spacing: 0.01em;
-      color: #dbeaffeb;
-      opacity: 0.91;
-      line-height: 1.7;
-    }
-    .entr-btn {
-      padding: 0.9em 3em;
-      font-size: 1.23em;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(90deg, #c72c41 40%, #11898c 83%);
-      border: none;
-      border-radius: 34px;
+    .half {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3vw 2vw;
+      box-sizing: border-box;
       color: #fff;
+    }
+    .left {
+      background: linear-gradient(135deg, #450a15 75%, #1a1a1a);
+      border-right: 2px solid #fff3;
+    }
+    .right {
+      background: linear-gradient(135deg, #f5f5f5 75%, #ece9e9);
+      color: #292929;
+    }
+    .title {
+      font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      box-shadow: 0 4px 32px #c72c4155;
+      font-size: 3.2em;
+      font-style: normal;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.3em;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 8px rgba(0,0,0,0.7);
+    }
+    .subtitle {
+      font-size: 1.15em;
+      max-width: 300px;
+      margin-bottom: 2em;
+      line-height: 1.6;
+      opacity: 0.87;
+      font-weight: 500;
+      user-select: none;
+    }
+    .button {
+      padding: 1em 3em;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2em;
+      font-weight: 700;
+      border-radius: 36px;
+      border: none;
       cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.25s ease, transform 0.15s ease;
+      box-shadow: 0 6px 17px rgba(0, 0, 0, 0.4);
+      user-select: none;
+    }
+    .button-left {
+      background: #c72c41;
+      color: #fff;
+      box-shadow: 0 6px 24px #c72c4177;
+    }
+    .button-left:hover, .button-left:focus {
+      background: #9d222f;
+      transform: scale(1.06);
       outline: none;
-      transition: background 0.2s, transform 0.16s;
     }
-    .entr-btn:hover, .entr-btn:active {
-      background: linear-gradient(90deg, #11898c 30%, #c72c41 80%);
-      transform: scale(1.04) translateY(-2px);
+    .button-right {
+      background: #11898c;
+      color: #fff;
+      box-shadow: 0 6px 24px #11898c77;
     }
-    @media (max-width: 750px) {
-      .artist-name { font-size: 2em; }
-      .aliases-intro { font-size: 1em; }
-      .entr-btn { font-size: 1em; padding: 0.75em 2em; }
+    .button-right:hover, .button-right:focus {
+      background: #0e706f;
+      transform: scale(1.06);
+      outline: none;
+    }
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .split-container {
+        flex-direction: column;
+        height: auto;
+      }
+      .half {
+        padding: 2em 0;
+        max-width: 100vw;
+        width: 100vw;
+      }
+      .left {
+        border-right: none;
+        border-bottom: 2px solid #fff3;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="artist-name">Yash Raipure</div>
-  <div class="aliases-intro">
-    Dual-alias electronic producer & DJ<br>
-    <b>raiBeat:</b> Raw, rebellious, high-octane energy for underground spaces.<br>
-    <b>Яsh:</b> Melodic, soulful experiences for chill and immersive settings.
+  <div class="split-container">
+    <section class="half left">
+      <div class="title">raiBeat</div>
+      <div class="subtitle">Raw, rebellious, high-octane energy for underground spaces.</div>
+      <button class="button button-left" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
+    </section>
+    <section class="half right">
+      <div class="title">Яsh</div>
+      <div class="subtitle">Melodic, soulful experiences for chill and immersive settings.</div>
+      <button class="button button-right" onclick="window.location.href='yash.html'">Enter Яsh</button>
+    </section>
   </div>
-  <button class="entr-btn" onclick="window.location.href='duo.html'">Enter</button>
 </body>
 </html>
