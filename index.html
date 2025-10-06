@@ -4,126 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>raiBeat | Яsh</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      display: flex;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    display: flex;
+  }
 
-    /* Split screen */
-    .split {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      flex-direction: column;
-      position: relative;
-      color: #fff;
-      transition: width 0.8s ease, opacity 0.8s ease;
-      overflow: hidden;
-    }
+  /* Split screen */
+  .split {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+    color: #fff;
+    transition: width 0.8s cubic-bezier(0.77,0,0.175,1), opacity 0.8s cubic-bezier(0.77,0,0.175,1), transform 0.8s cubic-bezier(0.77,0,0.175,1);
+    overflow: hidden;
+  }
+  .left {
+    background: #1a0000;
+  }
+  .right {
+    background: linear-gradient(135deg, #007788, #00b5b5);
+  }
 
-    /* Left side - raiBeat */
-    .left {
-      background: #1a0000;
-    }
-    .left h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #ff3333;
-      margin: 0;
-      text-transform: capitalize;
-    }
-    .left .tagline {
-      font-size: 1.2rem;
-      margin: 10px 0 20px 0;
-      color: #ff3333;
-      font-style: italic;
-    }
+  .left h1,
+  .right h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    color: transparent;
+    margin: 0;
+    text-transform: capitalize;
+    transition: color 0.5s;
+  }
+  .left h1 { -webkit-text-stroke: 2px #ff3333; }
+  .right h1 { -webkit-text-stroke: 2px #6ee7b7; }
 
-    /* Right side - Яsh */
-    .right {
-      background: linear-gradient(135deg, #007788, #00b5b5);
-    }
-    .right h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #6ee7b7;
-      margin: 0;
-    }
-    .right .tagline {
-      font-size: 1.2rem;
-      margin: 10px 0 20px 0;
-      color: #c9f5eb;
-      font-style: italic;
-    }
+  .tagline {
+    font-size: 1.2rem;
+    margin: 10px 0 20px 0;
+    font-style: italic;
+    transition: opacity 0.5s;
+  }
 
-    /* Transparent buttons */
-    .enter-btn, .back-btn {
-      display: inline-block;
-      padding: 10px 30px;
-      border: 2px solid currentColor;
-      background: transparent;
-      color: inherit;
-      font-weight: bold;
-      text-decoration: none;
-      text-transform: uppercase;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      margin-top: 20px;
-      opacity: 1;
-    }
-    .enter-btn:hover, .back-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
+  .left .tagline { color: #ff3333;}
+  .right .tagline { color: #c9f5eb;}
 
-    /* Expanded/Collapsed */
-    .expanded {
-      width: 100% !important;
-    }
-    .collapsed {
-      width: 0 !important;
-      opacity: 0;
-      pointer-events: none;
-    }
+  /* Transparent buttons */
+  .enter-btn, .back-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 2px solid currentColor;
+    background: transparent;
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s ease, opacity 0.5s;
+    cursor: pointer;
+    margin-top: 20px;
+    opacity: 1;
+  }
+  .enter-btn:hover, .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 
-    /* Fade-out elements */
-    .fade-out {
-      opacity: 0 !important;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-    }
+  /* Expanded/Collapsed */
+  .expanded {
+    width: 100% !important;
+    z-index: 2;
+    transform: translateX(0);
+  }
+  .collapsed {
+    width: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    transform: translateX(-2vw); /* subtle sliding */
+  }
 
-    /* Details content */
-    .details {
-      max-width: 800px;
-      margin-top: 40px;
-      display: none;
-      opacity: 0;
-    }
-    .details.active {
-      display: block;
-      animation: fadeIn 1s ease forwards;
-    }
-    .details h2 {
-      margin: 20px 0 10px;
-    }
-    #raibeat-details h2 { color: #ff3333; }
-    #yash-details h2 { color: #6ee7b7; }
+  /* Fade-out elements */
+  .fade-out {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.5s;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  /* Details content */
+  .details {
+    max-width: 800px;
+    margin-top: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.77,0,0.175,1);
+    transform: translateY(30px);
+    display: block;
+  }
+  .details.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+  .details.exiting {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(30px);
+  }
+  .details h2 {
+    margin: 20px 0 10px;
+  }
+  #raibeat-details h2 { color: #ff3333; }
+  #yash-details h2 { color: #6ee7b7; }
+
+  @media (max-width: 900px) {
+    .left h1, .right h1 { font-size: 2.2rem; }
+  }
+</style>
 </head>
 <body>
   <!-- Left Side: raiBeat -->
@@ -172,44 +176,58 @@
     </div>
   </div>
 
-  <script>
-    function expandSide(side) {
-      if (side === 'left') {
-        document.getElementById('left').classList.add('expanded');
-        document.getElementById('right').classList.add('collapsed');
-        document.getElementById('left-tagline').classList.add('fade-out');
-        document.getElementById('left-enter').classList.add('fade-out');
-        setTimeout(() => {
-          document.getElementById('raibeat-details').classList.add('active');
-        }, 500);
-      } else {
-        document.getElementById('right').classList.add('expanded');
-        document.getElementById('left').classList.add('collapsed');
-        document.getElementById('right-tagline').classList.add('fade-out');
-        document.getElementById('right-enter').classList.add('fade-out');
-        setTimeout(() => {
-          document.getElementById('yash-details').classList.add('active');
-        }, 500);
-      }
+ 
+<script>
+  function expandSide(side) {
+    // Hide details if visible
+    document.getElementById('raibeat-details').classList.remove('active', 'exiting');
+    document.getElementById('yash-details').classList.remove('active', 'exiting');
+
+    if (side === 'left') {
+      document.getElementById('left').classList.add('expanded');
+      document.getElementById('right').classList.add('collapsed');
+      document.getElementById('left-tagline').classList.add('fade-out');
+      document.getElementById('left-enter').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('raibeat-details').classList.add('active');
+      }, 800); // after panel fully expands
+    } else {
+      document.getElementById('right').classList.add('expanded');
+      document.getElementById('left').classList.add('collapsed');
+      document.getElementById('right-tagline').classList.add('fade-out');
+      document.getElementById('right-enter').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('yash-details').classList.add('active');
+      }, 800); // after panel fully expands
+    }
+  }
+
+  function resetView() {
+    // Fade out details before collapsing
+    let raibeatActive = document.getElementById('raibeat-details').classList.contains('active');
+    let yashActive = document.getElementById('yash-details').classList.contains('active');
+
+    if (raibeatActive) {
+      document.getElementById('raibeat-details').classList.remove('active');
+      document.getElementById('raibeat-details').classList.add('exiting');
+    }
+    if (yashActive) {
+      document.getElementById('yash-details').classList.remove('active');
+      document.getElementById('yash-details').classList.add('exiting');
     }
 
-    function resetView() {
+    setTimeout(() => {
       document.getElementById('left').classList.remove('expanded', 'collapsed');
       document.getElementById('right').classList.remove('expanded', 'collapsed');
-
-      // Reset taglines and buttons
       document.getElementById('left-tagline').classList.remove('fade-out');
       document.getElementById('left-enter').classList.remove('fade-out');
       document.getElementById('right-tagline').classList.remove('fade-out');
       document.getElementById('right-enter').classList.remove('fade-out');
-
-      // Hide details
-      document.getElementById('raibeat-details').classList.remove('active');
-      document.getElementById('yash-details').classList.remove('active');
-      document.getElementById('raibeat-details').style.display = 'none';
-      document.getElementById('yash-details').style.display = 'none';
-    }
-  </script>
+      document.getElementById('raibeat-details').classList.remove('exiting');
+      document.getElementById('yash-details').classList.remove('exiting');
+    }, 500); // matches details fade-out transition
+  }
+</script>
 </body>
 </html>
 
