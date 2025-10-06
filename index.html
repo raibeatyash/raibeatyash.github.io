@@ -4,26 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>raiBeat | Яsh</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   /* Global */
-  body, html {
+  html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    color: #fff;
-    position: relative;
     background: #111;
+    color: #fff;
   }
 
   /* Floating particles */
   .particle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.2;
+    opacity: 0.15;
     pointer-events: none;
     mix-blend-mode: overlay;
     animation: float 25s linear infinite;
@@ -31,7 +30,7 @@
 
   @keyframes float {
     0% { transform: translateY(0) translateX(0) scale(1); }
-    50% { transform: translateY(-250px) translateX(120px) scale(1.2); }
+    50% { transform: translateY(-200px) translateX(80px) scale(1.1); }
     100% { transform: translateY(0) translateX(0) scale(1); }
   }
 
@@ -41,8 +40,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
     position: relative;
     transition: width 0.8s ease, opacity 0.8s ease;
@@ -72,14 +71,13 @@
     100% { background-position: 0% 50%; }
   }
 
-  /* Headings and taglines */
+  /* Headings */
   h1 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Saira Stencil One', cursive;
     font-size: 4rem;
-    color: transparent;
-    -webkit-text-stroke: 2px currentColor;
     margin: 0;
-    transition: transform 0.5s ease, color 0.5s ease;
+    transition: transform 0.4s ease, color 0.4s ease;
+    cursor: default;
   }
   .left h1 { color: #ff3333; }
   .right h1 { color: #6ee7b7; }
@@ -108,7 +106,6 @@
     transition: all 0.3s ease;
     letter-spacing: 1px;
   }
-
   .enter-btn:hover, .back-btn:hover {
     background: rgba(255,255,255,0.08);
     transform: scale(1.05) translateY(-2px);
@@ -146,7 +143,7 @@
   @media (max-width: 768px) {
     body { flex-direction: column; }
     .split { width: 100%; height: 50%; }
-    h1 { font-size: 2.8rem; }
+    h1 { font-size: 3rem; }
     .details { padding: 20px; }
   }
 </style>
