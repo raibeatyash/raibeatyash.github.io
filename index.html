@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Yash Raipure – Dual Artist</title>
+  <title>Yash Raipure – Dual Artist Landing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto Slab:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -13,16 +13,43 @@
       font-family: 'Montserrat', Arial, sans-serif;
       color: #fff;
       display: flex;
-      flex-direction: row;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      text-align: center;
       overflow: hidden;
     }
+    /* Header - Artist Description */
+    .header {
+      padding: 3vh 2vw;
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.34em;
+      line-height: 1.6;
+      background: rgba(0,0,0,0.4);
+      margin-top: 2vh;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.4em;
+      margin-bottom: 0.4em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #ffd700;
+      text-shadow: 1px 2px 4px #000;
+    }
+    .header p {
+      margin: 0;
+      font-size: 1em;
+      font-weight: 400;
+      color: #dedede;
+    }
+
+    /* Split-screen container for aliases */
     .split-container {
       display: flex;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: calc(100vh - 20vh);
     }
     .half {
       flex: 1;
@@ -30,101 +57,83 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 3vw 2vw;
-      box-sizing: border-box;
-      color: #fff;
+      padding: 2em;
+      text-align: center;
     }
-    .left {
-      background: linear-gradient(135deg, #450a15 75%, #1a1a1a);
-      border-right: 2px solid #fff3;
-    }
-    .right {
-      background: linear-gradient(135deg, #f5f5f5 75%, #ece9e9);
-      color: #292929;
-    }
+    .left { background: linear-gradient(135deg, #450a15 75%, #1a1a1a); border-right: 2px solid #fff3; }
+    .right { background: linear-gradient(135deg, #f5f5f5 75%, #ece9e9); color: #292929; }
+
+    /* Alias Titles */
     .title {
       font-family: 'Poppins', sans-serif;
-      font-weight: 700;
-      font-size: 3.2em;
-      font-style: normal;
-      letter-spacing: 0.12em;
-      margin-bottom: 0.3em;
+      font-size: 2.4em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+      margin-bottom: 0.4em;
+      margin-top: 0.3em;
+      font-weight: 700;
       text-shadow: 1px 2px 8px rgba(0,0,0,0.7);
     }
-    .subtitle {
-      font-size: 1.15em;
-      max-width: 300px;
-      margin-bottom: 2em;
-      line-height: 1.6;
-      opacity: 0.87;
-      font-weight: 500;
-      user-select: none;
-    }
-    .button {
+    /* Buttons styling */
+    .btn {
       padding: 1em 3em;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.2em;
-      font-weight: 700;
+      margin-top: 1.4em;
       border-radius: 36px;
       border: none;
       cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.2em;
       text-transform: uppercase;
-      transition: background 0.25s ease, transform 0.15s ease;
-      box-shadow: 0 6px 17px rgba(0, 0, 0, 0.4);
-      user-select: none;
+      transition: background 0.25s, transform 0.15s;
+      box-shadow: 0 6px 17px rgba(0,0,0,0.4);
+      outline: none;
     }
-    .button-left {
+    .btn-left {
       background: #c72c41;
       color: #fff;
-      box-shadow: 0 6px 24px #c72c4177;
     }
-    .button-left:hover, .button-left:focus {
+    .btn-left:hover {
       background: #9d222f;
       transform: scale(1.06);
-      outline: none;
     }
-    .button-right {
+    .btn-right {
       background: #11898c;
       color: #fff;
-      box-shadow: 0 6px 24px #11898c77;
     }
-    .button-right:hover, .button-right:focus {
+    .btn-right:hover {
       background: #0e706f;
       transform: scale(1.06);
-      outline: none;
     }
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
+
+    /* Responsive adjustments */
+    @media(max-width: 900px){
       .split-container {
         flex-direction: column;
         height: auto;
       }
-      .half {
-        padding: 2em 0;
-        max-width: 100vw;
-        width: 100vw;
-      }
-      .left {
-        border-right: none;
-        border-bottom: 2px solid #fff3;
-      }
+      .half { padding: 1.5em; }
     }
   </style>
 </head>
 <body>
+  <!-- Artist Description -->
+  <div class="header">
+    <h1>Yash Raipure – Dual Alias Artist Profile</h1>
+    <p>
+      Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
+    </p>
+  </div>
+
+  <!-- Alias Buttons -->
   <div class="split-container">
     <section class="half left">
       <div class="title">raiBeat</div>
-      <div class="subtitle">Raw, rebellious, high-octane energy for underground spaces.</div>
-      <button class="button button-left" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
+      <button class="btn btn-left" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
     </section>
     <section class="half right">
       <div class="title">Яsh</div>
-      <div class="subtitle">Melodic, soulful experiences for chill and immersive settings.</div>
-      <button class="button button-right" onclick="window.location.href='yash.html'">Enter Яsh</button>
+      <button class="btn btn-right" onclick="window.location.href='yash.html'">Enter Яsh</button>
     </section>
   </div>
 </body>
