@@ -6,52 +6,59 @@
 <title>raiBeat | Яsh</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
+  /* Global */
+  body, html {
     margin: 0;
-    height: 100vh;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     font-family: 'Inter', sans-serif;
     overflow: hidden;
-    display: flex;
     color: #fff;
-    background: #111;
     position: relative;
+    background: #111;
   }
 
   /* Floating particles */
   .particle {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0.2;
     pointer-events: none;
     mix-blend-mode: overlay;
-    animation: float 20s linear infinite;
+    animation: float 25s linear infinite;
   }
 
   @keyframes float {
     0% { transform: translateY(0) translateX(0) scale(1); }
-    50% { transform: translateY(-200px) translateX(100px) scale(1.2); }
+    50% { transform: translateY(-250px) translateX(120px) scale(1.2); }
     100% { transform: translateY(0) translateX(0) scale(1); }
   }
 
-  /* Split screen */
+  /* Split layout */
   .split {
     width: 50%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     position: relative;
     transition: width 0.8s ease, opacity 0.8s ease;
     overflow: hidden;
   }
 
-  /* Left - raiBeat */
   .left {
     background: linear-gradient(135deg, #1a0000, #330000, #660000);
     background-size: 400% 400%;
-    animation: gradientLeft 25s ease infinite;
+    animation: gradientLeft 30s ease infinite;
+  }
+
+  .right {
+    background: linear-gradient(135deg, #007788, #0099aa, #00b5b5);
+    background-size: 400% 400%;
+    animation: gradientRight 30s ease infinite;
   }
 
   @keyframes gradientLeft {
@@ -59,60 +66,36 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
-  .left h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    color: transparent;
-    -webkit-text-stroke: 2px #ff3333;
-    margin: 0;
-    text-transform: capitalize;
-    transition: transform 0.5s ease;
-  }
-
-  .left .tagline {
-    font-size: 1.2rem;
-    margin: 10px 0 20px 0;
-    color: #ff3333;
-    font-style: italic;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-
-  /* Right - Яsh */
-  .right {
-    background: linear-gradient(135deg, #007788, #0099aa, #00b5b5);
-    background-size: 400% 400%;
-    animation: gradientRight 25s ease infinite;
-  }
-
   @keyframes gradientRight {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
 
-  .right h1 {
+  /* Headings and taglines */
+  h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 4rem;
     color: transparent;
-    -webkit-text-stroke: 2px #6ee7b7;
+    -webkit-text-stroke: 2px currentColor;
     margin: 0;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, color 0.5s ease;
   }
+  .left h1 { color: #ff3333; }
+  .right h1 { color: #6ee7b7; }
 
-  .right .tagline {
+  .tagline {
     font-size: 1.2rem;
     margin: 10px 0 20px 0;
-    color: #c9f5eb;
     font-style: italic;
-    opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
+  .left .tagline { color: #ff3333; }
+  .right .tagline { color: #c9f5eb; }
 
   /* Buttons */
   .enter-btn, .back-btn {
-    padding: 10px 30px;
+    padding: 12px 35px;
     border: 2px solid currentColor;
     background: transparent;
     color: inherit;
@@ -128,53 +111,34 @@
 
   .enter-btn:hover, .back-btn:hover {
     background: rgba(255,255,255,0.08);
-    transform: translateY(-2px) scale(1.03);
-  }
-
-  .enter-btn:active, .back-btn:active {
-    transform: scale(0.95);
+    transform: scale(1.05) translateY(-2px);
   }
 
   /* Expanded/Collapsed */
   .expanded { width: 100% !important; }
   .collapsed { width: 0 !important; opacity: 0; pointer-events: none; }
-
-  /* Fade elements */
   .fade-out { opacity: 0 !important; pointer-events: none; }
 
-  /* Split hover highlight */
-  .split:hover { filter: brightness(1.05); transition: filter 0.5s ease; }
-
-  /* Details content */
+  /* Details panel */
   .details {
     max-width: 700px;
     margin-top: 40px;
     display: none;
     opacity: 0;
-    line-height: 1.6;
-    padding: 20px;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.25);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    padding: 25px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.35);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    transition: transform 0.5s ease, opacity 0.5s ease;
   }
-
-  .details.active {
-    display: block;
-    animation: fadeIn 0.8s ease forwards;
-  }
-
-  .details h2 {
-    margin: 20px 0 10px;
-    font-size: 1.3rem;
-    font-weight: 600;
-  }
-
+  .details.active { display: block; animation: fadeIn 0.8s ease forwards; }
+  .details h2 { margin: 20px 0 10px; font-size: 1.4rem; }
   #raibeat-details h2 { color: #ff3333; }
   #yash-details h2 { color: #6ee7b7; }
   .details p a { color: inherit; text-decoration: underline; }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -182,8 +146,8 @@
   @media (max-width: 768px) {
     body { flex-direction: column; }
     .split { width: 100%; height: 50%; }
-    .split h1 { font-size: 2.8rem; }
-    .details { padding: 0 20px; }
+    h1 { font-size: 2.8rem; }
+    .details { padding: 20px; }
   }
 </style>
 </head>
@@ -191,20 +155,20 @@
 
 <!-- Floating particles -->
 <script>
-  for(let i=0;i<40;i++){
-    let p = document.createElement('div');
-    p.className = 'particle';
-    p.style.width = p.style.height = Math.random()*6+4+'px';
-    p.style.top = Math.random()*100+'%';
-    p.style.left = Math.random()*100+'%';
-    p.style.background = ['#ff3333','#6ee7b7','#ffffff'][Math.floor(Math.random()*3)];
-    p.style.animationDuration = (Math.random()*20+10)+'s';
-    p.style.opacity = Math.random()*0.4+0.1;
-    document.body.appendChild(p);
-  }
+for(let i=0;i<50;i++){
+  let p=document.createElement('div');
+  p.className='particle';
+  p.style.width=p.style.height=Math.random()*8+4+'px';
+  p.style.top=Math.random()*100+'%';
+  p.style.left=Math.random()*100+'%';
+  p.style.background=['#ff3333','#6ee7b7','#ffffff'][Math.floor(Math.random()*3)];
+  p.style.animationDuration=(Math.random()*25+10)+'s';
+  p.style.opacity=Math.random()*0.4+0.1;
+  document.body.appendChild(p);
+}
 </script>
 
-<!-- Left Side: raiBeat -->
+<!-- Left: raiBeat -->
 <div class="split left" id="left">
   <h1>raiBeat</h1>
   <p class="tagline" id="left-tagline">Raw. Rebellious. Rumble.</p>
@@ -223,7 +187,7 @@
   </div>
 </div>
 
-<!-- Right Side: Яsh -->
+<!-- Right: Яsh -->
 <div class="split right" id="right">
   <h1>Яsh</h1>
   <p class="tagline" id="right-tagline">Melodic Rhythm Therapy</p>
@@ -243,7 +207,7 @@
 </div>
 
 <script>
-function expandSide(side) {
+function expandSide(side){
   if(side==='left'){
     document.getElementById('left').classList.add('expanded');
     document.getElementById('right').classList.add('collapsed');
