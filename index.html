@@ -2,196 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Yash Raipure – Dual Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yash Raipure – Dual Alias Artist Profile</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Oswald:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #181818 70%, #252755 100%);
       font-family: 'Montserrat', Arial, sans-serif;
-      background: #181818;
-      color: #ededed;
-      overflow: hidden;
-    }
-    .split-container {
-      display: flex;
-      height: 100vh;
-      width: 100vw;
-    }
-    .alias {
-      flex: 1;
-      padding: 3vw 6vw 3vw 6vw;
+      color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: flex-start;
-      box-sizing: border-box;
-      min-width: 350px;
-      transition: background 0.5s;
+      align-items: center;
+      text-align: center;
     }
-    .alias-left {
-      background: linear-gradient(125deg, #450a15 68%, #1a1a1a 100%);
-      border-right: 2px solid #fff2;
-    }
-    .alias-right {
-      background: linear-gradient(125deg, #f5f5f5 65%, #ece9e9 100%);
-      color: #292929;
-    }
-    .alias-title {
-      font-family: 'Oswald', serif;
-      font-size: 2.7em;
-      letter-spacing: 0.04em;
-      margin-bottom: .07em;
-      line-height: 1.0;
-    }
-    .rebellious {
-      font-family: 'Oswald', serif;
-      font-size: 3.1em;
-      color: #c72c41;
-      letter-spacing: 0.06em;
-      filter: drop-shadow(0 2px 12px #c72c41AA);
-      text-shadow: 2px 2px 10px #670c12;
-      margin-bottom: 0.5em;
-      font-style: italic;
-      text-transform: uppercase;
-    }
-    .melodic {
-      font-family: 'Oswald', serif;
-      font-size: 2.7em;
-      color: #11898c;
-      margin-bottom: 0.5em;
-      filter: drop-shadow(0 2px 10px #11898c99);
-      text-transform: uppercase;
-    }
-    .alias-desc {
-      font-size: 1.13em;
-      margin-bottom: 23px;
-      max-width: 28em;
-      color: inherit;
-      opacity: 0.82;
-      font-weight: 500;
-      line-height: 1.52;
-    }
-    .info-section {
-      margin-bottom: 1.2em;
-    }
-    .info-label {
+    .artist-name {
+      font-size: 3em;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.08em;
       font-weight: 700;
-      text-transform: uppercase;
-      font-size: 1.11em;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.31em;
-      color: #c72c41;
+      margin-bottom: 0.45em;
+      margin-top: 2em;
+      text-shadow: 0 2px 28px #222b, 0 2px 2px #c72c4180;
     }
-    .right .info-label {
-      color: #11898c;
+    .aliases-intro {
+      max-width: 520px;
+      margin: 0 auto 2.5em auto;
+      font-size: 1.16em;
+      letter-spacing: 0.01em;
+      color: #dbeaffeb;
+      opacity: 0.91;
+      line-height: 1.7;
     }
-    .info-list {
-      list-style: none;
-      margin: 0 0 13px 0;
-      padding: 0;
+    .entr-btn {
+      padding: 0.9em 3em;
+      font-size: 1.23em;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(90deg, #c72c41 40%, #11898c 83%);
+      border: none;
+      border-radius: 34px;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 4px 32px #c72c4155;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.2s, transform 0.16s;
     }
-    .info-list li {
-      margin-bottom: 0.4em;
-      font-size: 1em;
-      opacity: 0.95;
+    .entr-btn:hover, .entr-btn:active {
+      background: linear-gradient(90deg, #11898c 30%, #c72c41 80%);
+      transform: scale(1.04) translateY(-2px);
     }
-    .divider {
-      width: 2px;
-      background: linear-gradient(to bottom, #c72c41, #11898c);
-      height: 90%;
-      margin: auto 0;
-    }
-    @media (max-width: 900px) {
-      .split-container { flex-direction: column; }
-      .alias { min-width: 100vw; padding: 6vw 8vw 6vw 8vw; align-items: center; }
-      .divider { width: 100%; height: 2px; margin: 24px 0; }
+    @media (max-width: 750px) {
+      .artist-name { font-size: 2em; }
+      .aliases-intro { font-size: 1em; }
+      .entr-btn { font-size: 1em; padding: 0.75em 2em; }
     }
   </style>
 </head>
 <body>
-  <div class="split-container">
-    <!-- raiBeat Side -->
-    <section class="alias alias-left left">
-      <div class="alias-title">Yash Raipure – Dual Alias Artist</div>
-      <div class="rebellious">raiBeat</div>
-      <div class="alias-desc">
-        raiBeat embodies raw, rebellious energy. This alias focuses on high-octane electronic beats, heavy basslines, and experimental sound design—perfect for underground clubs and festivals. Expect bold, edgy, and adrenaline-fueled sets that resonate with those seeking intense, unapologetic electronic experiences.
-      </div>
-      <div class="info-section">
-        <div class="info-label">Vibe / Style</div>
-        <ul class="info-list">
-          <li>Raw, energetic, rebellious</li>
-          <li>Underground electronic music</li>
-          <li>Heavy basslines, punchy rhythms, experimental sounds</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Musical Identity</div>
-        <ul class="info-list">
-          <li>Club & festival-ready drops</li>
-          <li>Raw, edgy, bold tracks & mixes</li>
-          <li>Techno, house, bass-driven sounds</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Performance Persona</div>
-        <ul class="info-list">
-          <li>Intense, commanding stage presence</li>
-          <li>Immersive, chaotic experiences</li>
-          <li>Rebellion, freedom, creative audacity</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Audience Connection</div>
-        <ul class="info-list">
-          <li>Draws fans with underground energy & authenticity</li>
-          <li>For experimental sound lovers & high-energy crowds</li>
-        </ul>
-      </div>
-    </section>
-    <!-- Divider -->
-    <div class="divider"></div>
-    <!-- Яsh Side -->
-    <section class="alias alias-right right">
-      <div class="alias-title">Yash Raipure – Dual Alias Artist</div>
-      <div class="melodic">Яsh</div>
-      <div class="alias-desc">
-        Яsh represents melodic, soulful artistry—chillwave, melodic house, and downtempo. His sets create immersive journeys through smooth rhythms, harmonic layers, and atmospheric soundscapes, connecting emotionally with the audience and perfect for beach events, intimate venues, and vibey gatherings.
-      </div>
-      <div class="info-section">
-        <div class="info-label">Vibe / Style</div>
-        <ul class="info-list">
-          <li>Melodic, smooth, immersive</li>
-          <li>Chill electronic beats, harmonic layers</li>
-          <li>Emotional connectivity</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Musical Identity</div>
-        <ul class="info-list">
-          <li>Melodic house, chillwave, downtempo</li>
-          <li>Soulful, rhythmic, immersive tracks</li>
-          <li>Ambient textures, subtle percussion, warm synths</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Performance Persona</div>
-        <ul class="info-list">
-          <li>Calm, atmospheric, engaging</li>
-          <li>Guides emotional & introspective journeys</li>
-          <li>Ideal for lounge, beach, or intimate festivals</li>
-        </ul>
-      </div>
-      <div class="info-section">
-        <div class="info-label">Audience Connection</div>
-        <ul class="info-list">
-          <li>Fans appreciate melodic, rhythmic experiences</li>
-          <li>Perfect for relaxation & inspiration</li>
-        </ul>
-      </div>
-    </section>
+  <div class="artist-name">Yash Raipure</div>
+  <div class="aliases-intro">
+    Dual-alias electronic producer & DJ<br>
+    <b>raiBeat:</b> Raw, rebellious, high-octane energy for underground spaces.<br>
+    <b>Яsh:</b> Melodic, soulful experiences for chill and immersive settings.
   </div>
+  <button class="entr-btn" onclick="window.location.href='duo.html'">Enter</button>
 </body>
 </html>
