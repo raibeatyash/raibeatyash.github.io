@@ -1,245 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>raiBeat | Яsh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
-      display: flex;
-      color: #fff;
-      -webkit-font-smoothing: antialiased;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>raiBeat | Яsh</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    display: flex;
+    color: #fff;
+    background: #111;
+    position: relative;
+  }
 
-    /* Split screen */
-    .split {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      position: relative;
-      transition: width 0.8s ease, opacity 0.8s ease;
-      overflow: hidden;
-    }
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    animation: float 20s linear infinite;
+  }
 
-    /* Left - raiBeat */
-    .left {
-      background: linear-gradient(135deg, #1a0000, #330000, #660000);
-      background-size: 400% 400%;
-      animation: gradientLeft 20s ease infinite;
-    }
-    @keyframes gradientLeft {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .left h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #ff3333;
-      margin: 0;
-      text-transform: capitalize;
-    }
-    .left .tagline {
-      font-size: 1.2rem;
-      margin: 10px 0 20px 0;
-      color: #ff3333;
-      font-style: italic;
-      transition: opacity 0.5s ease;
-    }
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) scale(1); }
+    50% { transform: translateY(-200px) translateX(100px) scale(1.2); }
+    100% { transform: translateY(0) translateX(0) scale(1); }
+  }
 
-    /* Right - Яsh */
-    .right {
-      background: linear-gradient(135deg, #007788, #0099aa, #00b5b5);
-      background-size: 400% 400%;
-      animation: gradientRight 20s ease infinite;
-    }
-    @keyframes gradientRight {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .right h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      color: transparent;
-      -webkit-text-stroke: 2px #6ee7b7;
-      margin: 0;
-    }
-    .right .tagline {
-      font-size: 1.2rem;
-      margin: 10px 0 20px 0;
-      color: #c9f5eb;
-      font-style: italic;
-      transition: opacity 0.5s ease;
-    }
+  /* Split screen */
+  .split {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    transition: width 0.8s ease, opacity 0.8s ease;
+    overflow: hidden;
+  }
 
-    /* Buttons */
-    .enter-btn, .back-btn {
-      padding: 10px 30px;
-      border: 2px solid currentColor;
-      background: transparent;
-      color: inherit;
-      font-weight: 600;
-      text-transform: uppercase;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 20px;
-      opacity: 1;
-      transition: all 0.3s ease;
-      letter-spacing: 1px;
-    }
-    .enter-btn:hover, .back-btn:hover {
-      background: rgba(255,255,255,0.08);
-      transform: translateY(-2px);
-    }
-    .enter-btn:active, .back-btn:active {
-      transform: scale(0.95);
-    }
+  /* Left - raiBeat */
+  .left {
+    background: linear-gradient(135deg, #1a0000, #330000, #660000);
+    background-size: 400% 400%;
+    animation: gradientLeft 25s ease infinite;
+  }
 
-    /* Expanded/Collapsed */
-    .expanded { width: 100% !important; }
-    .collapsed { width: 0 !important; opacity: 0; pointer-events: none; }
+  @keyframes gradientLeft {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    /* Fade elements */
-    .fade-out { opacity: 0 !important; pointer-events: none; }
+  .left h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    color: transparent;
+    -webkit-text-stroke: 2px #ff3333;
+    margin: 0;
+    text-transform: capitalize;
+    transition: transform 0.5s ease;
+  }
 
-    /* Hover highlight */
-    .split:hover { filter: brightness(1.05); transition: filter 0.5s ease; }
+  .left .tagline {
+    font-size: 1.2rem;
+    margin: 10px 0 20px 0;
+    color: #ff3333;
+    font-style: italic;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
 
-    /* Details content */
-    .details {
-      max-width: 700px;
-      margin-top: 40px;
-      display: none;
-      opacity: 0;
-      line-height: 1.6;
-      padding: 20px;
-      border-radius: 8px;
-      background: rgba(0,0,0,0.25);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
-    .details.active {
-      display: block;
-      animation: fadeIn 0.8s ease forwards;
-    }
-    .details h2 {
-      margin: 20px 0 10px;
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-    #raibeat-details h2 { color: #ff3333; }
-    #yash-details h2 { color: #6ee7b7; }
-    .details p a { color: inherit; text-decoration: underline; }
+  /* Right - Яsh */
+  .right {
+    background: linear-gradient(135deg, #007788, #0099aa, #00b5b5);
+    background-size: 400% 400%;
+    animation: gradientRight 25s ease infinite;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  @keyframes gradientRight {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    /* Subtle background texture */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.01) 1%, transparent 1%) repeat;
-      background-size: 3px 3px;
-      animation: grain 8s steps(10) infinite;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-    @keyframes grain {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(5%, -5%); }
-    }
+  .right h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    color: transparent;
+    -webkit-text-stroke: 2px #6ee7b7;
+    margin: 0;
+    transition: transform 0.5s ease;
+  }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .split { width: 100%; height: 50%; }
-      .split h1 { font-size: 2.8rem; }
-      .details { padding: 0 20px; }
-    }
-  </style>
+  .right .tagline {
+    font-size: 1.2rem;
+    margin: 10px 0 20px 0;
+    color: #c9f5eb;
+    font-style: italic;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  /* Buttons */
+  .enter-btn, .back-btn {
+    padding: 10px 30px;
+    border: 2px solid currentColor;
+    background: transparent;
+    color: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+
+  .enter-btn:hover, .back-btn:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .enter-btn:active, .back-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Expanded/Collapsed */
+  .expanded { width: 100% !important; }
+  .collapsed { width: 0 !important; opacity: 0; pointer-events: none; }
+
+  /* Fade elements */
+  .fade-out { opacity: 0 !important; pointer-events: none; }
+
+  /* Split hover highlight */
+  .split:hover { filter: brightness(1.05); transition: filter 0.5s ease; }
+
+  /* Details content */
+  .details {
+    max-width: 700px;
+    margin-top: 40px;
+    display: none;
+    opacity: 0;
+    line-height: 1.6;
+    padding: 20px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.25);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+
+  .details.active {
+    display: block;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .details h2 {
+    margin: 20px 0 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  #raibeat-details h2 { color: #ff3333; }
+  #yash-details h2 { color: #6ee7b7; }
+  .details p a { color: inherit; text-decoration: underline; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body { flex-direction: column; }
+    .split { width: 100%; height: 50%; }
+    .split h1 { font-size: 2.8rem; }
+    .details { padding: 0 20px; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- Left Side: raiBeat -->
-  <div class="split left" id="left">
-    <h1>raiBeat</h1>
-    <p class="tagline" id="left-tagline">Raw. Rebellious. Rumble.</p>
-    <button class="enter-btn" id="left-enter" onclick="expandSide('left')">Enter</button>
+<!-- Floating particles -->
+<script>
+  for(let i=0;i<40;i++){
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = p.style.height = Math.random()*6+4+'px';
+    p.style.top = Math.random()*100+'%';
+    p.style.left = Math.random()*100+'%';
+    p.style.background = ['#ff3333','#6ee7b7','#ffffff'][Math.floor(Math.random()*3)];
+    p.style.animationDuration = (Math.random()*20+10)+'s';
+    p.style.opacity = Math.random()*0.4+0.1;
+    document.body.appendChild(p);
+  }
+</script>
 
-    <div class="details" id="raibeat-details">
-      <h2>🔥 Music Uploads</h2>
-      <p>Check out my rebellious and raw drops.</p>
-      <h2>⚡ Upcoming Events</h2>
-      <p>Stay updated with live gigs, events, and tour dates.</p>
-      <h2>🎛️ Mixes</h2>
-      <p>Exclusive underground sets and mixes.</p>
-      <h2>📩 Contact</h2>
-      <p>Bookings and collabs: <a href="mailto:raibeat@example.com">raibeat@example.com</a></p>
-      <button class="back-btn" onclick="resetView()">⬅ Back</button>
-    </div>
+<!-- Left Side: raiBeat -->
+<div class="split left" id="left">
+  <h1>raiBeat</h1>
+  <p class="tagline" id="left-tagline">Raw. Rebellious. Rumble.</p>
+  <button class="enter-btn" id="left-enter" onclick="expandSide('left')">Enter</button>
+
+  <div class="details" id="raibeat-details">
+    <h2>🔥 Music Uploads</h2>
+    <p>Check out my rebellious and raw drops.</p>
+    <h2>⚡ Upcoming Events</h2>
+    <p>Stay updated with live gigs, events, and tour dates.</p>
+    <h2>🎛️ Mixes</h2>
+    <p>Exclusive underground sets and mixes.</p>
+    <h2>📩 Contact</h2>
+    <p>Bookings and collabs: <a href="mailto:raibeat@example.com">raibeat@example.com</a></p>
+    <button class="back-btn" onclick="resetView()">⬅ Back</button>
   </div>
+</div>
 
-  <!-- Right Side: Яsh -->
-  <div class="split right" id="right">
-    <h1>Яsh</h1>
-    <p class="tagline" id="right-tagline">Melodic Rhythm Therapy</p>
-    <button class="enter-btn" id="right-enter" onclick="expandSide('right')">Enter</button>
+<!-- Right Side: Яsh -->
+<div class="split right" id="right">
+  <h1>Яsh</h1>
+  <p class="tagline" id="right-tagline">Melodic Rhythm Therapy</p>
+  <button class="enter-btn" id="right-enter" onclick="expandSide('right')">Enter</button>
 
-    <div class="details" id="yash-details">
-      <h2>🎶 Chill Beats</h2>
-      <p>Relax and flow with melodic soundscapes.</p>
-      <h2>🌊 Rhythm Therapy</h2>
-      <p>Find peace in waves of rhythm and harmony.</p>
-      <h2>☀️ Events & Gatherings</h2>
-      <p>Join intimate beach vibes and soulful sessions.</p>
-      <h2>📩 Contact</h2>
-      <p>Collabs and vibes: <a href="mailto:yash@example.com">yash@example.com</a></p>
-      <button class="back-btn" onclick="resetView()">⬅ Back</button>
-    </div>
+  <div class="details" id="yash-details">
+    <h2>🎶 Chill Beats</h2>
+    <p>Relax and flow with melodic soundscapes.</p>
+    <h2>🌊 Rhythm Therapy</h2>
+    <p>Find peace in waves of rhythm and harmony.</p>
+    <h2>☀️ Events & Gatherings</h2>
+    <p>Join intimate beach vibes and soulful sessions.</p>
+    <h2>📩 Contact</h2>
+    <p>Collabs and vibes: <a href="mailto:yash@example.com">yash@example.com</a></p>
+    <button class="back-btn" onclick="resetView()">⬅ Back</button>
   </div>
+</div>
 
-  <script>
-    function expandSide(side) {
-      if (side === 'left') {
-        document.getElementById('left').classList.add('expanded');
-        document.getElementById('right').classList.add('collapsed');
-        document.getElementById('left-tagline').classList.add('fade-out');
-        document.getElementById('left-enter').classList.add('fade-out');
-        setTimeout(() => { document.getElementById('raibeat-details').classList.add('active'); }, 500);
-      } else {
-        document.getElementById('right').classList.add('expanded');
-        document.getElementById('left').classList.add('collapsed');
-        document.getElementById('right-tagline').classList.add('fade-out');
-        document.getElementById('right-enter').classList.add('fade-out');
-        setTimeout(() => { document.getElementById('yash-details').classList.add('active'); }, 500);
-      }
-    }
+<script>
+function expandSide(side) {
+  if(side==='left'){
+    document.getElementById('left').classList.add('expanded');
+    document.getElementById('right').classList.add('collapsed');
+    document.getElementById('left-tagline').classList.add('fade-out');
+    document.getElementById('left-enter').classList.add('fade-out');
+    setTimeout(()=>{document.getElementById('raibeat-details').classList.add('active');},500);
+  } else {
+    document.getElementById('right').classList.add('expanded');
+    document.getElementById('left').classList.add('collapsed');
+    document.getElementById('right-tagline').classList.add('fade-out');
+    document.getElementById('right-enter').classList.add('fade-out');
+    setTimeout(()=>{document.getElementById('yash-details').classList.add('active');},500);
+  }
+}
 
-    function resetView() {
-      document.getElementById('left').classList.remove('expanded', 'collapsed');
-      document.getElementById('right').classList.remove('expanded', 'collapsed');
-      document.querySelectorAll('.tagline, .enter-btn').forEach(el => el.classList.remove('fade-out'));
-      document.querySelectorAll('.details').forEach(el => {
-        el.classList.remove('active');
-        el.style.display = 'none';
-        setTimeout(() => el.style.display = '', 400);
-      });
-    }
-  </script>
+function resetView(){
+  document.getElementById('left').classList.remove('expanded','collapsed');
+  document.getElementById('right').classList.remove('expanded','collapsed');
+  document.querySelectorAll('.tagline,.enter-btn').forEach(el=>el.classList.remove('fade-out'));
+  document.querySelectorAll('.details').forEach(el=>{
+    el.classList.remove('active');
+    el.style.display='none';
+    setTimeout(()=>el.style.display='',400);
+  });
+}
+</script>
+
 </body>
 </html>
