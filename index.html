@@ -4,33 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>raiBeat | Яsh</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* ===== Base setup ===== */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       height: 100vh;
-      font-family: Arial, sans-serif;
       overflow: hidden;
       display: flex;
+      flex-wrap: wrap;
+      background-color: #000;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: #fff;
+      position: relative;
     }
 
-    /* Split screen */
+    /* ===== Subtle grain / texture ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.02) 1%, transparent 1%) repeat;
+      background-size: 3px 3px;
+      animation: grain 8s steps(10) infinite;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.8;
+    }
+    @keyframes grain {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(5%, -5%); }
+    }
+
+    /* ===== Split layout ===== */
     .split {
       width: 50%;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
       flex-direction: column;
       position: relative;
-      color: #fff;
-      transition: width 0.8s ease, opacity 0.8s ease;
+      text-align: center;
+      transition: width 0.9s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.7s ease;
       overflow: hidden;
+      z-index: 1;
     }
 
     /* Left side - raiBeat */
     .left {
-      background: #1a0000;
+      background: radial-gradient(circle at top left, #240000, #0d0000);
     }
     .left h1 {
       font-family: 'Orbitron', sans-serif;
@@ -39,17 +69,22 @@
       -webkit-text-stroke: 2px #ff3333;
       margin: 0;
       text-transform: capitalize;
+      transition: transform 0.6s ease;
+    }
+    .left:hover h1 {
+      transform: scale(1.04);
     }
     .left .tagline {
       font-size: 1.2rem;
-      margin: 10px 0 20px 0;
       color: #ff3333;
       font-style: italic;
+      margin: 12px 0 25px;
+      transition: opacity 0.5s ease;
     }
 
     /* Right side - Яsh */
     .right {
-      background: linear-gradient(135deg, #007788, #00b5b5);
+      background: linear-gradient(135deg, #006d7a 0%, #00a5a5 100%);
     }
     .right h1 {
       font-family: 'Orbitron', sans-serif;
@@ -57,57 +92,55 @@
       color: transparent;
       -webkit-text-stroke: 2px #6ee7b7;
       margin: 0;
+      transition: transform 0.6s ease;
+    }
+    .right:hover h1 {
+      transform: scale(1.04);
     }
     .right .tagline {
       font-size: 1.2rem;
-      margin: 10px 0 20px 0;
       color: #c9f5eb;
       font-style: italic;
+      margin: 12px 0 25px;
+      transition: opacity 0.5s ease;
     }
 
-    /* Transparent buttons */
+    /* ===== Buttons ===== */
     .enter-btn, .back-btn {
       display: inline-block;
-      padding: 10px 30px;
+      padding: 12px 34px;
       border: 2px solid currentColor;
       background: transparent;
       color: inherit;
-      font-weight: bold;
-      text-decoration: none;
+      font-weight: 600;
       text-transform: uppercase;
+      letter-spacing: 1px;
       border-radius: 4px;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 18px;
       opacity: 1;
     }
     .enter-btn:hover, .back-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+    .enter-btn:active, .back-btn:active {
+      transform: scale(0.95);
     }
 
-    /* Expanded/Collapsed */
-    .expanded {
-      width: 100% !important;
-    }
-    .collapsed {
-      width: 0 !important;
-      opacity: 0;
-      pointer-events: none;
-    }
+    /* ===== Animation states ===== */
+    .expanded { width: 100% !important; }
+    .collapsed { width: 0 !important; opacity: 0; pointer-events: none; }
+    .fade-out { opacity: 0 !important; pointer-events: none; }
 
-    /* Fade-out elements */
-    .fade-out {
-      opacity: 0 !important;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-    }
-
-    /* Details content */
+    /* ===== Detail content ===== */
     .details {
       max-width: 800px;
       margin-top: 40px;
       display: none;
       opacity: 0;
+      line-height: 1.7;
     }
     .details.active {
       display: block;
@@ -115,13 +148,28 @@
     }
     .details h2 {
       margin: 20px 0 10px;
+      font-size: 1.3rem;
+      font-weight: 600;
     }
     #raibeat-details h2 { color: #ff3333; }
     #yash-details h2 { color: #6ee7b7; }
-
+    .details p a {
+      color: inherit;
+      text-decoration: underline;
+    }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Responsive design ===== */
+    @media (max-width: 800px) {
+      body { flex-direction: column; }
+      .split { width: 100%; height: 50%; transition: height 0.9s ease; }
+      .expanded { height: 100% !important; }
+      .collapsed { height: 0 !important; }
+      .split h1 { font-size: 2.8rem; }
+      .details { padding: 0 20px; }
     }
   </style>
 </head>
@@ -181,7 +229,7 @@
         document.getElementById('left-enter').classList.add('fade-out');
         setTimeout(() => {
           document.getElementById('raibeat-details').classList.add('active');
-        }, 500);
+        }, 600);
       } else {
         document.getElementById('right').classList.add('expanded');
         document.getElementById('left').classList.add('collapsed');
@@ -189,25 +237,22 @@
         document.getElementById('right-enter').classList.add('fade-out');
         setTimeout(() => {
           document.getElementById('yash-details').classList.add('active');
-        }, 500);
+        }, 600);
       }
     }
 
     function resetView() {
-      document.getElementById('left').classList.remove('expanded', 'collapsed');
-      document.getElementById('right').classList.remove('expanded', 'collapsed');
+      const left = document.getElementById('left');
+      const right = document.getElementById('right');
+      left.classList.remove('expanded', 'collapsed');
+      right.classList.remove('expanded', 'collapsed');
 
-      // Reset taglines and buttons
-      document.getElementById('left-tagline').classList.remove('fade-out');
-      document.getElementById('left-enter').classList.remove('fade-out');
-      document.getElementById('right-tagline').classList.remove('fade-out');
-      document.getElementById('right-enter').classList.remove('fade-out');
-
-      // Hide details
-      document.getElementById('raibeat-details').classList.remove('active');
-      document.getElementById('yash-details').classList.remove('active');
-      document.getElementById('raibeat-details').style.display = 'none';
-      document.getElementById('yash-details').style.display = 'none';
+      document.querySelectorAll('.tagline, .enter-btn').forEach(el => el.classList.remove('fade-out'));
+      document.querySelectorAll('.details').forEach(el => {
+        el.classList.remove('active');
+        el.style.display = 'none';
+        setTimeout(() => el.style.display = '', 400);
+      });
     }
   </script>
 </body>
