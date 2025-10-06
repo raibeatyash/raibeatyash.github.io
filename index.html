@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>raiBeat | Яsh</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       height: 100vh;
-      font-family: 'Orbitron', sans-serif;
+      font-family: Arial, sans-serif;
       overflow: hidden;
       display: flex;
-      -webkit-font-smoothing: antialiased;
     }
 
     /* Split screen */
@@ -35,6 +33,7 @@
       background: #1a0000;
     }
     .left h1 {
+      font-family: 'Orbitron', sans-serif;
       font-size: 4rem;
       color: transparent;
       -webkit-text-stroke: 2px #ff3333;
@@ -50,10 +49,10 @@
 
     /* Right side - Яsh */
     .right {
-      background: #008b8b;
       background: linear-gradient(135deg, #007788, #00b5b5);
     }
     .right h1 {
+      font-family: 'Orbitron', sans-serif;
       font-size: 4rem;
       color: transparent;
       -webkit-text-stroke: 2px #6ee7b7;
@@ -66,7 +65,7 @@
       font-style: italic;
     }
 
-    /* Buttons */
+    /* Transparent buttons */
     .enter-btn, .back-btn {
       display: inline-block;
       padding: 10px 30px;
@@ -81,7 +80,6 @@
       cursor: pointer;
       margin-top: 20px;
       opacity: 1;
-      letter-spacing: 1px;
     }
     .enter-btn:hover, .back-btn:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -117,7 +115,6 @@
     }
     .details h2 {
       margin: 20px 0 10px;
-      font-size: 1.3rem;
     }
     #raibeat-details h2 { color: #ff3333; }
     #yash-details h2 { color: #6ee7b7; }
@@ -125,12 +122,6 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Responsive fix */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .split { width: 100%; height: 50%; }
     }
   </style>
 </head>
@@ -221,3 +212,5 @@
   </script>
 </body>
 </html>
+
+
