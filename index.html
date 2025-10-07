@@ -4,197 +4,273 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Rubik:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Rubik:wght@500&display=swap" rel="stylesheet" />
   <style>
     html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #fffbf3;
+      margin:0; padding:0; height:100%;
+      overflow:hidden;
+      background: #0b0a0d;
+      color:#fff;
+      font-family: 'Rubik', Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     body {
-      font-family: 'Rubik', Arial, sans-serif;
-      width: 100vw; height: 100vh;
-    }
-    .split-root {
-      width: 100vw; height: 100vh;
-      display: flex;
-      flex-direction: row;
       position: relative;
     }
-    .half {
+    #canvas {
+      position: fixed;
+      top:0;left:0;
+      width:100vw;
+      height:100vh;
+      z-index:0;
+      pointer-events:none;
+      background: linear-gradient(135deg,#220011 0%,#0a121b 90%);
+    }
+    .split-root {
+      position: relative;
+      z-index: 1;
+      width: 90vw;
+      max-width: 850px;
+      height: 450px;
+      display: flex;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 38px #cc2084aa, 0 0 40px #2ccbf4cc inset;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .left, .right {
       flex: 1;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      height: 100vh;
-      transition: box-shadow 0.3s;
+      align-items: flex-end;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: box-shadow 0.35s ease, background 0.35s ease;
+      pointer-events: auto;
+      user-select: none;
+      padding-bottom: 4rem;
+      color: #eee;
+      text-shadow: 0 0 6px #ff5a91bb;
+      font-weight: 600;
+      font-size: 2.8rem;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      box-sizing: border-box;
+    }
+    .left {
+      background: linear-gradient(45deg, #6a0e26 0%, #1c050d 100%);
+      box-shadow: inset 0 0 180px #aa2d4b88;
+      border-right: 3px solid #f0284e;
+      text-shadow: 0 0 24px #f0284ecc;
+    }
+    .left:hover, .left:focus {
+      box-shadow: 0 0 110px 12px #fa3a5e, inset 0 0 200px #ff3565cc;
+      border-color: #ff4574;
+      outline: none;
+      transform: scale(1.04);
+      z-index: 2;
+    }
+    .right {
+      background: linear-gradient(45deg, #247a95 0%,#113741 100%);
+      box-shadow: inset 0 0 200px #56ffec88;
+      border-left: 3px solid #3ae4f2;
+      text-shadow: 0 0 22px #3cf0ffcd;
+    }
+    .right:hover, .right:focus {
+      box-shadow: 0 0 120px 15px #1aedff, inset 0 0 210px #4fe7f699;
+      border-color: #2adbf2;
+      outline: none;
+      transform: scale(1.04);
+      z-index: 2;
+    }
+    /* Buttons */
+    .alias-btn {
+      margin-top: 2rem;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      padding: 1.4rem 4.3rem;
+      border-radius: 38px;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      color: #fff;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      box-shadow: 0 0 45px 4px rgba(255,255,255,0.4);
+      background-clip: padding-box;
+      transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+      outline: none;
       position: relative;
       overflow: hidden;
     }
-    /* raiBeat -- Rebellious underground */
-    .left {
-      background: radial-gradient(ellipse at 60% 100px, #5f232a 60%, #28080f 100%);
-      box-shadow: 8px 0 48px #3c0312aa inset;
+    .left .alias-btn {
+      background: #f43f67;
+      box-shadow: 0 0 50px 4px #ff4d75;
     }
-    /* Яsh -- Calm, melodic */
-    .right {
-      background: radial-gradient(ellipse at 50% 90%, #e1fcff 55%, #30afc9 100%);
-      box-shadow: -9px 0 68px #4ffeff55 inset;
+    .right .alias-btn {
+      background: #21abc4;
+      box-shadow: 0 0 62px 6px #15ccff;
     }
-    /* Center content overlay */
-    .center-content {
-      position: absolute;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 3;
-      pointer-events: none;
+    .alias-btn:focus-visible {
+      outline: 3px solid #fff;
     }
-    .main-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      letter-spacing: -1.2px;
-      color: #191726;
+    .alias-btn:hover {
+      filter: brightness(1.1);
+    }
+    .alias-btn:active {
+      transform: scale(0.94);
+      box-shadow: 0 0 35px 8px #fff4f4dd;
+    }
+    /* Heading animation shimmering */
+    .shimmer {
+      font-weight: 800;
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      position: relative;
+      color: #fee6f2;
+      background: linear-gradient(90deg, #fe80ab 0%, #eb4ceed7 30%, #fd69b4 50%, #f996bd 70%, #fd99c0 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3.5s linear infinite;
       text-transform: uppercase;
-      background: rgba(252,252,252,0.89);
-      border-radius: 19px;
-      box-shadow: 0 7px 54px #fffdfa60;
-      margin: 0 0 0.66em 0;
-      padding: 0.14em 1em 0.05em 1em;
-      z-index: 4;
-      pointer-events: auto;
+      letter-spacing: 0.06em;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
     }
-    .subtitle {
-      font-weight: 700;
-      color: #5b5449;
-      font-size: 1.04rem;
-      background: #f9f8ee;
-      padding: 0.64em 1.2em;
-      border-radius: 13px;
-      margin-bottom: 2.2em;
-      text-align: center;
-      pointer-events: auto;
-      z-index: 4;
-      box-shadow: 0 3px 24px #cde9ff20;
-      border: 1.5px dashed #ded6ce36;
-      font-family: 'Rubik', sans-serif;
-      max-width: 380px;
-    }
-    /* Alias enter buttons */
-    .enter-group {
-      display: flex;
-      gap: 2rem;
-      margin-top: 1.5em;
-      pointer-events: auto;
-      z-index: 4;
-    }
-    .alias-btn {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      padding: 1em 2.8em;
-      border-radius: 18px;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      transition: background 0.28s, color 0.17s, transform 0.14s, box-shadow 0.23s;
-      box-shadow: 0 3px 36px #e4e8f455;
-      outline: none;
-      pointer-events: auto;
-    }
-    .btn-raibeat {
-      background: #ff4163;
-      color: #fff7fd;
-      box-shadow: 0 4px 25px #5f232aa9;
-    }
-    .btn-raibeat:hover, .btn-raibeat:focus {
-      background: #7e2932;
-      color: #fff3f6;
-      transform: scale(1.062);
-      box-shadow: 0 10px 36px #ff416355;
-    }
-    .btn-yash {
-      background: #3edaef;
-      color: #fff;
-      box-shadow: 0 4px 19px #179eaf99;
-    }
-    .btn-yash:hover, .btn-yash:focus {
-      background: #126784;
-      color: #eaffff;
-      transform: scale(1.062);
-      box-shadow: 0 10px 35px #35bde788;
-    }
-    /* Textured/graphic overlays (grunge or wave lines) */
-    .texture {
-      position: absolute;
-      left: 0; width: 100%; z-index: 1;
-      opacity: 0.2;
-      pointer-events: none;
-    }
-    .texture.raiBeat {
-      top: 0;
-      height: 100%;
-      background: url('https://svgshare.com/i/17s7.svg') repeat-y left top;
-      background-size: 200px 200px;
-      mix-blend-mode: multiply;
-      opacity: 0.11;
-    }
-    .texture.yash {
-      bottom: 0;
-      height: 100%;
-      background: url('https://svgshare.com/i/17ug.svg') repeat-y right bottom;
-      background-size: 200px 200px;
-      mix-blend-mode: screen;
-      opacity: 0.08;
-    }
-    /* Split divider (optional) */
-    .split-divider {
-      position: absolute;
-      left: 50%;
-      top: 0; bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, #efc1fa 0%, #beeefa 100%);
-      opacity: 0.30;
-      z-index: 10;
-      border-radius: 50vw;
-    }
-    @media (max-width: 670px) {
-      .split-root { flex-direction: column; }
-      .left, .right {
-        width: 100vw;
-        min-height: 46vh;
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
       }
-      .center-content { padding-top: 1.8em; }
-      .split-divider { display: none; }
-      .main-title { font-size: 2rem; }
-      .subtitle { font-size: 0.96rem; }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    /* Subtle tagline text */
+    .tagline {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #b1d1df;
+      margin-bottom: 4rem;
+      text-align: center;
+      max-width: 350px;
+      letter-spacing: 0.04em;
+    }
+    /* Accessibility focus */
+    .left:focus-visible, .right:focus-visible {
+      outline: 4px solid #fff;
+      filter: brightness(1.2);
+      z-index: 9;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .split-root {
+        flex-direction: column;
+        height: auto;
+      }
+      .left, .right {
+        min-height: 45vh;
+        padding-bottom: 5rem;
+      }
+      .shimmer {
+        font-size: 2.4rem;
+      }
+      .tagline {
+        max-width: 100%;
+        padding: 0 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="split-root" role="presentation">
-    <div class="left" aria-label="RaiBeat Side">
-      <div class="texture raiBeat"></div>
-    </div>
-    <div class="right" aria-label="Яsh Side">
-      <div class="texture yash"></div>
-    </div>
-    <div class="split-divider"></div>
-    <div class="center-content">
-      <div class="main-title">Yash Raipure</div>
-      <div class="subtitle">
-        Dual Alias Artist: Bridging underground energy and melodic depth through <strong>raiBeat</strong> and <strong>Яsh</strong>.
+  <canvas id="canvas"></canvas>
+  <div class="split-root">
+    <div class="left" tabindex="0" role="button" aria-label="Enter raiBeat profile" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
+      <div>
+        <div class="shimmer">raiBeat</div>
+        <div class="tagline">Raw, rebellious underground energy with heavy bass and high-octane beats.</div>
+        <button class="alias-btn">Enter raiBeat</button>
       </div>
-      <div class="enter-group">
-        <button class="alias-btn btn-raibeat" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
-        <button class="alias-btn btn-yash" onclick="window.location.href='yash.html'">Enter Яsh</button>
+    </div>
+    <div class="right" tabindex="0" role="button" aria-label="Enter Яsh profile" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
+      <div>
+        <div class="shimmer" style="animation-direction: reverse;">Яsh</div>
+        <div class="tagline">Melodic, smooth, and immersive journeys built for chillwave and vibes.</div>
+        <button class="alias-btn">Enter Яsh</button>
       </div>
     </div>
   </div>
+
+  <script>
+    // Particle background for dynamic effect
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const colors = ['#f76c6c', '#06c1e1', '#c88cf2', '#48b9b9', '#eec213'];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.radius = 0.8 + Math.random() * 1.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.alpha = 0.15 + Math.random() * 0.25;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha})`;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+      }
+    }
+
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      return `${parseInt(hex.substr(0,2),16)},${parseInt(hex.substr(2,2),16)},${parseInt(hex.substr(4,2),16)}`;
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 75; i++) {
+        particles.push(new Particle());
+      }
+    }
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    initParticles();
+    animate();
+  </script>
 </body>
 </html>
