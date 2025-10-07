@@ -4,31 +4,25 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset & base */
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body, html {
-      margin: 0; padding: 0;
       height: 100%;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(ellipse at center, #0f0f16 30%, #1c1b26 90%);
-      color: #f5f5f7;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(135deg, #151217 60%, #212333 100%);
+      color: #f9f7fa;
+      min-height: 100vh;
+      width: 100vw;
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
-
-    /* Container and max width */
     .container {
       width: 100%;
-      max-width: 1200px;
-      padding: 3rem 2rem 4rem;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -36,229 +30,157 @@
       position: relative;
       z-index: 10;
     }
-
-    /* Title with stylish serif font and Orbitron fallback */
     h1 {
-      font-family: 'Italiana', serif;
-      font-weight: 400;
-      font-size: 3.8rem;
-      letter-spacing: 0.14em;
-      color: #f0d85c;
-      margin-bottom: 0.3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 2.8rem;
       text-transform: uppercase;
-      text-shadow:
-        2px 2px 8px rgba(240, 216, 92, 0.85),
-        4px 4px 20px rgba(240, 216, 92, 0.5);
-      line-height: 1.1;
+      letter-spacing: 0.08em;
+      color: #f7e369;
+      margin-bottom: 0.35em;
+      text-shadow: 2px 3px 22px #15121776;
     }
-
-    /* Subtitle paragraph with Orbitron for a sci-fi vibe */
     .subtitle {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Cormorant Garamond', serif;
       max-width: 700px;
-      font-weight: 400;
-      font-size: 1.26rem;
-      line-height: 1.7;
-      color: #bebec7cc;
-      margin-top: 0;
-      margin-bottom: 4rem;
-      letter-spacing: 0.06em;
-      user-select: none;
-      filter: drop-shadow(0 0 2px rgba(255,255,255,0.12));
-      font-variant-ligatures: none;
+      font-weight: 500;
+      font-size: 1.32rem;
+      line-height: 1.75;
+      color: #e8e5ffdb;
+      margin-bottom: 3.5rem;
+      letter-spacing: 0.01em;
     }
 
-    /* Split Screen container with smooth shadows & glow */
     .split {
       display: flex;
       width: 100%;
-      height: 52vh;
-      min-height: 370px;
-      border-radius: 38px;
+      min-height: 360px;
+      border-radius: 31px;
       overflow: hidden;
-      box-shadow:
-        0 0 130px 18px rgba(240, 216, 92, 0.17),
-        inset 0 0 110px 12px rgba(17, 137, 140, 0.18);
-      backdrop-filter: saturate(140%) blur(22px);
-      background: linear-gradient(140deg, #3f121c, #170d14 70%);
-      user-select: none;
+      background: #212126;
+      box-shadow: 0 0 90px 12px #f0d85c17, 0 10px 24px -6px #13224a99;
     }
-
-    /* Left panel (raiBeat) refined */
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2.8rem 2.5rem 2rem 2.5rem;
+      transition: background 0.2s;
+    }
     .left-panel {
-      flex: 1;
-      background: linear-gradient(150deg, #a42b3b 40%, #3f121c);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #ffe1d6;
-      padding: 3rem 4rem;
-      position: relative;
-      transition: background 0.35s ease;
-      cursor: pointer;
-      border-right: 3px solid #f0d85c88;
+      background: linear-gradient(145deg, #3e2024 55%, #7f272a 100%);
+      border-right: 2px solid #fff1;
     }
-    .left-panel:hover {
-      background: linear-gradient(150deg, #ba4051 65%, #501624);
-      box-shadow: 0 0 60px 6px #f0d85ccc;
-    }
-    .left-title {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 3.6rem;
-      letter-spacing: 0.19em;
-      margin-bottom: 1.2rem;
-      text-transform: uppercase;
-      text-shadow: 0 0 22px #f7b7a1aa;
-      color: #ffcdc4;
-      font-variant-ligatures: none;
-    }
-    .left-desc {
-      font-family: 'Italiana', serif;
-      font-weight: 600;
-      font-size: 1.22rem;
-      line-height: 1.6;
-      letter-spacing: 0.05em;
-      max-width: 450px;
-      color: #ffe1d6dd;
-      font-style: italic;
-      font-variant-ligatures: common-ligatures;
-    }
-    .left-btn {
-      margin-top: 3rem;
-      padding: 1.2rem 4.5rem;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      border-radius: 48px;
-      border: 3px solid #f0d85c;
-      color: #f0d85c;
-      background: transparent;
-      box-shadow: 0 0 38px #f0d85c88 inset;
-      transition: all 0.35s ease;
-      cursor: pointer;
-    }
-    .left-btn:hover {
-      background: #f0d85c;
-      color: #5a2d23;
-      box-shadow: 0 0 80px #f0d85ccc;
-      transform: scale(1.1);
-    }
-
-    /* Right panel (Яsh) refined */
     .right-panel {
-      flex: 1;
-      background: linear-gradient(40deg, #0b585d 50%, #062f32);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #d4f0ef;
-      padding: 3rem 4rem;
-      position: relative;
-      transition: background 0.35s ease;
-      cursor: pointer;
+      background: linear-gradient(145deg, #ddeeee 80%, #b3cfd3 100%);
+      color: #242b2b;
     }
-    .right-panel:hover {
-      background: linear-gradient(40deg, #15b1ac 90%, #0d7673);
-      box-shadow: 0 0 60px 6px #72d2cecc;
-    }
-    .right-title {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 3.6rem;
-      letter-spacing: 0.19em;
-      margin-bottom: 1.2rem;
+    .panel-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.11em;
       text-transform: uppercase;
-      text-shadow: 0 0 22px #93efebcc;
-      color: #a0f7f4;
-      font-variant-ligatures: none;
-    }
-    .right-desc {
-      font-family: 'Italiana', serif;
-      font-weight: 600;
-      font-size: 1.22rem;
-      line-height: 1.6;
-      letter-spacing: 0.05em;
-      max-width: 450px;
-      color: #cbeae9dd;
-      font-style: italic;
-      font-variant-ligatures: common-ligatures;
-    }
-    .right-btn {
-      margin-top: 3rem;
-      padding: 1.2rem 4.5rem;
-      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      font-size: 1.3rem;
-      border-radius: 48px;
-      border: 3px solid #72d2ce;
-      color: #72d2ce;
-      background: transparent;
-      box-shadow: 0 0 38px #72d2ce88 inset;
-      transition: all 0.35s ease;
-      cursor: pointer;
+      margin-bottom: 1.1rem;
+      color: #f4746c;
+      text-shadow: 0 0 20px #DE644D11;
     }
-    .right-btn:hover {
-      background: #72d2ce;
-      color: #064746;
-      box-shadow: 0 0 80px #72d2cecc;
-      transform: scale(1.1);
+    .right-panel .panel-title {
+      color: #0a9295;
+      text-shadow: 0 0 20px #79cce011;
+    }
+    .panel-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.11rem;
+      color: #f7e7e3d1;
+      font-weight: 500;
+      max-width: 350px;
+      margin-bottom: 2.3rem;
+      line-height: 1.55;
+    }
+    .right-panel .panel-desc {
+      color: #435c54ed;
+    }
+    .btn {
+      padding: 0.85em 2.8em;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.16em;
+      border-radius: 33px;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5em;
+      letter-spacing: 0.07em;
+      box-shadow: 0 2px 14px #201e4445;
+      transition: background 0.2s, color 0.18s, transform 0.15s;
+      outline: none;
+    }
+    .btn-left {
+      background: #ffee92;
+      color: #4c2625;
+    }
+    .btn-left:hover, .btn-left:focus {
+      background: #f9d13e;
+      color: #1a1011;
+      transform: scale(1.05);
+    }
+    .btn-right {
+      background: #a9e4e6;
+      color: #174e4f;
+    }
+    .btn-right:hover, .btn-right:focus {
+      background: #08bdb8;
+      color: #fff;
+      transform: scale(1.05);
     }
 
-    /* Responsive tweaks */
-    @media (max-width: 950px) {
-      h1 {
-        font-size: 3.2rem;
-      }
+    @media (max-width: 900px) {
       .container {
-        padding: 2rem 1.5rem 3rem;
+        padding: 2rem 1rem 2.5rem;
+      }
+      h1 {
+        font-size: 2.1rem;
       }
       .split {
         flex-direction: column;
-        height: auto;
-        max-height: none;
-        border-radius: 2rem;
-        box-shadow:
-          0 0 80px 10px rgba(240, 216, 92, 0.15),
-          inset 0 0 50px 6px rgba(17, 137, 140, 0.15);
+        border-radius: 1.1rem;
+        min-height: auto;
+        box-shadow: 0 0 60px 5px #efe33a24;
       }
-      .left-panel, .right-panel {
-        padding: 2rem 2rem 3rem;
-        max-width: 80vw;
-        margin: 1.5rem auto;
-        border-radius: 2rem;
-        box-shadow: 0 15px 55px -12px rgba(0,0,0,0.75);
-        border-right: none !important;
+      .panel {
+        padding: 2rem 1.7rem 1.5rem 1.7rem;
+        max-width: 90vw;
+        border-right: none!important;
+        border-bottom: 2px solid #fff1;
       }
-      .left-btn, .right-btn {
-        padding: 1rem 4rem;
-        font-size: 1.2rem;
+      .right-panel {
+        border-bottom: none;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container" role="main" aria-label="Artist introduction and alias selection">
+  <div class="container">
     <h1>Yash Raipure – Dual Alias Artist Profile</h1>
-    <p class="subtitle">
+    <div class="subtitle">
       Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
-    </p>
-    <div class="split" role="region" aria-label="Select artist alias">
-      <section class="left-panel" tabindex="0" aria-describedby="left-desc" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
-        <h2 class="left-title">raiBeat</h2>
-        <p id="left-desc" class="left-desc">
-          Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for underground clubs and festivals.
-        </p>
-        <button class="left-btn" aria-label="Enter raiBeat profile" onclick="event.stopPropagation(); window.location.href='raiBeat.html'">Enter raiBeat</button>
+    </div>
+    <div class="split">
+      <section class="panel left-panel">
+        <div class="panel-title">raiBeat</div>
+        <div class="panel-desc">
+          Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for clubs and festivals.
+        </div>
+        <button class="btn btn-left" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
       </section>
-      <section class="right-panel" tabindex="0" aria-describedby="right-desc" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
-        <h2 class="right-title">Яsh</h2>
-        <p id="right-desc" class="right-desc">
+      <section class="panel right-panel">
+        <div class="panel-title">Яsh</div>
+        <div class="panel-desc">
           Melodic, soulful and immersive; chillwave and downtempo, perfect for beach and intimate events.
-        </p>
-        <button class="right-btn" aria-label="Enter Яsh profile" onclick="event.stopPropagation(); window.location.href='yash.html'">Enter Яsh</button>
+        </div>
+        <button class="btn btn-right" onclick="window.location.href='yash.html'">Enter Яsh</button>
       </section>
     </div>
   </div>
