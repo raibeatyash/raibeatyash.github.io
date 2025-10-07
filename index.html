@@ -2,253 +2,197 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Yash Raipure — Dual Alias Artist</title>
+  <title>Yash Raipure – Dual Alias Entry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Bold geometric and pop sans-serif fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900;700&family=Rubik:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Rubik:wght@500&display=swap" rel="stylesheet" />
   <style>
-    body {
-      background: #fffdf6;
-      font-family: 'Rubik', Arial, sans-serif;
-      color: #1a1a18;
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
+      overflow: hidden;
+      background: #fffbf3;
     }
-    .container {
-      max-width: 470px;
-      margin: 0 auto;
-      padding: 2.2rem 1rem 3rem 1rem;
+    body {
+      font-family: 'Rubik', Arial, sans-serif;
+      width: 100vw; height: 100vh;
     }
-    .main-title-block {
+    .split-root {
+      width: 100vw; height: 100vh;
       display: flex;
-      align-items: flex-end;
-      gap: 0.8em;
-      margin-bottom: 0.18em;
-      flex-wrap: wrap;
+      flex-direction: row;
+      position: relative;
+    }
+    .half {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      height: 100vh;
+      transition: box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    /* raiBeat -- Rebellious underground */
+    .left {
+      background: radial-gradient(ellipse at 60% 100px, #5f232a 60%, #28080f 100%);
+      box-shadow: 8px 0 48px #3c0312aa inset;
+    }
+    /* Яsh -- Calm, melodic */
+    .right {
+      background: radial-gradient(ellipse at 50% 90%, #e1fcff 55%, #30afc9 100%);
+      box-shadow: -9px 0 68px #4ffeff55 inset;
+    }
+    /* Center content overlay */
+    .center-content {
+      position: absolute;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 3;
+      pointer-events: none;
     }
     .main-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 900;
-      letter-spacing: 0.03em;
-      background: #e9ecf4;
-      padding: 0.28em 0.49em 0.18em 0.49em;
-      border-radius: 18px;
-      text-shadow: 0 3px 16px #e2ddff66;
-      margin: 0;
-      line-height: 1;
-      display: inline-block;
+      letter-spacing: -1.2px;
+      color: #191726;
       text-transform: uppercase;
+      background: rgba(252,252,252,0.89);
+      border-radius: 19px;
+      box-shadow: 0 7px 54px #fffdfa60;
+      margin: 0 0 0.66em 0;
+      padding: 0.14em 1em 0.05em 1em;
+      z-index: 4;
+      pointer-events: auto;
     }
-    .pill-label {
-      font-family: 'Rubik', sans-serif;
-      font-size: 1.02em;
-      padding: 0.16em 1.3em;
-      border-radius: 14px;
-      color: #414141;
+    .subtitle {
       font-weight: 700;
-      background: #d5f0e9;
-      margin-left: 5px;
-      margin-bottom: 8px;
-      user-select: none;
-      box-shadow: 0 0 9px #d5f0e99a;
-    }
-    .pill-label.pink {
-      background: #fecde8;
-      color: #72517d;
-    }
-    .desc-block {
-      margin-bottom: 2.7em;
-      background: #f8f8fa;
-      border-radius: 16px;
-      box-shadow: 0 3px 24px #efbdd922;
-      font-size: 1.09em;
-      line-height: 1.5;
-      padding: 1.2em 1.1em 1.1em 1.1em;
-      color: #39354c;
-    }
-    /* Alias cards */
-    .alias-card {
-      position: relative;
-      border-radius: 18px;
-      padding: 1.35em 1.15em 1.5em 1.05em;
-      margin-bottom: 1.35em;
-      box-shadow: 0 7px 32px #eae2ff40;
-      transition: box-shadow 0.29s, transform 0.2s;
-      cursor: pointer;
-      display: flex;
-      align-items: flex-start;
-      background: #fff;
-    }
-    .alias-card:hover {
-      box-shadow: 0 12px 40px #eabbd9cc;
-      transform: scale(1.025);
-    }
-    /* Vibe background colors (pastel) */
-    .pink-bg { background: #ffd9ec; }
-    .green-bg { background: #d9f8e6; }
-    /* Decorative star icon */
-    .star {
-      width: 21px;
-      height: 21px;
-      background: #feda65;
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      position: absolute;
-      top: 9px;
-      left: 12px;
-    }
-    .star.right { left: auto; right: 12px; }
-    /* Date badge style */
-    .date-badge {
-      position: absolute;
-      top: 14px;
-      right: 18px;
-      border-radius: 50%/70% 80% 120% 100%;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1em;
-      padding: 8px 18px;
-      color: #474747;
-      background: #fff3a6;
-      box-shadow: 0 0 17px #ffe8a8b2;
+      color: #5b5449;
+      font-size: 1.04rem;
+      background: #f9f8ee;
+      padding: 0.64em 1.2em;
+      border-radius: 13px;
+      margin-bottom: 2.2em;
       text-align: center;
-      user-select: none;
+      pointer-events: auto;
+      z-index: 4;
+      box-shadow: 0 3px 24px #cde9ff20;
+      border: 1.5px dashed #ded6ce36;
+      font-family: 'Rubik', sans-serif;
+      max-width: 380px;
+    }
+    /* Alias enter buttons */
+    .enter-group {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5em;
+      pointer-events: auto;
+      z-index: 4;
+    }
+    .alias-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      padding: 1em 2.8em;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: background 0.28s, color 0.17s, transform 0.14s, box-shadow 0.23s;
+      box-shadow: 0 3px 36px #e4e8f455;
+      outline: none;
+      pointer-events: auto;
+    }
+    .btn-raibeat {
+      background: #ff4163;
+      color: #fff7fd;
+      box-shadow: 0 4px 25px #5f232aa9;
+    }
+    .btn-raibeat:hover, .btn-raibeat:focus {
+      background: #7e2932;
+      color: #fff3f6;
+      transform: scale(1.062);
+      box-shadow: 0 10px 36px #ff416355;
+    }
+    .btn-yash {
+      background: #3edaef;
+      color: #fff;
+      box-shadow: 0 4px 19px #179eaf99;
+    }
+    .btn-yash:hover, .btn-yash:focus {
+      background: #126784;
+      color: #eaffff;
+      transform: scale(1.062);
+      box-shadow: 0 10px 35px #35bde788;
+    }
+    /* Textured/graphic overlays (grunge or wave lines) */
+    .texture {
+      position: absolute;
+      left: 0; width: 100%; z-index: 1;
+      opacity: 0.2;
       pointer-events: none;
     }
-    .date-badge.pink { background: #fee3f2; color: #874e76; }
-    .date-badge.green { background: #bff7d4; color: #257d3d; }
-    /* Alias card content */
-    .alias-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.37rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #270f20;
-      background: #ffe3fa44;
-      padding: 0.08em 0.3em;
-      border-radius: 9px;
-      margin-bottom: 2px;
+    .texture.raiBeat {
+      top: 0;
+      height: 100%;
+      background: url('https://svgshare.com/i/17s7.svg') repeat-y left top;
+      background-size: 200px 200px;
+      mix-blend-mode: multiply;
+      opacity: 0.11;
     }
-    .alias-tagline {
-      font-family: 'Rubik', sans-serif;
-      font-size: 1em;
-      font-weight: 700;
-      color: #ff4e52;
-      margin-bottom: 1.02em;
-      padding-left: 4px;
+    .texture.yash {
+      bottom: 0;
+      height: 100%;
+      background: url('https://svgshare.com/i/17ug.svg') repeat-y right bottom;
+      background-size: 200px 200px;
+      mix-blend-mode: screen;
+      opacity: 0.08;
     }
-    .alias-desc {
-      font-size: 0.99em;
-      margin-bottom: 0.65em;
+    /* Split divider (optional) */
+    .split-divider {
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #efc1fa 0%, #beeefa 100%);
+      opacity: 0.30;
+      z-index: 10;
+      border-radius: 50vw;
     }
-    /* Section title separator */
-    .section-sep {
-      border-bottom: 2.5px solid #fbbcae;
-      margin-bottom: 0.95em;
-    }
-    /* Subsection titles */
-    .alias-section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.08em;
-      margin-bottom: 0.1em;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #684155;
-      background: #fff9ef;
-      border-radius: 8px;
-      display: inline-block;
-      padding: 0.1em 0.45em;
-      margin-top: 1.1em;
-    }
-    /* List style */
-    ul {
-      padding-left: 1em;
-      margin-top: 0.3em;
-      margin-bottom: 0.7em;
-      color: #29294c;
-      font-weight: 500;
-      font-size: 0.98em;
-    }
-    li {
-      margin-bottom: 0.3em;
-    }
-    /* Responsive */
-    @media (max-width: 510px) {
-      .container { max-width: 100%; padding: 1.3rem 0.3rem 1.3rem 0.3rem;}
-      .main-title { font-size: 2.1rem; }
-      .alias-title { font-size: 1.1rem; }
+    @media (max-width: 670px) {
+      .split-root { flex-direction: column; }
+      .left, .right {
+        width: 100vw;
+        min-height: 46vh;
+      }
+      .center-content { padding-top: 1.8em; }
+      .split-divider { display: none; }
+      .main-title { font-size: 2rem; }
+      .subtitle { font-size: 0.96rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Main Title and header -->
-    <div class="main-title-block">
+  <div class="split-root" role="presentation">
+    <div class="left" aria-label="RaiBeat Side">
+      <div class="texture raiBeat"></div>
+    </div>
+    <div class="right" aria-label="Яsh Side">
+      <div class="texture yash"></div>
+    </div>
+    <div class="split-divider"></div>
+    <div class="center-content">
       <div class="main-title">Yash Raipure</div>
-      <div class="pill-label">Dual Alias Artist</div>
-      <div class="pill-label pink">2025</div>
-    </div>
-    <div class="desc-block">
-      Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
-    </div>
-    <!-- raiBeat Card -->
-    <div class="alias-card pink-bg" tabindex="0" aria-label="raiBeat alias profile">
-      <div class="star"></div>
-      <div class="star right"></div>
-      <div class="date-badge pink">raiBeat</div>
-      <div>
-        <div class="alias-title">raiBeat</div>
-        <div class="alias-tagline">Raw, energetic, rebellious</div>
-        <div class="alias-desc">
-          raiBeat embodies raw, rebellious energy. This alias focuses on high-octane electronic beats, heavy basslines, and experimental sound design, perfect for underground clubs and festival stages. Bold, edgy, and adrenaline-fueled tracks that push the boundaries of rhythm and texture.
-        </div>
-        <div class="section-sep"></div>
-        <div class="alias-section-title">Vibe / Style</div>
-        <div class="alias-desc">Raw, energetic, and rebellious. Channels underground electronic music with heavy basslines, punchy rhythms, and experimental sounds. The persona embodies unfiltered energy, appealing to those who love high-octane beats and boundary-pushing tracks.</div>
-        <div class="alias-section-title">Musical Identity</div>
-        <ul>
-          <li>Focused on club and festival-ready drops that move the crowd</li>
-          <li>Mixes and tracks are raw, edgy, unapologetically bold</li>
-          <li>Techno, house, and bass-driven electronic elements</li>
-        </ul>
-        <div class="alias-section-title">Performance Persona</div>
-        <div class="alias-desc">Intense and commanding presence; immersive, chaotic experience. Represents rebellion, freedom, audacity—perfect for underground events and high-energy sets.</div>
-        <div class="alias-section-title">Audience Connection</div>
-        <ul>
-          <li>Fans drawn to raw energy, underground feel, authenticity</li>
-          <li>For listeners who appreciate experimental sounds and live shows that push limits</li>
-        </ul>
+      <div class="subtitle">
+        Dual Alias Artist: Bridging underground energy and melodic depth through <strong>raiBeat</strong> and <strong>Яsh</strong>.
       </div>
-    </div>
-    <!-- Яsh Card -->
-    <div class="alias-card green-bg" tabindex="0" aria-label="Яsh alias profile">
-      <div class="star"></div>
-      <div class="star right"></div>
-      <div class="date-badge green">Яsh</div>
-      <div>
-        <div class="alias-title">Яsh</div>
-        <div class="alias-tagline">Melodic, smooth, immersive</div>
-        <div class="alias-desc">
-          Яsh represents the melodic, soulful side of Yash’s artistry. Chillwave, melodic house, and downtempo sounds create immersive soundscapes. Sets are smooth and atmospheric, offering a relaxing yet engaging journey for listeners.
-        </div>
-        <div class="section-sep"></div>
-        <div class="alias-section-title">Vibe / Style</div>
-        <div class="alias-desc">Melodic, smooth, immersive. Chill beats with harmonic, soulful layers suited for relaxation, introspection, and emotional connection.</div>
-        <div class="alias-section-title">Musical Identity</div>
-        <ul>
-          <li>Melodic house, chillwave, and downtempo electronics</li>
-          <li>Soulful, rhythmic, immersive journey-like tracks</li>
-          <li>Ambient textures, subtle percussion, warm synths</li>
-        </ul>
-        <div class="alias-section-title">Performance Persona</div>
-        <div class="alias-desc">Calm, engaging, and atmospheric on stage—guiding the audience through emotional highs and introspective lows. Ideal for lounge, beach, or intimate settings.</div>
-        <div class="alias-section-title">Audience Connection</div>
-        <ul>
-          <li>Fans appreciate melodic, emotionally rich rhythmic experiences</li>
-          <li>A space for relaxation and vibe-driven inspiration</li>
-        </ul>
+      <div class="enter-group">
+        <button class="alias-btn btn-raibeat" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
+        <button class="alias-btn btn-yash" onclick="window.location.href='yash.html'">Enter Яsh</button>
       </div>
     </div>
   </div>
