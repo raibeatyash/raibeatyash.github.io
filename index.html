@@ -4,161 +4,161 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Humanica from Fontshare -->
-  <link href="https://api.fontshare.com/v2/css?f[]=humanica@700&display=swap" rel="stylesheet">
-  <!-- Montserrat and Cormorant Garamond for panels/descriptions/buttons -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <!-- Clash Display and Satoshi from Fontshare -->
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,500&f[]=satoshi@700,500&display=swap" rel="stylesheet">
+  <!-- Literata from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Literata:wght@500;700&display=swap" rel="stylesheet" />
   <style>
-    body, html { height: 100%; margin: 0; padding: 0; background: linear-gradient(120deg, #181622 60%, #2c4065 100%); }
+    body, html {
+      height: 100%; min-height: 100vh; margin: 0; padding: 0;
+      box-sizing: border-box;
+      background: linear-gradient(118deg, #191826 59%, #40507c 100%);
+    }
     .container {
-      max-width: 1200px;
-      min-height: 100vh;
-      padding: 4rem 2rem 2.5rem;
+      max-width: 1200px; min-height: 100vh;
+      padding: 3.6rem 2vw 2rem 2vw;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      justify-content: flex-start;
       box-sizing: border-box;
+      justify-content: flex-start;
     }
     .title {
-      font-family: 'Humanica', cursive, sans-serif;
-      font-size: 3rem;
-      letter-spacing: 0.13em;
-      color: #fffdc9;
-      margin-bottom: 0.6em;
-      margin-top: 1.4em;
+      font-family: 'Clash Display', sans-serif;
+      font-size: 3.18rem;
+      letter-spacing: 0.07em;
       font-weight: 700;
-      text-shadow: 0 3px 18px #231c0a42, 0 1.5px 1.5px #f7e9a055;
       text-transform: uppercase;
-      transition: color 0.22s;
+      color: #fdf5c0;
+      margin-top: 2.5em;
+      margin-bottom: 0.46em;
+      line-height: 1.08;
+      text-shadow: 0 5px 36px #f9ecd055, 0 2px 16px #50442a36;
+      transition: color 0.21s;
     }
     .subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.22rem;
-      max-width: 690px;
-      margin-bottom: 3.6rem;
-      color: #efe9f7e0;
-      font-weight: 600;
-      line-height: 1.68;
-      letter-spacing: 0.01em;
+      font-family: 'Literata', serif;
+      font-size: 1.30rem;
+      line-height: 1.7;
+      max-width: 720px;
+      color: #f5f3eef1;
+      font-weight: 500;
+      letter-spacing: 0.012em;
+      margin-bottom: 3.5rem;
+      margin-top: 0;
     }
-
     .split {
       display: flex;
       width: 100%;
-      min-height: 370px;
-      border-radius: 32px;
+      min-height: 350px;
+      border-radius: 30px;
+      background: #262539;
+      box-shadow: 0 0 80px 10px #ffebd44f, 0 6px 28px #10122b44;
       overflow: hidden;
-      box-shadow: 0 0 90px 15px #fbe8821d, 0 10px 24px #00274228;
-      background: #23232a;
-      margin-bottom: 3rem;
-      margin-top: 0.8rem;
-      transition: box-shadow 0.25s;
+      margin-top: 0.4rem;
+      margin-bottom: 2.7rem;
+      transition: box-shadow 0.21s;
     }
-
     .panel {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2.5rem 2.4rem 2.1rem 2.4rem;
-      transition: background 0.22s, box-shadow 0.23s, transform 0.18s;
+      padding: 2.4rem 2.2rem 2.1rem 2.2rem;
+      transition: background 0.20s, box-shadow 0.22s, transform 0.16s;
       cursor: pointer;
+      will-change: transform;
     }
-    /* Left: raiBeat */
     .left-panel {
-      background: linear-gradient(145deg, #34212b 60%, #bd2b39 100%);
-      border-right: 2px solid #fff1;
-      box-shadow: 0 0 44px 0 #dd3a3015 inset;
-      color: #fff2ef;
+      background: linear-gradient(145deg, #2d171e 66%, #ad3544 100%);
+      border-right: 2px solid #faeccc35;
+      color: #fff1eb;
     }
-    .left-panel:hover, .left-panel:active {
-      background: linear-gradient(145deg, #dc4155 75%, #3c1a15 100%);
-      box-shadow: 0 8px 48px 0px #dc415566;
+    .left-panel:hover, .left-panel:focus-within, .left-panel:active {
+      background: linear-gradient(135deg, #fb406b 95%, #37211a 100%);
+      box-shadow: 0 8px 58px 0px #fb406b55;
       z-index: 2;
-      transform: scale(1.03);
+      transform: scale(1.034);
     }
     .panel-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 2.1rem;
+      font-family: 'Satoshi', sans-serif;
+      font-size: 2.07rem;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 1.1rem;
-      color: #fdb088;
-      text-shadow: 0 0 13px #ffbfae12;
+      margin-bottom: 1.10rem;
+      color: #f5be8b;
+      text-shadow: 0 0 18px #fea96e11;
     }
     .panel-desc {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Literata', serif;
       font-size: 1.08rem;
-      color: #ffe9dfc1;
-      font-weight: 600;
+      color: #fbe9d5cb;
+      font-weight: 500;
       max-width: 350px;
-      margin-bottom: 2.2rem;
-      line-height: 1.56;
+      margin-bottom: 2.3rem;
+      line-height: 1.55;
     }
     .left-panel .btn {
       background: #fff8b8;
-      color: #ab2836;
-      box-shadow: 0 2px 11px #751b222a, 0 0 0 2.5px #fff7be inset;
+      color: #b52f54;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 2px 13px #7820401a, 0 0 0 2.5px #fff7be inset;
     }
     .left-panel .btn:hover, .left-panel .btn:focus {
       background: #ffd941;
-      color: #2e0f03;
-      transform: scale(1.06);
+      color: #2d0c12;
+      transform: scale(1.07);
     }
-    /* Right: Яsh */
     .right-panel {
-      background: linear-gradient(137deg, #eef7f7 80%, #b1d1d7 100%);
-      color: #1b303c;
-      box-shadow: 0 0 60px 0 #63ecec19 inset;
+      background: linear-gradient(135deg, #f0f9fb 83%, #c3dae6 100%);
+      color: #18393f;
     }
-    .right-panel:hover, .right-panel:active {
-      background: linear-gradient(125deg, #7deced 95%, #f7faf7 100%);
-      box-shadow: 0 8px 84px 3px #14bfcfb4;
+    .right-panel:hover, .right-panel:focus-within, .right-panel:active {
+      background: linear-gradient(123deg, #85e4f2 97%, #f7fafa 100%);
+      box-shadow: 0 8px 66px 3px #53c7f4b7;
       z-index: 2;
-      transform: scale(1.03);
+      transform: scale(1.034);
     }
     .right-panel .panel-title {
-      color: #2eb9b9;
-      text-shadow: 0 0 13px #3bbbd022;
+      color: #19afb1;
+      text-shadow: 0 0 14px #53c7f422;
     }
     .right-panel .panel-desc {
-      color: #27586ed1;
+      color: #29515bc9;
     }
     .right-panel .btn {
-      background: #bbeded;
+      background: #bdf0f2;
       color: #15736a;
-      box-shadow: 0 2px 10px #19b8b846, 0 0 0 2.5px #bbeded inset;
+      font-family: 'Satoshi', sans-serif;
+      font-weight: 700;
+      box-shadow: 0 2px 10px #19b8b84d, 0 0 0 2px #bdf0f2 inset;
     }
     .right-panel .btn:hover, .right-panel .btn:focus {
-      background: #30b6ba;
+      background: #1bb8bb;
       color: #fff;
-      transform: scale(1.06);
+      transform: scale(1.07);
     }
-
     .btn {
-      padding: 0.98em 3.15em;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.13em;
-      border-radius: 26px;
+      padding: 1em 3.1em;
+      font-size: 1.06em;
+      border-radius: 24px;
       border: none;
-      margin-top: 0.08em;
-      letter-spacing: 0.10em;
+      margin-top: 0.15em;
+      letter-spacing: 0.09em;
       cursor: pointer;
-      transition: background 0.18s, color 0.16s, transform 0.13s, box-shadow 0.17s;
       outline: none;
+      transition: background 0.15s, color 0.15s, transform 0.10s;
     }
-
-    @media (max-width: 900px) {
-      .container { padding: 2rem 0.5rem 1.5rem; }
-      .title { font-size: 2.1rem; }
-      .split { flex-direction: column; min-width: 90vw; margin-top: 0.3rem; }
-      .panel { border-right: none!important; border-bottom: 2px solid #fff1; padding: 1.5rem 1.3rem; }
+    @media (max-width: 920px) {
+      .container { padding: 2rem 0.7rem 1.5rem; }
+      .title { font-size: 2.15rem; margin-top: 0.7em;}
+      .split { flex-direction: column; min-width: 90vw; margin-top: 0.2rem; }
+      .panel { border-right: none!important; border-bottom: 2px solid #faeccc35; padding: 1.3rem 1rem;}
       .right-panel { border-bottom: none; }
     }
   </style>
