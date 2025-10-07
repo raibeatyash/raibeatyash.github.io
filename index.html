@@ -4,219 +4,254 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Fonts: Clash Display + Satoshi from Fontshare & Playfair Display from Google -->
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
-
+  <!-- Futurist Fixed font import -->
+  <link href="https://api.fontshare.com/v2/css?f[]=futurist-fixed@700&display=swap" rel="stylesheet" />
+  <!-- Poppins font import -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ---------------- Base Setup ---------------- */
+    /* Reset & base */
     * {
       box-sizing: border-box;
     }
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: linear-gradient(118deg, #181622 59%, #3f4b70 100%);
-      color: #f5f5f5;
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at center, #0d0a14 30%, #1f2430 100%);
+      font-family: 'Poppins', sans-serif;
+      color: #f0f0f3;
       overflow-x: hidden;
-      animation: fadeIn 1.2s ease-out both;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------------- Container ---------------- */
-    .container {
-      max-width: 1200px;
-      min-height: 100vh;
-      padding: 3.6rem 2vw 2rem;
-      margin: 0 auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      justify-content: flex-start;
     }
 
-    /* ---------------- Typography ---------------- */
+    .container {
+      max-width: 1200px;
+      padding: 4.2rem 2rem 3rem 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      margin-top: 1.5rem;
+    }
+
     .title {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.4rem;
-      letter-spacing: 0.05em;
-      font-weight: 600;
+      font-family: 'Futurist Fixed', monospace;
+      font-weight: 700;
+      font-size: 3.8rem;
+      letter-spacing: 0.13em;
+      color: #b564ff;
       text-transform: uppercase;
-      margin-top: 2.8em;
-      margin-bottom: 0.5em;
-      line-height: 1.1;
-      background: linear-gradient(90deg, #fdf5c0 10%, #ffe89d 95%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 5px 30px rgba(255, 237, 185, 0.2);
+      text-shadow:
+        0 0 12px #b564ff88,
+        0 0 18px #b564ffaa,
+        0 0 48px #9c49ffa6;
+      margin-bottom: 0.75rem;
     }
 
     .subtitle {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 1.22rem;
-      line-height: 1.7;
       max-width: 720px;
-      color: #f5f3eef1;
-      font-weight: 400;
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.7;
+      color: #cfcfe9cc;
+      margin-bottom: 4rem;
       letter-spacing: 0.02em;
-      margin-bottom: 3.6rem;
-      margin-top: 0;
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+      user-select: none;
     }
 
-    /* ---------------- Split Panels ---------------- */
     .split {
       display: flex;
       width: 100%;
-      min-height: 350px;
-      border-radius: 30px;
-      background: rgba(38, 37, 57, 0.65);
-      backdrop-filter: blur(9px);
-      box-shadow: 0 0 80px 10px #ffebd44f, 0 6px 28px #10122b44;
+      min-height: 420px;
+      border-radius: 32px;
+      box-shadow:
+        0 0 60px 12px #ac7cfff2,
+        inset 0 0 40px 30px #521c93e8;
+      background: linear-gradient(135deg, #311a4f 55%, #6d3ea7 100%);
       overflow: hidden;
-      margin-top: 0.4rem;
-      margin-bottom: 2.7rem;
-      transition: box-shadow 0.25s ease;
+      transition: box-shadow 0.3s ease;
     }
 
     .panel {
       flex: 1;
+      padding: 3rem 2.8rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 2.6rem 2.3rem 2.2rem;
-      transition: background 0.25s, box-shadow 0.22s, transform 0.18s;
+      justify-content: center;
       cursor: pointer;
-      will-change: transform;
+      transition:
+        background 0.28s ease,
+        box-shadow 0.28s ease,
+        transform 0.2s ease;
+      border: 1px solid transparent;
+      user-select: none;
     }
 
-    /* ---------------- Left Panel (raiBeat) ---------------- */
+    /* Left panel: raiBeat */
     .left-panel {
-      background: linear-gradient(145deg, #2b161f 66%, #a53746 100%);
-      border-right: 2px solid #faeccc35;
-      color: #fff1eb;
+      background: linear-gradient(135deg, #6e0e1e 50%, #bd2442 100%);
+      border-right: 2px solid #a37affcc;
+      box-shadow: 1px 1px 9px #bd244290 inset;
+      color: #ffd5d6;
     }
-    .left-panel:hover, .left-panel:focus-within {
-      background: linear-gradient(135deg, #fb406b 95%, #37211a 100%);
-      box-shadow: 0 8px 58px 0px #fb406b66;
-      transform: scale(1.035);
+    .left-panel:hover, .left-panel:focus-within, .left-panel:active {
+      background: linear-gradient(135deg, #fb1f3a 55%, #370a12 115%);
+      box-shadow:
+        0 0 40px 6px #ff5e8a55,
+        0 0 80px 16px #e21b3faa inset;
+      transform: scale(1.04);
+      border: 1px solid #ff76a5;
       z-index: 2;
     }
 
-    /* ---------------- Right Panel (Яsh) ---------------- */
+    /* Right panel: Яsh */
     .right-panel {
-      background: linear-gradient(135deg, #edf9fa 83%, #c3dae6 100%);
-      color: #18393f;
+      background: linear-gradient(135deg, #2e4169 70%, #5a7ce8 100%);
+      color: #d2e6ffcc;
+      box-shadow: 1px 1px 11px #5270e0a1 inset;
     }
-    .right-panel:hover, .right-panel:focus-within {
-      background: linear-gradient(125deg, #9ee9f1 97%, #f7fbfb 100%);
-      box-shadow: 0 8px 66px 3px #53c7f4b7;
-      transform: scale(1.035);
+    .right-panel:hover, .right-panel:focus-within, .right-panel:active {
+      background: linear-gradient(135deg, #46a0ff 75%, #19304a 105%);
+      box-shadow:
+        0 0 50px 8px #689ffcdd,
+        0 0 80px 24px #5285ffcc inset;
+      transform: scale(1.04);
+      border: 1px solid #7db2ff;
       z-index: 2;
     }
 
-    /* ---------------- Panel Text ---------------- */
     .panel-title {
-      font-family: 'Clash Display', sans-serif;
-      font-size: 2.2rem;
+      font-family: 'Satoshi', sans-serif;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      font-size: 2.3rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       margin-bottom: 1.2rem;
-      color: inherit;
+      text-shadow: 0 0 10px #ff68b093;
+    }
+    .right-panel .panel-title {
+      text-shadow: 0 0 13px #acf0ffca;
     }
 
     .panel-desc {
-      font-family: 'Satoshi', sans-serif;
-      font-size: 1.08rem;
+      font-family: 'Poppins', sans-serif;
       font-weight: 500;
-      max-width: 360px;
-      line-height: 1.58;
-      margin-bottom: 2.4rem;
-      opacity: 0.92;
+      font-size: 1.1rem;
+      max-width: 365px;
+      margin-bottom: 3rem;
+      line-height: 1.56;
+      color: inherit;
+      user-select: text;
+      letter-spacing: 0.015em;
     }
 
-    /* ---------------- Buttons ---------------- */
     .btn {
-      padding: 1em 3.1em;
-      font-size: 1.05em;
-      border-radius: 24px;
-      border: none;
-      margin-top: 0.15em;
-      letter-spacing: 0.09em;
-      cursor: pointer;
-      outline: none;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
+      background: transparent;
+      border: 2.5px solid #f9abff;
+      border-radius: 40px;
+      color: #f9abff;
+      padding: 1em 3.2em;
+      letter-spacing: 0.12em;
       font-family: 'Satoshi', sans-serif;
       font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+      outline: none;
+      user-select: none;
+      box-shadow: 0 0 35px #f8a5ff88;
     }
 
     .left-panel .btn {
-      background: #fff8b8;
-      color: #b52f54;
-      box-shadow: 0 2px 13px #7820401a, 0 0 0 2.5px #fff7be inset;
+      border-color: #ff7ccf;
+      color: #ff7ccf;
+      box-shadow: 0 0 40px 3px #ff7ccf90;
     }
     .left-panel .btn:hover {
-      background: #ffd941;
-      color: #2d0c12;
-      transform: scale(1.08);
+      background: #ff87d1cc;
+      color: #3b0030;
+      box-shadow: 0 0 70px 9px #ff56afcc;
+      transform: scale(1.07);
     }
 
     .right-panel .btn {
-      background: #bdf0f2;
-      color: #15736a;
-      box-shadow: 0 2px 10px #19b8b84d, 0 0 0 2px #bdf0f2 inset;
+      border-color: #8ecaff;
+      color: #8ecaff;
+      box-shadow: 0 0 40px 3px #8ecaff90;
     }
     .right-panel .btn:hover {
-      background: #1bb8bb;
-      color: #fff;
-      transform: scale(1.08);
+      background: #9bd9ffcc;
+      color: #053150;
+      box-shadow: 0 0 70px 10px #7cc0ffcc;
+      transform: scale(1.07);
     }
 
-    /* ---------------- Responsive ---------------- */
-    @media (max-width: 920px) {
-      .container { padding: 2rem 1rem 1.5rem; }
-      .title { font-size: 2.4rem; margin-top: 1.2em; }
-      .split { flex-direction: column; min-width: 90vw; margin-top: 0.4rem; }
-      .panel { border-right: none !important; border-bottom: 2px solid #faeccc35; padding: 1.5rem 1rem; }
-      .right-panel { border-bottom: none; }
+    @media (max-width: 900px) {
+      .container {
+        padding: 2rem 1rem 1rem;
+        margin-top: 0;
+      }
+      .title {
+        font-size: 2.5rem;
+        margin-top: 1.4rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+        max-width: 85vw;
+        margin-bottom: 3rem;
+      }
+      .split {
+        flex-direction: column;
+        min-height: 640px;
+        border-radius: 24px;
+      }
+      .panel {
+        border-right: none !important;
+        border-bottom: 2px solid #7a5ece57;
+        padding: 2.7rem 2rem 2rem 2rem;
+        max-width: 90vw;
+        margin: 1rem auto;
+        box-shadow: 0 12px 38px -4px #000000aa;
+        transition: none !important;
+        transform: none !important;
+      }
+      .left-panel, .right-panel {
+        margin-bottom: 12px;
+      }
+      .right-panel {
+        border-bottom: none;
+      }
+      .btn {
+        padding: 1em 3rem;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="title">Yash Raipure</div>
-    <div class="subtitle">
-      Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that explores both the raw intensity and melodic depth of modern sound. With a keen ear for rhythm, texture, and sonic storytelling, Yash bridges underground energy with emotive, cinematic experiences that resonate on and beyond the dance floor.
-    </div>
-
-    <div class="split">
-      <!-- raiBeat Panel -->
-      <section class="panel left-panel" tabindex="0" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
-        <div class="panel-title">raiBeat</div>
-        <div class="panel-desc">
-          Raw, rebellious, and rhythmically charged. Heavy basslines and peak-time energy made for club and festival crowds.
-        </div>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='raiBeat.html'">Enter raiBeat</button>
-      </section>
-
-      <!-- Яsh Panel -->
-      <section class="panel right-panel" tabindex="0" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
-        <div class="panel-title">Яsh</div>
-        <div class="panel-desc">
-          Melodic, soulful, and immersive. A downtempo identity shaped for reflective moments, beaches, and intimate spaces.
-        </div>
-        <button class="btn" onclick="event.stopPropagation(); window.location.href='yash.html'">Enter Яsh</button>
-      </section>
-    </div>
-  </div>
+  <main class="container" role="main" aria-label="Artist Profile Landing">
+    <h1 class="title">Yash Raipure</h1>
+    <p class="subtitle" aria-label="Artist description">
+      Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
+    </p>
+    <section class="split" aria-label="Alias selection">
+      <article class="panel left-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') {window.location.href='raiBeat.html';}">
+        <h2 class="panel-title">raiBeat</h2>
+        <p class="panel-desc">Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for clubs and festivals.</p>
+        <button class="btn" aria-label="Enter raiBeat profile" onclick="event.stopPropagation(); window.location.href='raiBeat.html'">Enter raiBeat</button>
+      </article>
+      <article class="panel right-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') {window.location.href='yash.html';}">
+        <h2 class="panel-title">Яsh</h2>
+        <p class="panel-desc">Melodic, soulful and immersive; chillwave and downtempo, perfect for beach and intimate events.</p>
+        <button class="btn" aria-label="Enter Яsh profile" onclick="event.stopPropagation(); window.location.href='yash.html'">Enter Яsh</button>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
