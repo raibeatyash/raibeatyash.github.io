@@ -4,26 +4,34 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Simple, modern fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet" />
   <style>
+    /* Reset base */
+    * {
+      box-sizing: border-box;
+    }
     body, html {
       height: 100%;
       margin: 0;
       padding: 0;
       background: #121212;
-      color: #eeeeee;
       font-family: 'Open Sans', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      user-select: none;
+      color: #eeeeee;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     .container {
       max-width: 900px;
       width: 95%;
       padding: 2rem;
+      margin: auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      perspective: 1000px;
+      user-select: none;
     }
     .title {
       font-family: 'Montserrat', sans-serif;
@@ -32,12 +40,18 @@
       margin-bottom: 0.5rem;
       letter-spacing: 0.06em;
       color: #f5c518;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+      cursor: default;
     }
     .subtitle {
       font-size: 1.1rem;
       color: #ccc;
       margin-bottom: 2rem;
       line-height: 1.6;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+      cursor: default;
     }
     .split {
       display: flex;
@@ -52,37 +66,59 @@
       border-radius: 10px;
       box-shadow: 0 0 12px rgba(0,0,0,0.5);
       cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
       color: #eee;
+      position: relative;
+      transform-style: preserve-3d;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: transform 0.4s ease, box-shadow 0.3s ease, opacity 0.4s ease;
+      will-change: transform, opacity;
+    }
+    .panel.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     .panel:hover {
       background: #333;
-      box-shadow: 0 0 20px #f5c518aa;
+      box-shadow: 0 0 25px #f5c518aa;
+      transform: scale(1.05);
+      z-index: 10;
+    }
+    .panel:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
     }
     .panel-title {
       font-family: 'Montserrat', sans-serif;
       font-size: 1.8rem;
       margin-bottom: 0.6rem;
       color: #f5c518;
+      pointer-events: none;
+      user-select: none;
+      transform-style: preserve-3d;
     }
     .panel-desc {
       font-size: 1rem;
       margin-bottom: 1.3rem;
       color: #bbb;
       line-height: 1.4;
+      pointer-events: none;
+      user-select: text;
+      transform-style: preserve-3d;
     }
     .btn {
       padding: 0.65rem 2.5rem;
+      background-color: #f5c518;
       border: none;
       border-radius: 24px;
-      background-color: #f5c518;
       color: #121212;
       font-weight: 700;
       font-family: 'Montserrat', sans-serif;
       font-size: 1rem;
       cursor: pointer;
+      user-select: none;
       transition: background-color 0.3s ease;
-      outline: none;
+      pointer-events: auto;
     }
     .btn:hover {
       background-color: #d4a60a;
@@ -95,20 +131,20 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">Yash Raipure</h1>
-    <p class="subtitle">
+  <div class="container" id="container">
+    <h1 class="title" id="title">Yash Raipure</h1>
+    <p class="subtitle" id="subtitle">
       Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that balances raw intensity and melodic depth, crafting immersive experiences across the electronic music spectrum.
     </p>
     <div class="split">
-      <div class="panel" tabindex="0" role="button" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
+      <div class="panel" tabindex="0" role="button" id="panel1" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
         <h2 class="panel-title">raiBeat</h2>
         <p class="panel-desc">
           Raw, rebellious energy with high-octane beats and heavy basslines. Perfect for clubs and festivals.
         </p>
         <button class="btn" onclick="event.stopPropagation(); window.location.href='raiBeat.html'">Enter raiBeat</button>
       </div>
-      <div class="panel" tabindex="0" role="button" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
+      <div class="panel" tabindex="0" role="button" id="panel2" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
         <h2 class="panel-title">Яsh</h2>
         <p class="panel-desc">
           Melodic, soulful and immersive; chillwave and downtempo, ideal for beach events and intimate gatherings.
@@ -117,5 +153,33 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Fade-in panels on scroll
+    const panels = document.querySelectorAll('.panel');
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.85;
+      panels.forEach(panel => {
+        const panelTop = panel.getBoundingClientRect().top;
+        if(panelTop < triggerBottom) {
+          panel.classList.add('visible');
+        } else {
+          panel.classList.remove('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('load', checkVisibility);
+
+    // Parallax effect for title and subtitle on mouse move
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    document.getElementById('container').addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      title.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      subtitle.style.transform = `translate3d(${x / 2}px, ${y / 2}px, 0)`;
+    });
+  </script>
 </body>
 </html>
