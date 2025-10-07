@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Sora Neue and Orbitron -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Sora+Neue:wght@700&display=swap" rel="stylesheet" />
+  <!-- Bebas Neue and Exo 2 -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:wght@600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Base and reset */
+    /* Reset & base */
     * {
       box-sizing: border-box;
     }
-    html, body {
+    body, html {
       margin: 0; padding: 0;
       height: 100%;
-      background: radial-gradient(circle at center, #0d0d16 30%, #1f1f2c 100%);
-      color: #e4e4ef;
-      font-family: 'Sora Neue', sans-serif;
+      background: radial-gradient(circle at center, #0b1019 25%, #182433 100%);
+      color: #e0e2e7;
+      font-family: 'Exo 2', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -25,177 +25,186 @@
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
+
     .container {
-      max-width: 1150px;
+      max-width: 1100px;
       width: 100%;
-      padding: 4rem 2rem 3.5rem;
-      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      margin: 2rem auto 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      box-sizing: border-box;
     }
+
     .title {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 3.3rem;
-      letter-spacing: 0.21em;
+      font-family: 'Bebas Neue', cursive, sans-serif;
+      font-weight: normal;
+      font-size: 4rem;
       text-transform: uppercase;
-      color: #71f2ff;
+      letter-spacing: 0.15em;
+      color: #49c3ff;
       text-shadow:
-        0 0 30px #4d9eaee0,
-        0 0 60px #3bbfff88,
-        0 0 90px #00c1ffaa;
-      margin-bottom: 0.6rem;
-    }
-    .subtitle {
-      font-family: 'Sora Neue', sans-serif;
-      font-weight: 700;
-      font-size: 1.14rem;
-      letter-spacing: 0.05em;
-      max-width: 680px;
-      margin-bottom: 4rem;
-      line-height: 1.55;
-      color: #9090a0c7;
+        0 0 16px #49c3ffaa,
+        0 0 36px #1c75cdcc;
+      margin-bottom: 0.8rem;
       user-select: none;
     }
+
+    .subtitle {
+      max-width: 700px;
+      font-weight: 600;
+      font-size: 1.23rem;
+      color: #b9c9dbc0;
+      margin-bottom: 4rem;
+      letter-spacing: 0.02em;
+      line-height: 1.6;
+      user-select: none;
+    }
+
     .split {
       display: flex;
       width: 100%;
       min-height: 400px;
-      border-radius: 32px;
+      border-radius: 28px;
+      background: #1c2041;
+      box-shadow:
+        0 0 90px 20px #4ab7ff44,
+        inset 0 0 50px 15px #1d426abf;
       overflow: hidden;
-      background: #1d1d2d;
-      box-shadow: 0 0 120px 22px #1a5577bb;
       transition: box-shadow 0.3s ease;
-      user-select: none;
     }
+
     .panel {
       flex: 1;
-      padding: 3rem 3rem;
+      padding: 3rem 3rem 2.8rem 3rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       cursor: pointer;
-      transition:
-        background 0.3s ease,
-        box-shadow 0.3s ease,
-        transform 0.25s ease;
-      will-change: transform;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
       border: 2px solid transparent;
+      will-change: transform;
+      user-select: none;
     }
-    /* Left panel */
+
     .left-panel {
-      background: linear-gradient(145deg, #22313f 45%, #0091bc 95%);
-      border-right: 2px solid #0091bc88;
-      box-shadow: inset 0 0 35px 8px #00aaff88, 0 0 25px 3px #00c9ff55;
-      color: #d1f7ffdd;
+      background: linear-gradient(135deg, #1a2932 55%, #0058bf 100%);
+      border-right: 2px solid #3cd1ffb0;
+      color: #ade2ff;
+      box-shadow: inset 0 0 50px 20px #0985ff88;
     }
     .left-panel:hover, .left-panel:focus-within, .left-panel:active {
-      background: linear-gradient(145deg, #00aaff 60%, #004a5c 125%);
+      background: linear-gradient(135deg, #19a9ff 90%, #00375e);
       box-shadow:
-        0 0 80px 12px #00acffcc,
-        inset 0 0 75px 10px #00aaffbb;
-      border: 2px solid #2ee9ffcc;
+        0 0 80px 18px #50baffcc,
+        inset 0 0 100px 20px #1fabe0cc;
+      border: 2px solid #3dd1ffcc;
       transform: scale(1.05);
       z-index: 2;
     }
-    /* Right panel */
+
     .right-panel {
-      background: linear-gradient(135deg, #0b2538 55%, #4ca1d9 85%);
-      color: #98c8e8bb;
-      box-shadow: inset 0 0 40px 10px #3db4ff88;
+      background: linear-gradient(135deg, #2b2e41 75%, #009e80 120%);
+      box-shadow: inset 0 0 45px 15px #2ccdae88;
+      color: #b7d2cc;
     }
     .right-panel:hover, .right-panel:focus-within, .right-panel:active {
-      background: linear-gradient(135deg, #52b8ff 80%, #083050 110%);
+      background: linear-gradient(135deg, #3de8ce 90%, #134538);
       box-shadow:
-        0 0 90px 20px #3bc0ffcc,
-        inset 0 0 100px 25px #3dc3ffbb;
-      border: 2px solid #30b9ffcc;
+        0 0 90px 20px #43d3becc,
+        inset 0 0 100px 25px #2ec9a388;
+      border: 2px solid #48d1b4cc;
       transform: scale(1.05);
       z-index: 2;
     }
+
     .panel-title {
-      font-size: 2.4rem;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.13em;
+      font-family: 'Bebas Neue', cursive, sans-serif;
+      font-size: 2.6rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       margin-bottom: 1.3rem;
-      text-shadow: 0 0 18px #00d7ffbb, 0 0 20px #2de0ffe3;
-      color: #60e2ff;
+      color: #79cbff;
+      text-shadow: 0 0 12px #74cbffcc;
+      user-select: none;
     }
-    .left-panel .panel-title {
-      color: #7deaff;
-      text-shadow: 0 0 18px #75e7ffae, 0 0 20px #80e3ffec;
-    }
+
     .right-panel .panel-title {
-      color: #57c0ff;
-      text-shadow: 0 0 24px #47b9ffdd, 0 0 28px #6fc7ffcc;
+      color: #3efdcc;
+      text-shadow: 0 0 15px #24d7b4cc;
     }
+
     .panel-desc {
-      font-family: 'Sora Neue', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      width: 95%;
-      max-width: 360px;
-      margin-bottom: 2.7rem;
-      letter-spacing: 0.05em;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+      font-size: 1.12rem;
+      max-width: 350px;
+      margin-bottom: 3rem;
+      line-height: 1.55;
       color: inherit;
       user-select: text;
-      line-height: 1.55;
+      letter-spacing: 0.02em;
     }
+
     .btn {
-      padding: 1rem 3.6rem;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 1.24rem;
-      border-radius: 36px;
       background: transparent;
-      border: 3px solid #53acffcc;
-      color: #8bd9ff;
-      letter-spacing: 0.15em;
+      border: 3px solid #79cdffcc;
+      border-radius: 36px;
+      color: #9fd8ff;
+      padding: 1rem 3.2rem;
+      font-family: 'Bebas Neue', cursive, sans-serif;
+      font-weight: 400;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: background 0.3s, box-shadow 0.3s, transform 0.25s;
-      user-select: none;
-      box-shadow: 0 0 30px 3px #5a9effab inset;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.25s;
+      box-shadow: 0 0 25px 4px #78bdffaa inset;
       outline: none;
+      user-select: none;
     }
+
     .left-panel .btn {
-      border-color: #74c3ffcc;
-      color: #a9ddff;
-      box-shadow: 0 0 33px 5px #50c3ff92 inset;
+      border-color: #4f9fffcc;
+      box-shadow: 0 0 24px 5px #42aaffcc inset;
+      color: #4f9fff;
     }
-    .left-panel .btn:hover, .left-panel .btn:focus {
-      background: #59c0ffef;
-      color: #092739;
-      box-shadow: 0 0 80px 10px #4db2ffc9;
-      transform: scale(1.1);
+
+    .left-panel .btn:hover {
+      background: #48bcffcc;
+      color: #00324a;
+      box-shadow: 0 0 80px 20px #3ca8ffbb;
+      transform: scale(1.08);
     }
+
     .right-panel .btn {
-      border-color: #7af6ffcc;
-      color: #7bf1ff;
-      box-shadow: 0 0 33px 4px #47d2ff79 inset;
+      border-color: #3aedcccc;
+      box-shadow: 0 0 25px 5px #3aedccc7 inset;
+      color: #3aedcc;
     }
-    .right-panel .btn:hover, .right-panel .btn:focus {
-      background: #2de2ffcc;
-      color: #00354e;
-      box-shadow: 0 0 80px 15px #38befff0;
-      transform: scale(1.1);
+
+    .right-panel .btn:hover {
+      background: #29d8d5cc;
+      color: #002d2b;
+      box-shadow: 0 0 70px 18px #2dcdb5cc;
+      transform: scale(1.08);
     }
+
     @media (max-width: 920px) {
       .container {
         padding: 2rem 1rem 1rem;
-        margin-top: 1.2rem;
+        margin-top: 1rem;
       }
       .title {
-        font-size: 2.2rem;
-        margin-top: 1.1rem;
+        font-size: 2.6rem;
+        margin-top: 1rem;
       }
       .subtitle {
         font-size: 1rem;
-        max-width: 87vw;
+        max-width: 90vw;
         margin-bottom: 3rem;
       }
       .split {
@@ -203,41 +212,41 @@
         min-height: auto;
         border-radius: 20px;
         margin: 0 auto 1rem;
-        box-shadow: 0 0 70px 12px #00a7ff53;
+        box-shadow: 0 0 70px 14px #18aaff66;
       }
       .panel {
         border-right: none !important;
-        border-bottom: 2px solid #008bd7bb;
-        max-width: 92vw;
-        padding: 2rem;
+        border-bottom: 2px solid #4ab7ffbb;
+        max-width: 90vw;
+        padding: 3rem 2.5rem 2rem 2.5rem;
         margin: 1rem auto;
-        transform: none !important;
-        box-shadow: 0 18px 38px -10px rgba(0,0,0,0.7);
+        box-shadow: 0 15px 39px -9px rgba(0,0,0,0.69);
         transition: none !important;
+        transform: none !important;
       }
       .right-panel {
         border-bottom: none;
       }
       .btn {
-        padding: 0.9rem 3rem;
+        padding: 1em 3rem;
         font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
-  <main class="container" role="main" aria-label="Yash Raipure Artist Profile Landing">
+  <main class="container" role="main" aria-label="Artist Profile Landing">
     <h1 class="title">Yash Raipure</h1>
     <p class="subtitle" aria-label="Artist description">
       Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
     </p>
-    <section class="split" aria-label="Select between raiBeat and Яsh aliases">
-      <article class="panel left-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter'){window.location.href='raiBeat.html';}">
+    <section class="split" aria-label="Alias selection">
+      <article class="panel left-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
         <h2 class="panel-title">raiBeat</h2>
         <p class="panel-desc">Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for clubs and festivals.</p>
         <button class="btn" aria-label="Enter raiBeat profile" onclick="event.stopPropagation(); window.location.href='raiBeat.html'">Enter raiBeat</button>
       </article>
-      <article class="panel right-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter'){window.location.href='yash.html';}">
+      <article class="panel right-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
         <h2 class="panel-title">Яsh</h2>
         <p class="panel-desc">Melodic, soulful and immersive; chillwave and downtempo, perfect for beach and intimate events.</p>
         <button class="btn" aria-label="Enter Яsh profile" onclick="event.stopPropagation(); window.location.href='yash.html'">Enter Яsh</button>
