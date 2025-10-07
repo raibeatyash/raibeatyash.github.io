@@ -3,653 +3,470 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Yash Raipure — Dual Alias Artist</title>
+<title>Yash Raipure — Dual Alias Selection</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --bg: #FBF8F3; /* light cream */
-    --ink: #0b0b0b;
-    --muted: #6b6b6b;
+    --bg:#0f0f12;
+    --cream:#FBF8F3;
+    --muted:#9aa0a3;
 
-    /* raiBeat palette (underground but pastel-toned) */
-    --rb-bg: #ffd85c; /* mustard pastel */
-    --rb-accent: #ff6b8a; /* coral accent */
-    --rb-ink: #0c0c0c;
+    /* raiBeat */
+    --rb-base:#0b0b0f;
+    --rb-accent:#ff6b6b;
+    --rb-panel:#1e1b20;
+    --rb-glow:rgba(255,107,107,0.16);
 
-    /* Яsh palette (chill pastel seaside) */
-    --y-bg: #bdf1e6; /* mint */
-    --y-accent: #f8c0e6; /* soft pink */
-    --y-ink: #072a2a;
+    /* Яsh */
+    --ys-base:#e8fffb;
+    --ys-accent:#8be3d0;
+    --ys-panel:#dff7f2;
+    --ys-glow:rgba(139,227,208,0.18);
 
-    --card-radius: 18px;
-    --soft-shadow: 0 8px 24px rgba(11,11,11,0.08);
-    --glass: rgba(255,255,255,0.55);
+    --white: #ffffff;
+    --card-radius:20px;
   }
 
   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(185,230,215,0.14), transparent 8%),
-                radial-gradient(1200px 600px at 90% 90%, rgba(255,198,220,0.07), transparent 8%),
-                var(--bg);
-    color:var(--ink);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
+  html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial; background:var(--bg); color:var(--white); overflow:hidden}
+  a{color:inherit}
+
+  /* fullscreen split layout */
+  .stage{
+    width:100vw;height:100vh;display:flex;
+    perspective:1200px;
+    position:relative; overflow:hidden;
   }
 
-  /* page layout */
-  .wrap{
-    max-width:920px;
-    margin:32px auto;
-    padding:28px;
-    position:relative;
+  .side{
+    flex:1; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    transition:filter .28s ease, transform .36s cubic-bezier(.2,.9,.3,1);
+    min-width:300px;
   }
 
-  header{
+  /* Left: raiBeat */
+  .side.raibeat{
+    background:
+      radial-gradient(600px 300px at 10% 20%, rgba(255,107,107,0.05), transparent 8%),
+      linear-gradient(180deg,#0b0b0f 0%, #17161a 60%);
+    color:#fff;
+  }
+  /* Right: Яsh */
+  .side.yash{
+    background:
+      radial-gradient(700px 320px at 90% 80%, rgba(139,227,208,0.06), transparent 6%),
+      linear-gradient(180deg,#eafefb 0%, #daf6f0 60%);
+    color:#012b29;
+  }
+
+  /* central content cards */
+  .card {
+    width:min(720px,86%);
+    max-width:980px;
+    border-radius:24px;
     display:flex;
-    align-items:center;
-    gap:18px;
-    margin-bottom:18px;
-  }
-
-  .logo-block{
-    background:#fff;
-    border-radius:10px;
-    padding:10px 14px;
-    box-shadow:var(--soft-shadow);
-    display:flex;
-    gap:12px;
-    align-items:center;
-  }
-
-  .brand{
-    font-family: "Montserrat", sans-serif;
-    font-weight:900;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    font-size:32px;
-    line-height:1;
-    color:var(--ink);
-  }
-
-  .sub{
-    font-size:13px;
-    color:var(--muted);
-    margin-top:6px;
-  }
-
-  main{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap:20px;
-  }
-
-  /* Intro panel */
-  .intro{
-    background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
-    border-radius:22px;
-    padding:28px;
-    box-shadow:var(--soft-shadow);
-    position:relative;
-    overflow:visible;
-  }
-
-  .intro h1{
-    margin:0 0 8px 0;
-    font-family:"Montserrat",sans-serif;
-    font-size:40px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-  }
-  .intro p{
-    margin:0;
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.6;
-  }
-
-  /* decorative floating star */
-  .sparkles { position:absolute; right:18px; top:8px; opacity:0.95; pointer-events:none; }
-  .spark { width:12px; height:12px; background:linear-gradient(180deg,#fff,#ffd9b3); border-radius:4px; transform:rotate(25deg); filter:drop-shadow(0 6px 14px rgba(255,200,120,0.12)); animation: floaty 3.6s infinite ease-in-out; }
-  .spark + .spark{ transform:rotate(-10deg); animation-delay:0.4s }
-
-  @keyframes floaty { 0%{ transform:translateY(0) rotate(0)} 50%{ transform:translateY(-8px) rotate(8deg)} 100%{ transform:translateY(0) rotate(0)} }
-
-  /* Cards container (the two stacked aliases) */
-  .cards{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
-  }
-
-  .card{
-    border-radius:var(--card-radius);
-    padding:18px 18px;
-    position:relative;
-    display:flex;
-    gap:18px;
     align-items:center;
     justify-content:space-between;
-    box-shadow:var(--soft-shadow);
-    cursor:pointer;
+    gap:20px;
+    padding:28px;
     transform-origin:center;
-    transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
-  }
-  .card:hover{ transform:translateY(-6px) scale(1.01); box-shadow:0 18px 40px rgba(8,8,8,0.12) }
-
-  .card .left{
-    display:flex;
-    gap:14px;
-    align-items:center;
-  }
-  .avatar{
-    width:88px;
-    height:88px;
-    border-radius:14px;
-    flex-shrink:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:"Montserrat",sans-serif;
-    font-weight:900;
-    font-size:18px;
-    color:var(--rb-ink);
-    box-shadow:inset 0 -10px 24px rgba(0,0,0,0.06);
-  }
-  .card h3{
-    margin:0;
-    font-family:"Montserrat",sans-serif;
-    font-size:22px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-  }
-  .tagline{
-    margin-top:6px;
-    color:var(--muted);
-    font-size:14px;
-    text-transform:lowercase;
-    font-weight:500;
-    letter-spacing:0.6px;
+    box-shadow: 0 30px 80px rgba(2,2,2,0.45);
+    backdrop-filter: blur(6px);
+    transition:transform .28s ease, box-shadow .28s ease;
+    position:relative;
+    z-index:6;
   }
 
-  .enter-btn{
-    background:transparent;
-    border:2px solid rgba(0,0,0,0.06);
-    padding:10px 14px;
-    border-radius:12px;
-    font-weight:700;
-    letter-spacing:1px;
-    transition:all .22s;
-    min-width:120px;
-    text-align:center;
-    cursor:pointer;
+  .raibeat .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,107,107,0.06);
   }
-  .enter-btn:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.08) }
-
-  /* raiBeat theme */
-  .card.raibeat{
-    background:linear-gradient(135deg, color-mix(in srgb, var(--rb-bg) 90%, white), color-mix(in srgb, var(--rb-accent) 6%, rgba(255,255,255,0.75)));
-    border:1px solid rgba(0,0,0,0.03);
+  .yash .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.86));
+    border: 1px solid rgba(139,227,208,0.06);
+    color:var(--ys-base);
   }
-  .card.raibeat .avatar{ background:linear-gradient(180deg,#fff4d4,#ffe8b1); color:var(--rb-ink) }
-  .card.raibeat .enter-btn{ background:rgba(0,0,0,0.04); border-color:transparent; color:var(--rb-ink); }
 
-  /* Яsh theme */
-  .card.yash{
-    background:linear-gradient(135deg, color-mix(in srgb, var(--y-bg) 92%, white), color-mix(in srgb, var(--y-accent) 6%, rgba(255,255,255,0.75)));
-    border:1px solid rgba(0,0,0,0.03);
+  .card h1{
+    margin:0;font-family:"Montserrat",sans-serif;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+    font-size:42px;
   }
-  .card.yash .avatar{ background:linear-gradient(180deg,#eafff8,#d7fbf1); color:var(--y-ink) }
-  .card.yash .enter-btn{ background:rgba(255,255,255,0.6); border-color:transparent; color:var(--y-ink) }
+  .card p { margin:6px 0 0 0; font-size:16px; color:inherit; opacity:.9 }
 
-  /* alias detail pages (hidden by default) */
-  .alias-page{
-    position:fixed;
-    inset:0;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:60;
-    padding:30px;
-    background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+  .badge {
+    padding:8px 12px;border-radius:999px;font-weight:700;font-size:12px;
+    background:rgba(255,255,255,0.04);
+  }
+
+  .enter {
+    margin-left:18px; min-width:120px;
+    border-radius:12px;padding:12px 16px;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+    cursor:pointer;border:0;transition:transform .16s ease, box-shadow .18s;
+  }
+
+  .enter:hover{ transform: translateY(-6px) scale(1.02) }
+
+  .enter.rb{
+    background: linear-gradient(90deg,var(--rb-accent), #ffb08a);
+    color: #12090a;
+    box-shadow: 0 12px 30px rgba(255,107,107,0.14);
+  }
+
+  .enter.ys{
+    background: linear-gradient(90deg,#8be3d0,#d7f5ed);
+    color: #003733;
+    box-shadow: 0 12px 30px rgba(139,227,208,0.12);
+  }
+
+  /* floating shapes & abstract geometric background */
+  .bg-layer{
+    position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+    mix-blend-mode:screen;
+  }
+  .geom{
+    position:absolute; width:420px; height:420px; border-radius:18px; opacity:.12; transform:rotate(14deg);
+    filter: blur(18px) saturate(120%);
+    animation: floatX 9s ease-in-out infinite;
+  }
+  .geom.g1{ left:-6%; top:6%; background: linear-gradient(180deg,#ff7d7d,#ffd29a); animation-duration:8s; transform:rotate(-8deg); }
+  .geom.g2{ right:-6%; bottom:6%; background: linear-gradient(180deg,#8be3d0,#c6f7ec); animation-duration:10s; transform:rotate(12deg); }
+  .geom.g3{ left:50%; top:10%; width:320px;height:320px; background: linear-gradient(180deg,#ffd9f0,#d3fff5); opacity:0.06; animation-duration:12s; transform:translateX(-50%); }
+  .geom.g4{ right:12%; top:28%; width:260px;height:260px; background: linear-gradient(180deg,#9bf3e0,#fff7d6); opacity:.08; animation-duration:7s }
+
+  @keyframes floatX {
+    0%{ transform: translateY(0) rotate(0) scale(1) }
+    50%{ transform: translateY(-28px) rotate(6deg) scale(1.03) }
+    100%{ transform: translateY(0) rotate(0) scale(1) }
+  }
+
+  /* polygon pieces (game-like shards) */
+  .shard{
+    position:absolute; width:220px;height:220px; clip-path: polygon(0 0,100% 10%,90% 100%,0% 90%); opacity:0.08; filter:blur(6px);
+  }
+  .shard.s1{ left:8%; bottom:10%; background:linear-gradient(180deg,#ff6b6b,#ffb08a); animation: drift 11s linear infinite; }
+  .shard.s2{ right:6%; top:12%; background:linear-gradient(180deg,#8be3d0,#c9f0e8); animation: drift 13s linear infinite reverse; }
+  @keyframes drift{ from{transform:translateY(0)} to{transform:translateY(-40px)} }
+
+  /* focus dimming: when hover left, right dims */
+  .side.dimmed{ filter: brightness(.6) saturate(.8) grayscale(.06); transform: scale(.99) }
+
+  /* entrance animations */
+  .stage.show .side{ animation: popIn .7s cubic-bezier(.2,.9,.3,1) both; }
+  @keyframes popIn { from{ transform: translateY(10px) scale(.985); opacity:0 } to{ transform:none; opacity:1 } }
+
+  /* small alias subtitle style */
+  .meta {
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .meta .tag{ color:var(--muted); font-size:13px; text-transform:lowercase; letter-spacing:.6px; opacity:.95; }
+
+  /* overlay alias pages */
+  .overlay{
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    z-index:30; background: linear-gradient(180deg, rgba(3,3,3,0.6), rgba(3,3,3,0.4));
     backdrop-filter: blur(6px) saturate(110%);
   }
+  .overlay.show{ display:flex; animation: overlayIn .32s ease both; }
+  @keyframes overlayIn { from{opacity:0; transform:scale(.98)} to{opacity:1; transform:scale(1)} }
 
-  .alias-content{
-    width:min(920px,96%);
-    border-radius:20px;
-    padding:32px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9));
-    box-shadow:0 40px 80px rgba(6,6,6,0.18);
-    display:grid;
-    grid-template-columns: 1fr 360px;
-    gap:20px;
-    align-items:start;
+  .panel{
+    width:min(1000px,96%); max-height:86vh; overflow:auto; border-radius:18px; padding:28px; display:grid;
+    grid-template-columns: 1fr 360px; gap:20px; background: linear-gradient(180deg,#ffffff,#f9fbfb); color:#0b0b0b;
+    box-shadow: 0 40px 100px rgba(2,2,2,0.36);
   }
-  .alias-hero h2{
-    margin:0 0 8px 0;
-    font-family:"Montserrat",sans-serif;
-    font-size:34px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-  }
-  .alias-hero .lead{ color:var(--muted); font-size:15px; line-height:1.7 }
+  .panel h2{ margin:0;font-family:"Montserrat",sans-serif;font-weight:900;font-size:34px;letter-spacing:2px;text-transform:uppercase; }
+  .panel .lead{ color:#666; font-size:15px; line-height:1.6 }
 
-  .alias-meta{
-    background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));
-    border-radius:14px;
-    padding:18px;
-    box-shadow:var(--soft-shadow);
-  }
-  .alias-meta h4{ margin:0 0 6px 0; font-family:"Montserrat",sans-serif; text-transform:uppercase; letter-spacing:2px; font-size:14px }
-  .alias-meta p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5 }
-
-  .close-btn{
-    background:transparent;
-    border:0;
-    font-weight:800;
-    letter-spacing:1px;
-    font-family:"Montserrat",sans-serif;
-    font-size:13px;
-    cursor:pointer;
-    padding:10px 12px;
-    border-radius:10px;
-    transition:all .22s;
-  }
-  .close-btn:hover{ transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.08) }
-
-  /* specialized textures */
-  .rb-texture{
-    position:absolute;
-    inset:auto 18px 18px auto;
-    width:180px;
-    height:180px;
-    pointer-events:none;
-    filter:blur(8px) saturate(120%);
-    transform:translate(12px, -8px) rotate(-6deg);
-    opacity:0.95;
-    z-index:10;
-    background:
-      linear-gradient(90deg, rgba(255,255,255,0.15), rgba(0,0,0,0.02)),
-      repeating-linear-gradient( -25deg, rgba(0,0,0,0.02) 0 6px, transparent 6px 12px );
-    animation: rbPulse 3s ease-in-out infinite;
-    border-radius:12px;
-  }
-  @keyframes rbPulse { 0%{ transform:translate(12px,-8px) rotate(-6deg) scale(1) } 50%{ transform:translate(10px,-12px) rotate(-6deg) scale(1.04) } 100%{ transform:translate(12px,-8px) rotate(-6deg) scale(1) } }
-
-  .y-texture{
-    position:absolute;
-    left:18px; bottom:18px;
-    width:240px; height:120px;
-    pointer-events:none;
-    opacity:0.9;
-    z-index:9;
-    background:
-      radial-gradient(120px 60px at 40% 50%, rgba(255,255,255,0.45), transparent 40%),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px);
-    border-radius:20px;
-    animation: yWaves 6s linear infinite;
-  }
-  @keyframes yWaves { from{ background-position:0 0 } to{ background-position:480px 0 } }
-
-  /* particles canvas (small circles) */
-  #particles{
-    position:fixed; inset:0; pointer-events:none; z-index:5;
+  .panel .meta-block{ background:#fff;border-radius:12px;padding:16px; box-shadow:0 10px 28px rgba(2,2,2,0.06) }
+  .close {
+    margin-top:8px;padding:10px 12px;border-radius:10px;border:0;font-weight:800;cursor:pointer;background:transparent;
   }
 
-  /* mobile tweaks */
-  @media (max-width:820px){
-    .alias-content{ grid-template-columns:1fr; padding:22px }
-    .avatar{ width:72px; height:72px; font-size:14px }
-    .brand{ font-size:26px }
-    .intro h1{ font-size:30px }
+  /* responsive */
+  @media (max-width:920px){
+    .card h1{ font-size:32px }
+    .panel{ grid-template-columns: 1fr; }
   }
 
-  /* subtle entrance transitions for alias page */
-  .alias-page.show{ display:flex; animation: fadeInScale .4s ease forwards; }
-  @keyframes fadeInScale{ from{opacity:0; transform:scale(.98)} to{opacity:1; transform:scale(1)} }
+  /* accessibility focus */
+  button:focus{ outline: 3px solid rgba(255,255,255,0.12); outline-offset:4px }
 
-  /* small decorative shapes */
-  .badge {
-    display:inline-block;
-    padding:8px 12px;
-    border-radius:999px;
-    font-weight:700;
-    letter-spacing:1px;
-    font-size:13px;
-    transform:translateY(-2px);
+  /* small label at bottom center */
+  .foot-label{
+    position:absolute; left:50%; transform:translateX(-50%); bottom:24px; z-index:8; font-size:13px; color:rgba(255,255,255,0.6);
+    background:rgba(0,0,0,0.18); padding:8px 12px; border-radius:999px; backdrop-filter: blur(4px);
   }
+
+  /* subtle hover bumps on cards */
+  .side:hover .card{ transform: translateY(-8px) scale(1.01); box-shadow: 0 46px 120px rgba(0,0,0,0.5) }
 </style>
 </head>
 <body>
 
-<div class="wrap" id="app">
+<div class="stage show" id="stage" role="main" aria-label="Alias selection screen">
 
-  <header>
-    <div class="logo-block" aria-hidden="true">
-      <div style="width:58px;height:58px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#fff,#f3f3f3);box-shadow:0 8px 20px rgba(0,0,0,0.06)">
-        <div style="font-family:Montserrat;font-weight:900;font-size:18px">YR</div>
-      </div>
+  <!-- abstract geometric background layer -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="geom g1"></div>
+    <div class="geom g2"></div>
+    <div class="geom g3"></div>
+    <div class="geom g4"></div>
+
+    <div class="shard s1"></div>
+    <div class="shard s2"></div>
+
+    <!-- many small floating SVG pieces -->
+    <svg width="0" height="0" style="position:absolute">
+      <!-- defs placeholder if needed -->
+    </svg>
+  </div>
+
+  <!-- Left: raiBeat -->
+  <section class="side raibeat" id="leftSide" tabindex="0" aria-labelledby="rbName">
+    <div class="card" role="button" aria-pressed="false" onclick="openAlias('raibeat')">
       <div>
-        <div class="brand">Yash Raipure</div>
-        <div class="sub">Dual Alias Artist — Producer • DJ • Storyteller</div>
+        <h1 id="rbName">raiBeat</h1>
+        <div class="meta">
+          <div class="tag">Raw. Rebellious. Rumble</div>
+          <div style="height:10px"></div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="badge">Underground</div>
+            <div class="tag" style="color:rgba(255,255,255,0.75)">Techno • Bass • Experimental</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">
+        <button class="enter rb" onclick="openAlias('raibeat'); event.stopPropagation();" aria-label="Enter raiBeat">Enter</button>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="intro" aria-labelledby="introTitle">
-      <div class="sparkles">
-        <div class="spark"></div>
-        <div class="spark"></div>
+  <!-- Right: Яsh -->
+  <section class="side yash" id="rightSide" tabindex="0" aria-labelledby="ysName">
+    <div class="card" role="button" aria-pressed="false" onclick="openAlias('yash')">
+      <div>
+        <h1 id="ysName">Яsh</h1>
+        <div class="meta">
+          <div class="tag">Melodic. Rhythm. Therapy</div>
+          <div style="height:10px"></div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div class="badge" style="background:rgba(255,255,255,0.95); color:#003733">Chill • Melodic</div>
+            <div class="tag" style="color:rgba(0,0,0,0.65)">Chillwave • Melodic House • Downtempo</div>
+          </div>
+        </div>
       </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">
+        <button class="enter ys" onclick="openAlias('yash'); event.stopPropagation();" aria-label="Enter Яsh">Enter</button>
+      </div>
+    </div>
+  </section>
 
-      <h1 id="introTitle">Yash Raipure – Dual Alias Artist</h1>
-      <p>
-        Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music.
-        With a keen ear for rhythm, texture, and sonic storytelling, Yash blends underground energy with immersive melodic experiences — crafting journeys that can be both fierce and soothing.
-      </p>
-    </section>
-
-    <section class="cards" aria-label="Aliases">
-      <!-- raiBeat card -->
-      <article class="card raibeat" id="card-rai">
-        <div class="left">
-          <div class="avatar">raiBeat</div>
-          <div>
-            <h3>raiBeat</h3>
-            <div class="tagline">Raw. Rebellious. Rumble</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-          <div class="badge" style="background:#fff3d6;border:1px solid rgba(0,0,0,0.03)">Underground</div>
-          <button class="enter-btn" data-target="raibeat">Enter</button>
-        </div>
-        <div class="rb-texture" aria-hidden="true"></div>
-      </article>
-
-      <!-- Яsh card -->
-      <article class="card yash" id="card-yash">
-        <div class="left">
-          <div class="avatar">Яsh</div>
-          <div>
-            <h3>Яsh</h3>
-            <div class="tagline">melodic. rhythm. therapy</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-          <div class="badge" style="background:#e6fff8;border:1px solid rgba(0,0,0,0.03)">Chill • Melodic</div>
-          <button class="enter-btn" data-target="yash">Enter</button>
-        </div>
-        <div class="y-texture" aria-hidden="true"></div>
-      </article>
-    </section>
-  </main>
-
+  <div class="foot-label">Select an alias — choose your world</div>
 </div>
 
-<!-- Alias pages (simulated pages) -->
-<div class="alias-page" id="page-raibeat" aria-hidden="true">
-  <div class="alias-content" role="dialog" aria-label="raiBeat detail">
-    <div class="alias-hero">
+<!-- overlays for details (single-page) -->
+<div class="overlay" id="overlay-raibeat" aria-hidden="true" role="dialog" aria-label="raiBeat details">
+  <div class="panel" role="document">
+    <div>
       <h2>raiBeat</h2>
       <p class="lead">raiBeat embodies raw, rebellious energy. This alias focuses on high-octane electronic beats, heavy basslines, and experimental sound design — perfect for underground clubs and festival stages. With raiBeat, Yash pushes the boundaries of rhythm and texture, delivering sets and productions that are bold, edgy, and adrenaline-fueled.</p>
 
-      <div style="height:14px"></div>
+      <div style="height:16px"></div>
 
-      <div class="alias-meta">
-        <h4>Vibe / Style</h4>
+      <div class="meta-block">
+        <strong>Vibe / Style</strong>
         <p>Raw, energetic, and rebellious — underground electronic music with heavy basslines, punchy rhythms, and experimental sounds.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Musical Identity</h4>
-        <p>
-          • Focused on club and festival-ready drops that make the crowd move.<br>
-          • Mixes and tracks are raw, edgy, and unapologetically bold.<br>
-          • Often integrates elements of techno, house, and bass-driven electronic music.
-        </p>
+      <div class="meta-block">
+        <strong>Musical Identity</strong>
+        <p>• Focused on club and festival-ready drops that make the crowd move.<br>• Mixes and tracks are raw, edgy, and unapologetically bold.<br>• Often integrates elements of techno, house, and bass-driven electronic music.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Performance Persona</h4>
-        <p>
-          • Intense and commanding stage presence.<br>
-          • Represents rebellion, freedom, and creative audacity — ideal for underground events and high-energy sets.
-        </p>
+      <div class="meta-block">
+        <strong>Performance Persona</strong>
+        <p>• Intense and commanding stage presence.<br>• Represents rebellion, freedom, and creative audacity — ideal for underground events and high-energy sets.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Audience Connection</h4>
-        <p>
-          • Fans are drawn to raw energy and authenticity.<br>
-          • Appeals to listeners who appreciate boundary-pushing live performances.
-        </p>
+      <div class="meta-block">
+        <strong>Audience Connection</strong>
+        <p>• Fans are drawn to raw energy and authenticity.<br>• Appeals to listeners who appreciate boundary-pushing live performances.</p>
       </div>
     </div>
 
-    <aside>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div style="display:flex;gap:10px;align-items:center">
-          <div style="width:62px;height:62px;border-radius:12px;background:linear-gradient(180deg,#fff4d4,#ffe8b1);display:grid;place-items:center;font-weight:900;font-family:Montserrat">R</div>
+    <aside style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:68px;height:68px;border-radius:12px;background:linear-gradient(180deg,#ffb6b6,#ffd9c1);display:grid;place-items:center;color:#12090a;font-weight:900;font-family:Montserrat">R</div>
           <div>
-            <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">raiBeat</div>
-            <div style="color:var(--muted);font-size:13px">Raw • Rebellious • Rumble</div>
+            <div style="font-weight:900;letter-spacing:1px;text-transform:uppercase">raiBeat</div>
+            <div style="color:#666">Raw • Rebellious • Rumble</div>
           </div>
         </div>
         <div>
-          <button class="close-btn" data-close>Back</button>
+          <button class="close" onclick="closeOverlay('raibeat')">Back</button>
         </div>
       </div>
 
-      <div class="alias-meta" style="margin-bottom:10px">
-        <h4>Notable Elements</h4>
-        <p>
-          • Heavy basslines • Experimental sound-design • Punchy techno and house mixes • Festival energy
-        </p>
-      </div>
+      <div class="meta-block"><strong>Notable Elements</strong><p>Heavy basslines • Experimental sound design • Punchy techno and house mixes • Festival energy</p></div>
 
-      <div class="alias-meta" style="margin-bottom:10px">
-        <h4>Recommended Venues</h4>
-        <p>Underground clubs, late-night festival stages, warehouse raves.</p>
-      </div>
+      <div class="meta-block"><strong>Recommended Venues</strong><p>Underground clubs, late-night festival stages, warehouse raves.</p></div>
 
-      <div class="alias-meta">
-        <h4>Visual / Stage Notes</h4>
-        <p>High-contrast lighting, fast cuts, low fog, raw textures, animated glitch visuals and bass-synced motion.</p>
-      </div>
+      <div class="meta-block"><strong>Visual / Stage Notes</strong><p>High-contrast lighting, fast cuts, low fog, raw textures, animated glitch visuals and bass-synced motion.</p></div>
     </aside>
   </div>
 </div>
 
-<div class="alias-page" id="page-yash" aria-hidden="true">
-  <div class="alias-content" role="dialog" aria-label="Яsh detail">
-    <div class="alias-hero">
+<div class="overlay" id="overlay-yash" aria-hidden="true" role="dialog" aria-label="Яsh details">
+  <div class="panel" role="document">
+    <div>
       <h2>Яsh</h2>
       <p class="lead">Яsh represents the melodic, soulful side of Yash’s artistry. Through this alias, he produces chillwave, melodic house, and downtempo electronic music, creating immersive soundscapes that connect emotionally with the audience. Яsh sets are smooth, harmonic, and atmospheric — offering listeners a journey through relaxing yet deeply engaging rhythmic landscapes.</p>
 
-      <div style="height:14px"></div>
+      <div style="height:16px"></div>
 
-      <div class="alias-meta">
-        <h4>Vibe / Style</h4>
+      <div class="meta-block">
+        <strong>Vibe / Style</strong>
         <p>Melodic, smooth, and immersive — chill electronic beats with harmonic, soulful layers.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Musical Identity</h4>
-        <p>
-          • Focus on melodic house, chillwave, and downtempo.<br>
-          • Soulful, rhythmic, and immersive tracks that form a journey-like experience.<br>
-          • Combines ambient textures, subtle percussion, and warm synths.
-        </p>
+      <div class="meta-block">
+        <strong>Musical Identity</strong>
+        <p>• Focus on melodic house, chillwave, and downtempo.<br>• Soulful, rhythmic, and immersive tracks that form a journey-like experience.<br>• Combines ambient textures, subtle percussion, and warm synths.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Performance Persona</h4>
-        <p>
-          • Calm, engaging, and atmospheric on stage.<br>
-          • Ideal for lounges, beach events, and intimate festival moments.
-        </p>
+      <div class="meta-block">
+        <strong>Performance Persona</strong>
+        <p>• Calm, engaging, and atmospheric on stage.<br>• Ideal for lounges, beach events, and intimate festival moments.</p>
       </div>
 
       <div style="height:12px"></div>
 
-      <div class="alias-meta">
-        <h4>Audience Connection</h4>
-        <p>
-          • Fans appreciate emotionally rich, melodic experiences.<br>
-          • Creates a space for relaxation and vibe-driven connection.
-        </p>
+      <div class="meta-block">
+        <strong>Audience Connection</strong>
+        <p>• Fans appreciate emotionally rich, melodic experiences.<br>• Creates a space for relaxation and vibe-driven connection.</p>
       </div>
     </div>
 
-    <aside>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div style="display:flex;gap:10px;align-items:center">
-          <div style="width:62px;height:62px;border-radius:12px;background:linear-gradient(180deg,#eafff8,#d7fbf1);display:grid;place-items:center;font-weight:900;font-family:Montserrat">Я</div>
+    <aside style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div style="width:68px;height:68px;border-radius:12px;background:linear-gradient(180deg,#d7fbf1,#baf3e8);display:grid;place-items:center;color:#003733;font-weight:900;font-family:Montserrat">Я</div>
           <div>
-            <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">Яsh</div>
-            <div style="color:var(--muted);font-size:13px">melodic • rhythm • therapy</div>
+            <div style="font-weight:900;letter-spacing:1px;text-transform:uppercase">Яsh</div>
+            <div style="color:#666">Melodic • Rhythm • Therapy</div>
           </div>
         </div>
         <div>
-          <button class="close-btn" data-close>Back</button>
+          <button class="close" onclick="closeOverlay('yash')">Back</button>
         </div>
       </div>
 
-      <div class="alias-meta" style="margin-bottom:10px">
-        <h4>Notable Elements</h4>
-        <p>Warm synth textures • Melodic progression • Reverb-drenched pads • Smooth groove</p>
-      </div>
+      <div class="meta-block"><strong>Notable Elements</strong><p>Warm synth textures • Melodic progression • Reverb-drenched pads • Smooth groove</p></div>
 
-      <div class="alias-meta" style="margin-bottom:10px">
-        <h4>Recommended Venues</h4>
-        <p>Beachstage, lounge sets, day-to-dusk festival stages, intimate venues.</p>
-      </div>
+      <div class="meta-block"><strong>Recommended Venues</strong><p>Beachstage, lounge sets, day-to-dusk festival stages, intimate venues.</p></div>
 
-      <div class="alias-meta">
-        <h4>Visual / Stage Notes</h4>
-        <p>Pastel lights, slow fades, oceanic textures, immersive projections, relaxed pacing.</p>
-      </div>
+      <div class="meta-block"><strong>Visual / Stage Notes</strong><p>Pastel lights, slow fades, oceanic textures, immersive projections, relaxed pacing.</p></div>
     </aside>
   </div>
 </div>
 
-<!-- minimal particle layer (canvas) -->
-<canvas id="particles" width="1920" height="1080" aria-hidden="true"></canvas>
-
+<!-- simple interactive script -->
 <script>
-  // Simple routing: show / hide alias "pages"
-  const openBtns = document.querySelectorAll('.enter-btn');
-  const pages = {
-    raibeat: document.getElementById('page-raibeat'),
-    yash: document.getElementById('page-yash')
-  };
-  openBtns.forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      const tgt = btn.dataset.target;
-      if(pages[tgt]){
-        showPage(pages[tgt]);
-        // push history state so back button behaves
-        history.pushState({alias:tgt}, '', `#${tgt}`);
-      }
-    });
+  const left = document.getElementById('leftSide');
+  const right = document.getElementById('rightSide');
+  const stage = document.getElementById('stage');
+
+  // focus/dim logic
+  left.addEventListener('mouseenter', ()=> { right.classList.add('dimmed'); });
+  left.addEventListener('mouseleave', ()=> { right.classList.remove('dimmed'); });
+  right.addEventListener('mouseenter', ()=> { left.classList.add('dimmed'); });
+  right.addEventListener('mouseleave', ()=> { left.classList.remove('dimmed'); });
+
+  // keyboard accessibility: arrow keys to toggle focus
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowLeft') { left.focus(); left.classList.add('focused'); right.classList.add('dimmed'); }
+    if(e.key === 'ArrowRight') { right.focus(); right.classList.add('focused'); left.classList.add('dimmed'); }
   });
 
-  // close buttons
-  document.querySelectorAll('[data-close]').forEach(btn=>{
-    btn.addEventListener('click', closeAll);
-  });
-
-  function showPage(el){
-    el.classList.add('show');
-    el.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
+  // open overlay
+  function openAlias(name){
+    if(name === 'raibeat'){
+      document.getElementById('overlay-raibeat').classList.add('show');
+      document.getElementById('overlay-raibeat').setAttribute('aria-hidden','false');
+      history.pushState({alias:'raibeat'}, '', '#raibeat');
+    } else {
+      document.getElementById('overlay-yash').classList.add('show');
+      document.getElementById('overlay-yash').setAttribute('aria-hidden','false');
+      history.pushState({alias:'yash'}, '', '#yash');
+    }
+    // reduce background motion slightly
+    stage.style.filter = 'blur(0.3px) brightness(.96)';
+    document.body.style.overflow = 'hidden';
   }
-  function closeAll(){
-    Object.values(pages).forEach(p=>{
-      p.classList.remove('show');
-      p.setAttribute('aria-hidden','true');
-    });
-    document.body.style.overflow='';
+
+  function closeOverlay(name){
+    if(name === 'raibeat'){
+      document.getElementById('overlay-raibeat').classList.remove('show');
+      document.getElementById('overlay-raibeat').setAttribute('aria-hidden','true');
+    } else {
+      document.getElementById('overlay-yash').classList.remove('show');
+      document.getElementById('overlay-yash').setAttribute('aria-hidden','true');
+    }
+    stage.style.filter = '';
+    document.body.style.overflow = '';
     history.pushState({}, '', location.pathname);
   }
 
-  // handle back/forward navigation
-  window.addEventListener('popstate', (ev)=>{
+  // back/forward handling
+  window.addEventListener('popstate', ()=>{
     const h = location.hash.replace('#','');
-    if(h && pages[h]) {
-      showPage(pages[h]);
-    } else {
-      closeAll();
-    }
+    if(h === 'raibeat') openAlias('raibeat');
+    else if(h === 'yash') openAlias('yash');
+    else { closeOverlay('raibeat'); closeOverlay('yash'); }
   });
 
-  // on load if hash present
-  window.addEventListener('load', ()=> {
-    const h = location.hash.replace('#','');
-    if(h && pages[h]) showPage(pages[h]);
+  // close overlays with ESC
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') { closeOverlay('raibeat'); closeOverlay('yash'); }
   });
 
-  /* SIMPLE PARTICLE FIELD (floating dots + small stars) */
-  (function(){
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = innerWidth;
-    let H = canvas.height = innerHeight;
-    const particles = [];
-    const count = Math.round((W*H)/90000); // density
-    for(let i=0;i<count;i++){
-      particles.push({
-        x: Math.random()*W,
-        y: Math.random()*H,
-        r: Math.random()*2.8 + 0.6,
-        s: (Math.random()*0.6)+0.2,
-        vy: (Math.random()*0.4)+0.1,
-        life: Math.random()*200
-      });
-    }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      for(let p of particles){
-        p.y -= p.vy * (p.s*2);
-        p.x += Math.sin(p.y*0.002 + p.s) * 0.2;
-        p.life -= 0.08;
-        if(p.y < -10 || p.life < 0){ p.y = H + 10; p.x = Math.random()*W; p.life = Math.random()*200; }
-        ctx.beginPath();
-        ctx.fillStyle = 'rgba(255,255,255,' + (0.06 + (p.s*0.06)) + ')';
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-      }
-      requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', ()=>{
-      W = canvas.width = innerWidth;
-      H = canvas.height = innerHeight;
+  // small parallax on mouse move
+  document.addEventListener('mousemove', (e)=>{
+    const cx = window.innerWidth/2, cy = window.innerHeight/2;
+    const dx = (e.clientX - cx)/cx;
+    const dy = (e.clientY - cy)/cy;
+    document.querySelectorAll('.geom').forEach((el, i)=>{
+      const factor = (i%2===0) ? 10 : -8;
+      el.style.transform = `translate3d(${dx*factor}px,${dy*factor}px,0) rotate(${i*6}deg)`;
     });
-    draw();
-  })();
-
-  /* small keyboard / accessibility: allow Esc to close alias pages */
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape') closeAll();
+    document.querySelectorAll('.shard').forEach((s, i)=>{
+      s.style.transform = `translateY(${Math.sin(e.clientY*0.01 + i)*8}px)`;
+    });
   });
+
+  // small entrance bloom
+  window.addEventListener('load', ()=>{
+    setTimeout(()=> document.body.classList.add('loaded'), 120);
+    // if hash present open overlay
+    const h = location.hash.replace('#','');
+    if(h === 'raibeat') openAlias('raibeat');
+    if(h === 'yash') openAlias('yash');
+  });
+
 </script>
 
 </body>
