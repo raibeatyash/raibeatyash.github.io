@@ -4,61 +4,46 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; }
-    body, html {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: linear-gradient(135deg, #151217 60%, #212333 100%);
-      color: #f9f7fa;
-      min-height: 100vh;
-      width: 100vw;
-      overflow-x: hidden;
-    }
+    body, html { height: 100%; margin: 0; padding: 0; background: linear-gradient(120deg, #161622 60%, #274762 100%); }
     .container {
-      width: 100%;
-      max-width: 1120px;
+      max-width: 1150px;
+      padding: 4rem 2rem 3rem;
       margin: 0 auto;
-      padding: 3.5rem 2rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      position: relative;
-      z-index: 10;
     }
     h1 {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 2.8rem;
+      font-weight: 800;
+      font-size: 2.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #f7e369;
-      margin-bottom: 0.35em;
-      text-shadow: 2px 3px 22px #15121776;
+      letter-spacing: 0.13em;
+      color: #fff7c2;
+      margin-bottom: 0.45em;
+      text-shadow: 2px 6px 22px #23232a85;
     }
     .subtitle {
       font-family: 'Cormorant Garamond', serif;
-      max-width: 700px;
       font-weight: 500;
-      font-size: 1.32rem;
+      font-size: 1.28rem;
       line-height: 1.75;
-      color: #e8e5ffdb;
-      margin-bottom: 3.5rem;
-      letter-spacing: 0.01em;
+      color: #ddded8e6;
+      margin-bottom: 3.2rem;
+      max-width: 740px;
+      letter-spacing: 0.012em;
     }
-
     .split {
       display: flex;
       width: 100%;
-      min-height: 360px;
-      border-radius: 31px;
+      min-height: 370px;
+      border-radius: 33px;
       overflow: hidden;
-      background: #212126;
-      box-shadow: 0 0 90px 12px #f0d85c17, 0 10px 24px -6px #13224a99;
+      box-shadow: 0 0 60px 13px #ffedb033, 0 12px 30px #18194227;
+      background: #23232a;
     }
     .panel {
       flex: 1;
@@ -66,98 +51,79 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 2.8rem 2.5rem 2rem 2.5rem;
-      transition: background 0.2s;
+      padding: 3rem 2.3rem 2.2rem 2.3rem;
+      transition: background 0.18s;
     }
     .left-panel {
-      background: linear-gradient(145deg, #3e2024 55%, #7f272a 100%);
-      border-right: 2px solid #fff1;
+      background: linear-gradient(140deg, #3e2024 48%, #a83f49 100%);
+      border-right: 2px solid #fff2;
     }
     .right-panel {
-      background: linear-gradient(145deg, #ddeeee 80%, #b3cfd3 100%);
-      color: #242b2b;
+      background: linear-gradient(120deg, #f2f7f8 90%, #b7d9da 100%);
+      color: #282f2b;
     }
     .panel-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: 0.11em;
+      font-size: 2.1rem;
+      letter-spacing: 0.10em;
       text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 1.1rem;
-      color: #f4746c;
-      text-shadow: 0 0 20px #DE644D11;
+      font-weight: 600;
+      margin-bottom: 1.05rem;
+      color: #fec77e;
+      text-shadow: 0 0 17px #feca9e23;
     }
     .right-panel .panel-title {
-      color: #0a9295;
-      text-shadow: 0 0 20px #79cce011;
+      color: #0ba7a3;
+      text-shadow: 0 0 16px #5373dc22;
     }
     .panel-desc {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.11rem;
-      color: #f7e7e3d1;
+      font-size: 1.08rem;
+      color: #ffecdfd1;
       font-weight: 500;
-      max-width: 350px;
-      margin-bottom: 2.3rem;
-      line-height: 1.55;
+      max-width: 300px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
     }
     .right-panel .panel-desc {
-      color: #435c54ed;
+      color: #314e4cdb;
     }
     .btn {
-      padding: 0.85em 2.8em;
+      padding: 0.88em 2.85em;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.16em;
-      border-radius: 33px;
+      font-weight: 600;
+      font-size: 1.12em;
+      border-radius: 31px;
       border: none;
       cursor: pointer;
-      margin-top: 0.5em;
-      letter-spacing: 0.07em;
-      box-shadow: 0 2px 14px #201e4445;
-      transition: background 0.2s, color 0.18s, transform 0.15s;
-      outline: none;
+      margin-top: 0.2em;
+      letter-spacing: 0.09em;
+      background: #ffedb0;
+      color: #7c3c32;
+      box-shadow: 0 2px 10px #23232a33, 0 0 0 3px #feda927e inset;
+      transition: background 0.17s, color 0.13s, transform 0.13s;
     }
-    .btn-left {
-      background: #ffee92;
-      color: #4c2625;
-    }
-    .btn-left:hover, .btn-left:focus {
-      background: #f9d13e;
-      color: #1a1011;
+    .btn:hover, .btn:focus {
+      background: #feda92;
+      color: #1a1012;
       transform: scale(1.05);
     }
     .btn-right {
-      background: #a9e4e6;
-      color: #174e4f;
+      background: #aeeaea;
+      color: #17606e;
+      box-shadow: 0 2px 12px #20abac33, 0 0 0 3px #aeeaea66 inset;
     }
     .btn-right:hover, .btn-right:focus {
-      background: #08bdb8;
+      background: #33ced0;
       color: #fff;
       transform: scale(1.05);
     }
-
     @media (max-width: 900px) {
-      .container {
-        padding: 2rem 1rem 2.5rem;
-      }
-      h1 {
-        font-size: 2.1rem;
-      }
-      .split {
-        flex-direction: column;
-        border-radius: 1.1rem;
-        min-height: auto;
-        box-shadow: 0 0 60px 5px #efe33a24;
-      }
-      .panel {
-        padding: 2rem 1.7rem 1.5rem 1.7rem;
-        max-width: 90vw;
-        border-right: none!important;
-        border-bottom: 2px solid #fff1;
-      }
-      .right-panel {
-        border-bottom: none;
-      }
+      .container { padding: 2rem 1rem 2.5rem; }
+      h1 { font-size: 2rem; }
+      .split { flex-direction: column; }
+      .panel { border-right: none!important; border-bottom: 2px solid #fff2; padding: 2rem 1.5rem 1.2rem 1.5rem; }
+      .right-panel { border-bottom: none; }
     }
   </style>
 </head>
@@ -173,7 +139,7 @@
         <div class="panel-desc">
           Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for clubs and festivals.
         </div>
-        <button class="btn btn-left" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
+        <button class="btn" onclick="window.location.href='raiBeat.html'">Enter raiBeat</button>
       </section>
       <section class="panel right-panel">
         <div class="panel-title">Яsh</div>
