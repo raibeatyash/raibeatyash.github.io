@@ -1,276 +1,656 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Yash Raipure – Dual Alias Entry</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Rubik:wght@500&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      margin:0; padding:0; height:100%;
-      overflow:hidden;
-      background: #0b0a0d;
-      color:#fff;
-      font-family: 'Rubik', Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    body {
-      position: relative;
-    }
-    #canvas {
-      position: fixed;
-      top:0;left:0;
-      width:100vw;
-      height:100vh;
-      z-index:0;
-      pointer-events:none;
-      background: linear-gradient(135deg,#220011 0%,#0a121b 90%);
-    }
-    .split-root {
-      position: relative;
-      z-index: 1;
-      width: 90vw;
-      max-width: 850px;
-      height: 450px;
-      display: flex;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 0 38px #cc2084aa, 0 0 40px #2ccbf4cc inset;
-      border: 2px solid transparent;
-      transition: border-color 0.3s ease;
-    }
-    .left, .right {
-      flex: 1;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      position: relative;
-      cursor: pointer;
-      transition: box-shadow 0.35s ease, background 0.35s ease;
-      pointer-events: auto;
-      user-select: none;
-      padding-bottom: 4rem;
-      color: #eee;
-      text-shadow: 0 0 6px #ff5a91bb;
-      font-weight: 600;
-      font-size: 2.8rem;
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      box-sizing: border-box;
-    }
-    .left {
-      background: linear-gradient(45deg, #6a0e26 0%, #1c050d 100%);
-      box-shadow: inset 0 0 180px #aa2d4b88;
-      border-right: 3px solid #f0284e;
-      text-shadow: 0 0 24px #f0284ecc;
-    }
-    .left:hover, .left:focus {
-      box-shadow: 0 0 110px 12px #fa3a5e, inset 0 0 200px #ff3565cc;
-      border-color: #ff4574;
-      outline: none;
-      transform: scale(1.04);
-      z-index: 2;
-    }
-    .right {
-      background: linear-gradient(45deg, #247a95 0%,#113741 100%);
-      box-shadow: inset 0 0 200px #56ffec88;
-      border-left: 3px solid #3ae4f2;
-      text-shadow: 0 0 22px #3cf0ffcd;
-    }
-    .right:hover, .right:focus {
-      box-shadow: 0 0 120px 15px #1aedff, inset 0 0 210px #4fe7f699;
-      border-color: #2adbf2;
-      outline: none;
-      transform: scale(1.04);
-      z-index: 2;
-    }
-    /* Buttons */
-    .alias-btn {
-      margin-top: 2rem;
-      font-weight: 700;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.2rem;
-      padding: 1.4rem 4.3rem;
-      border-radius: 38px;
-      border: none;
-      cursor: pointer;
-      user-select: none;
-      color: #fff;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      box-shadow: 0 0 45px 4px rgba(255,255,255,0.4);
-      background-clip: padding-box;
-      transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
-      outline: none;
-      position: relative;
-      overflow: hidden;
-    }
-    .left .alias-btn {
-      background: #f43f67;
-      box-shadow: 0 0 50px 4px #ff4d75;
-    }
-    .right .alias-btn {
-      background: #21abc4;
-      box-shadow: 0 0 62px 6px #15ccff;
-    }
-    .alias-btn:focus-visible {
-      outline: 3px solid #fff;
-    }
-    .alias-btn:hover {
-      filter: brightness(1.1);
-    }
-    .alias-btn:active {
-      transform: scale(0.94);
-      box-shadow: 0 0 35px 8px #fff4f4dd;
-    }
-    /* Heading animation shimmering */
-    .shimmer {
-      font-weight: 800;
-      font-size: 3.5rem;
-      margin-bottom: 0.8rem;
-      position: relative;
-      color: #fee6f2;
-      background: linear-gradient(90deg, #fe80ab 0%, #eb4ceed7 30%, #fd69b4 50%, #f996bd 70%, #fd99c0 100%);
-      background-size: 200% 100%;
-      animation: shimmer 3.5s linear infinite;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      user-select: none;
-    }
-    @keyframes shimmer {
-      0% {
-        background-position: 200% 0;
-      }
-      100% {
-        background-position: -200% 0;
-      }
-    }
-    /* Subtle tagline text */
-    .tagline {
-      font-family: 'Rubik', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #b1d1df;
-      margin-bottom: 4rem;
-      text-align: center;
-      max-width: 350px;
-      letter-spacing: 0.04em;
-    }
-    /* Accessibility focus */
-    .left:focus-visible, .right:focus-visible {
-      outline: 4px solid #fff;
-      filter: brightness(1.2);
-      z-index: 9;
-    }
-    /* Responsive */
-    @media (max-width: 700px) {
-      .split-root {
-        flex-direction: column;
-        height: auto;
-      }
-      .left, .right {
-        min-height: 45vh;
-        padding-bottom: 5rem;
-      }
-      .shimmer {
-        font-size: 2.4rem;
-      }
-      .tagline {
-        max-width: 100%;
-        padding: 0 2rem;
-      }
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Yash Raipure — Dual Alias Artist</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #FBF8F3; /* light cream */
+    --ink: #0b0b0b;
+    --muted: #6b6b6b;
+
+    /* raiBeat palette (underground but pastel-toned) */
+    --rb-bg: #ffd85c; /* mustard pastel */
+    --rb-accent: #ff6b8a; /* coral accent */
+    --rb-ink: #0c0c0c;
+
+    /* Яsh palette (chill pastel seaside) */
+    --y-bg: #bdf1e6; /* mint */
+    --y-accent: #f8c0e6; /* soft pink */
+    --y-ink: #072a2a;
+
+    --card-radius: 18px;
+    --soft-shadow: 0 8px 24px rgba(11,11,11,0.08);
+    --glass: rgba(255,255,255,0.55);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(185,230,215,0.14), transparent 8%),
+                radial-gradient(1200px 600px at 90% 90%, rgba(255,198,220,0.07), transparent 8%),
+                var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
+
+  /* page layout */
+  .wrap{
+    max-width:920px;
+    margin:32px auto;
+    padding:28px;
+    position:relative;
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:18px;
+  }
+
+  .logo-block{
+    background:#fff;
+    border-radius:10px;
+    padding:10px 14px;
+    box-shadow:var(--soft-shadow);
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .brand{
+    font-family: "Montserrat", sans-serif;
+    font-weight:900;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:32px;
+    line-height:1;
+    color:var(--ink);
+  }
+
+  .sub{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:6px;
+  }
+
+  main{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:20px;
+  }
+
+  /* Intro panel */
+  .intro{
+    background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.8));
+    border-radius:22px;
+    padding:28px;
+    box-shadow:var(--soft-shadow);
+    position:relative;
+    overflow:visible;
+  }
+
+  .intro h1{
+    margin:0 0 8px 0;
+    font-family:"Montserrat",sans-serif;
+    font-size:40px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+  }
+  .intro p{
+    margin:0;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.6;
+  }
+
+  /* decorative floating star */
+  .sparkles { position:absolute; right:18px; top:8px; opacity:0.95; pointer-events:none; }
+  .spark { width:12px; height:12px; background:linear-gradient(180deg,#fff,#ffd9b3); border-radius:4px; transform:rotate(25deg); filter:drop-shadow(0 6px 14px rgba(255,200,120,0.12)); animation: floaty 3.6s infinite ease-in-out; }
+  .spark + .spark{ transform:rotate(-10deg); animation-delay:0.4s }
+
+  @keyframes floaty { 0%{ transform:translateY(0) rotate(0)} 50%{ transform:translateY(-8px) rotate(8deg)} 100%{ transform:translateY(0) rotate(0)} }
+
+  /* Cards container (the two stacked aliases) */
+  .cards{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .card{
+    border-radius:var(--card-radius);
+    padding:18px 18px;
+    position:relative;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:var(--soft-shadow);
+    cursor:pointer;
+    transform-origin:center;
+    transition:transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s;
+  }
+  .card:hover{ transform:translateY(-6px) scale(1.01); box-shadow:0 18px 40px rgba(8,8,8,0.12) }
+
+  .card .left{
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
+  .avatar{
+    width:88px;
+    height:88px;
+    border-radius:14px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:"Montserrat",sans-serif;
+    font-weight:900;
+    font-size:18px;
+    color:var(--rb-ink);
+    box-shadow:inset 0 -10px 24px rgba(0,0,0,0.06);
+  }
+  .card h3{
+    margin:0;
+    font-family:"Montserrat",sans-serif;
+    font-size:22px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .tagline{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:14px;
+    text-transform:lowercase;
+    font-weight:500;
+    letter-spacing:0.6px;
+  }
+
+  .enter-btn{
+    background:transparent;
+    border:2px solid rgba(0,0,0,0.06);
+    padding:10px 14px;
+    border-radius:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    transition:all .22s;
+    min-width:120px;
+    text-align:center;
+    cursor:pointer;
+  }
+  .enter-btn:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(0,0,0,0.08) }
+
+  /* raiBeat theme */
+  .card.raibeat{
+    background:linear-gradient(135deg, color-mix(in srgb, var(--rb-bg) 90%, white), color-mix(in srgb, var(--rb-accent) 6%, rgba(255,255,255,0.75)));
+    border:1px solid rgba(0,0,0,0.03);
+  }
+  .card.raibeat .avatar{ background:linear-gradient(180deg,#fff4d4,#ffe8b1); color:var(--rb-ink) }
+  .card.raibeat .enter-btn{ background:rgba(0,0,0,0.04); border-color:transparent; color:var(--rb-ink); }
+
+  /* Яsh theme */
+  .card.yash{
+    background:linear-gradient(135deg, color-mix(in srgb, var(--y-bg) 92%, white), color-mix(in srgb, var(--y-accent) 6%, rgba(255,255,255,0.75)));
+    border:1px solid rgba(0,0,0,0.03);
+  }
+  .card.yash .avatar{ background:linear-gradient(180deg,#eafff8,#d7fbf1); color:var(--y-ink) }
+  .card.yash .enter-btn{ background:rgba(255,255,255,0.6); border-color:transparent; color:var(--y-ink) }
+
+  /* alias detail pages (hidden by default) */
+  .alias-page{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:60;
+    padding:30px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+    backdrop-filter: blur(6px) saturate(110%);
+  }
+
+  .alias-content{
+    width:min(920px,96%);
+    border-radius:20px;
+    padding:32px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.9));
+    box-shadow:0 40px 80px rgba(6,6,6,0.18);
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:20px;
+    align-items:start;
+  }
+  .alias-hero h2{
+    margin:0 0 8px 0;
+    font-family:"Montserrat",sans-serif;
+    font-size:34px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+  }
+  .alias-hero .lead{ color:var(--muted); font-size:15px; line-height:1.7 }
+
+  .alias-meta{
+    background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));
+    border-radius:14px;
+    padding:18px;
+    box-shadow:var(--soft-shadow);
+  }
+  .alias-meta h4{ margin:0 0 6px 0; font-family:"Montserrat",sans-serif; text-transform:uppercase; letter-spacing:2px; font-size:14px }
+  .alias-meta p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5 }
+
+  .close-btn{
+    background:transparent;
+    border:0;
+    font-weight:800;
+    letter-spacing:1px;
+    font-family:"Montserrat",sans-serif;
+    font-size:13px;
+    cursor:pointer;
+    padding:10px 12px;
+    border-radius:10px;
+    transition:all .22s;
+  }
+  .close-btn:hover{ transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,0.08) }
+
+  /* specialized textures */
+  .rb-texture{
+    position:absolute;
+    inset:auto 18px 18px auto;
+    width:180px;
+    height:180px;
+    pointer-events:none;
+    filter:blur(8px) saturate(120%);
+    transform:translate(12px, -8px) rotate(-6deg);
+    opacity:0.95;
+    z-index:10;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.15), rgba(0,0,0,0.02)),
+      repeating-linear-gradient( -25deg, rgba(0,0,0,0.02) 0 6px, transparent 6px 12px );
+    animation: rbPulse 3s ease-in-out infinite;
+    border-radius:12px;
+  }
+  @keyframes rbPulse { 0%{ transform:translate(12px,-8px) rotate(-6deg) scale(1) } 50%{ transform:translate(10px,-12px) rotate(-6deg) scale(1.04) } 100%{ transform:translate(12px,-8px) rotate(-6deg) scale(1) } }
+
+  .y-texture{
+    position:absolute;
+    left:18px; bottom:18px;
+    width:240px; height:120px;
+    pointer-events:none;
+    opacity:0.9;
+    z-index:9;
+    background:
+      radial-gradient(120px 60px at 40% 50%, rgba(255,255,255,0.45), transparent 40%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 8px, transparent 8px 16px);
+    border-radius:20px;
+    animation: yWaves 6s linear infinite;
+  }
+  @keyframes yWaves { from{ background-position:0 0 } to{ background-position:480px 0 } }
+
+  /* particles canvas (small circles) */
+  #particles{
+    position:fixed; inset:0; pointer-events:none; z-index:5;
+  }
+
+  /* mobile tweaks */
+  @media (max-width:820px){
+    .alias-content{ grid-template-columns:1fr; padding:22px }
+    .avatar{ width:72px; height:72px; font-size:14px }
+    .brand{ font-size:26px }
+    .intro h1{ font-size:30px }
+  }
+
+  /* subtle entrance transitions for alias page */
+  .alias-page.show{ display:flex; animation: fadeInScale .4s ease forwards; }
+  @keyframes fadeInScale{ from{opacity:0; transform:scale(.98)} to{opacity:1; transform:scale(1)} }
+
+  /* small decorative shapes */
+  .badge {
+    display:inline-block;
+    padding:8px 12px;
+    border-radius:999px;
+    font-weight:700;
+    letter-spacing:1px;
+    font-size:13px;
+    transform:translateY(-2px);
+  }
+</style>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  <div class="split-root">
-    <div class="left" tabindex="0" role="button" aria-label="Enter raiBeat profile" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
+
+<div class="wrap" id="app">
+
+  <header>
+    <div class="logo-block" aria-hidden="true">
+      <div style="width:58px;height:58px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#fff,#f3f3f3);box-shadow:0 8px 20px rgba(0,0,0,0.06)">
+        <div style="font-family:Montserrat;font-weight:900;font-size:18px">YR</div>
+      </div>
       <div>
-        <div class="shimmer">raiBeat</div>
-        <div class="tagline">Raw, rebellious underground energy with heavy bass and high-octane beats.</div>
-        <button class="alias-btn">Enter raiBeat</button>
+        <div class="brand">Yash Raipure</div>
+        <div class="sub">Dual Alias Artist — Producer • DJ • Storyteller</div>
       </div>
     </div>
-    <div class="right" tabindex="0" role="button" aria-label="Enter Яsh profile" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
-      <div>
-        <div class="shimmer" style="animation-direction: reverse;">Яsh</div>
-        <div class="tagline">Melodic, smooth, and immersive journeys built for chillwave and vibes.</div>
-        <button class="alias-btn">Enter Яsh</button>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="introTitle">
+      <div class="sparkles">
+        <div class="spark"></div>
+        <div class="spark"></div>
+      </div>
+
+      <h1 id="introTitle">Yash Raipure – Dual Alias Artist</h1>
+      <p>
+        Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music.
+        With a keen ear for rhythm, texture, and sonic storytelling, Yash blends underground energy with immersive melodic experiences — crafting journeys that can be both fierce and soothing.
+      </p>
+    </section>
+
+    <section class="cards" aria-label="Aliases">
+      <!-- raiBeat card -->
+      <article class="card raibeat" id="card-rai">
+        <div class="left">
+          <div class="avatar">raiBeat</div>
+          <div>
+            <h3>raiBeat</h3>
+            <div class="tagline">Raw. Rebellious. Rumble</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+          <div class="badge" style="background:#fff3d6;border:1px solid rgba(0,0,0,0.03)">Underground</div>
+          <button class="enter-btn" data-target="raibeat">Enter</button>
+        </div>
+        <div class="rb-texture" aria-hidden="true"></div>
+      </article>
+
+      <!-- Яsh card -->
+      <article class="card yash" id="card-yash">
+        <div class="left">
+          <div class="avatar">Яsh</div>
+          <div>
+            <h3>Яsh</h3>
+            <div class="tagline">melodic. rhythm. therapy</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
+          <div class="badge" style="background:#e6fff8;border:1px solid rgba(0,0,0,0.03)">Chill • Melodic</div>
+          <button class="enter-btn" data-target="yash">Enter</button>
+        </div>
+        <div class="y-texture" aria-hidden="true"></div>
+      </article>
+    </section>
+  </main>
+
+</div>
+
+<!-- Alias pages (simulated pages) -->
+<div class="alias-page" id="page-raibeat" aria-hidden="true">
+  <div class="alias-content" role="dialog" aria-label="raiBeat detail">
+    <div class="alias-hero">
+      <h2>raiBeat</h2>
+      <p class="lead">raiBeat embodies raw, rebellious energy. This alias focuses on high-octane electronic beats, heavy basslines, and experimental sound design — perfect for underground clubs and festival stages. With raiBeat, Yash pushes the boundaries of rhythm and texture, delivering sets and productions that are bold, edgy, and adrenaline-fueled.</p>
+
+      <div style="height:14px"></div>
+
+      <div class="alias-meta">
+        <h4>Vibe / Style</h4>
+        <p>Raw, energetic, and rebellious — underground electronic music with heavy basslines, punchy rhythms, and experimental sounds.</p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Musical Identity</h4>
+        <p>
+          • Focused on club and festival-ready drops that make the crowd move.<br>
+          • Mixes and tracks are raw, edgy, and unapologetically bold.<br>
+          • Often integrates elements of techno, house, and bass-driven electronic music.
+        </p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Performance Persona</h4>
+        <p>
+          • Intense and commanding stage presence.<br>
+          • Represents rebellion, freedom, and creative audacity — ideal for underground events and high-energy sets.
+        </p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Audience Connection</h4>
+        <p>
+          • Fans are drawn to raw energy and authenticity.<br>
+          • Appeals to listeners who appreciate boundary-pushing live performances.
+        </p>
       </div>
     </div>
+
+    <aside>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="width:62px;height:62px;border-radius:12px;background:linear-gradient(180deg,#fff4d4,#ffe8b1);display:grid;place-items:center;font-weight:900;font-family:Montserrat">R</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">raiBeat</div>
+            <div style="color:var(--muted);font-size:13px">Raw • Rebellious • Rumble</div>
+          </div>
+        </div>
+        <div>
+          <button class="close-btn" data-close>Back</button>
+        </div>
+      </div>
+
+      <div class="alias-meta" style="margin-bottom:10px">
+        <h4>Notable Elements</h4>
+        <p>
+          • Heavy basslines • Experimental sound-design • Punchy techno and house mixes • Festival energy
+        </p>
+      </div>
+
+      <div class="alias-meta" style="margin-bottom:10px">
+        <h4>Recommended Venues</h4>
+        <p>Underground clubs, late-night festival stages, warehouse raves.</p>
+      </div>
+
+      <div class="alias-meta">
+        <h4>Visual / Stage Notes</h4>
+        <p>High-contrast lighting, fast cuts, low fog, raw textures, animated glitch visuals and bass-synced motion.</p>
+      </div>
+    </aside>
   </div>
+</div>
 
-  <script>
-    // Particle background for dynamic effect
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    const colors = ['#f76c6c', '#06c1e1', '#c88cf2', '#48b9b9', '#eec213'];
+<div class="alias-page" id="page-yash" aria-hidden="true">
+  <div class="alias-content" role="dialog" aria-label="Яsh detail">
+    <div class="alias-hero">
+      <h2>Яsh</h2>
+      <p class="lead">Яsh represents the melodic, soulful side of Yash’s artistry. Through this alias, he produces chillwave, melodic house, and downtempo electronic music, creating immersive soundscapes that connect emotionally with the audience. Яsh sets are smooth, harmonic, and atmospheric — offering listeners a journey through relaxing yet deeply engaging rhythmic landscapes.</p>
 
-    function resize() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      <div style="height:14px"></div>
+
+      <div class="alias-meta">
+        <h4>Vibe / Style</h4>
+        <p>Melodic, smooth, and immersive — chill electronic beats with harmonic, soulful layers.</p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Musical Identity</h4>
+        <p>
+          • Focus on melodic house, chillwave, and downtempo.<br>
+          • Soulful, rhythmic, and immersive tracks that form a journey-like experience.<br>
+          • Combines ambient textures, subtle percussion, and warm synths.
+        </p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Performance Persona</h4>
+        <p>
+          • Calm, engaging, and atmospheric on stage.<br>
+          • Ideal for lounges, beach events, and intimate festival moments.
+        </p>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="alias-meta">
+        <h4>Audience Connection</h4>
+        <p>
+          • Fans appreciate emotionally rich, melodic experiences.<br>
+          • Creates a space for relaxation and vibe-driven connection.
+        </p>
+      </div>
+    </div>
+
+    <aside>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="width:62px;height:62px;border-radius:12px;background:linear-gradient(180deg,#eafff8,#d7fbf1);display:grid;place-items:center;font-weight:900;font-family:Montserrat">Я</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">Яsh</div>
+            <div style="color:var(--muted);font-size:13px">melodic • rhythm • therapy</div>
+          </div>
+        </div>
+        <div>
+          <button class="close-btn" data-close>Back</button>
+        </div>
+      </div>
+
+      <div class="alias-meta" style="margin-bottom:10px">
+        <h4>Notable Elements</h4>
+        <p>Warm synth textures • Melodic progression • Reverb-drenched pads • Smooth groove</p>
+      </div>
+
+      <div class="alias-meta" style="margin-bottom:10px">
+        <h4>Recommended Venues</h4>
+        <p>Beachstage, lounge sets, day-to-dusk festival stages, intimate venues.</p>
+      </div>
+
+      <div class="alias-meta">
+        <h4>Visual / Stage Notes</h4>
+        <p>Pastel lights, slow fades, oceanic textures, immersive projections, relaxed pacing.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- minimal particle layer (canvas) -->
+<canvas id="particles" width="1920" height="1080" aria-hidden="true"></canvas>
+
+<script>
+  // Simple routing: show / hide alias "pages"
+  const openBtns = document.querySelectorAll('.enter-btn');
+  const pages = {
+    raibeat: document.getElementById('page-raibeat'),
+    yash: document.getElementById('page-yash')
+  };
+  openBtns.forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const tgt = btn.dataset.target;
+      if(pages[tgt]){
+        showPage(pages[tgt]);
+        // push history state so back button behaves
+        history.pushState({alias:tgt}, '', `#${tgt}`);
+      }
+    });
+  });
+
+  // close buttons
+  document.querySelectorAll('[data-close]').forEach(btn=>{
+    btn.addEventListener('click', closeAll);
+  });
+
+  function showPage(el){
+    el.classList.add('show');
+    el.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+  function closeAll(){
+    Object.values(pages).forEach(p=>{
+      p.classList.remove('show');
+      p.setAttribute('aria-hidden','true');
+    });
+    document.body.style.overflow='';
+    history.pushState({}, '', location.pathname);
+  }
+
+  // handle back/forward navigation
+  window.addEventListener('popstate', (ev)=>{
+    const h = location.hash.replace('#','');
+    if(h && pages[h]) {
+      showPage(pages[h]);
+    } else {
+      closeAll();
     }
-    window.addEventListener('resize', resize);
-    resize();
+  });
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.radius = 0.8 + Math.random() * 1.5;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.speedX = (Math.random() - 0.5) * 0.4;
-        this.speedY = (Math.random() - 0.5) * 0.4;
-        this.alpha = 0.15 + Math.random() * 0.25;
-      }
+  // on load if hash present
+  window.addEventListener('load', ()=> {
+    const h = location.hash.replace('#','');
+    if(h && pages[h]) showPage(pages[h]);
+  });
 
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > width) this.speedX *= -1;
-        if (this.y < 0 || this.y > height) this.speedY *= -1;
-      }
-
-      draw() {
+  /* SIMPLE PARTICLE FIELD (floating dots + small stars) */
+  (function(){
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = innerWidth;
+    let H = canvas.height = innerHeight;
+    const particles = [];
+    const count = Math.round((W*H)/90000); // density
+    for(let i=0;i<count;i++){
+      particles.push({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: Math.random()*2.8 + 0.6,
+        s: (Math.random()*0.6)+0.2,
+        vy: (Math.random()*0.4)+0.1,
+        life: Math.random()*200
+      });
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(let p of particles){
+        p.y -= p.vy * (p.s*2);
+        p.x += Math.sin(p.y*0.002 + p.s) * 0.2;
+        p.life -= 0.08;
+        if(p.y < -10 || p.life < 0){ p.y = H + 10; p.x = Math.random()*W; p.life = Math.random()*200; }
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${hexToRgb(this.color)},${this.alpha})`;
-        ctx.shadowColor = ctx.fillStyle;
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.06 + (p.s*0.06)) + ')';
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
         ctx.fill();
       }
+      requestAnimationFrame(draw);
     }
+    window.addEventListener('resize', ()=>{
+      W = canvas.width = innerWidth;
+      H = canvas.height = innerHeight;
+    });
+    draw();
+  })();
 
-    function hexToRgb(hex) {
-      hex = hex.replace('#', '');
-      return `${parseInt(hex.substr(0,2),16)},${parseInt(hex.substr(2,2),16)},${parseInt(hex.substr(4,2),16)}`;
-    }
+  /* small keyboard / accessibility: allow Esc to close alias pages */
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeAll();
+  });
+</script>
 
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < 75; i++) {
-        particles.push(new Particle());
-      }
-    }
-    function animate() {
-      ctx.clearRect(0, 0, width, height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    initParticles();
-    animate();
-  </script>
 </body>
 </html>
