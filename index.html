@@ -4,203 +4,197 @@
   <meta charset="UTF-8" />
   <title>Yash Raipure – Dual Alias Artist</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Halisgrove from Google Fonts Alternative - Playfair Display as a rich stand-in -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet" />
+  <!-- Cosmic Sans from Fontshare -->
+  <link href="https://api.fontshare.com/v2/css?f[]=cosmic-sans@700&display=swap" rel="stylesheet" />
+  <!-- Press Start 2P from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
-    /* Reset & base styling */
+    /* Base Reset */
     *, *::before, *::after {
       box-sizing: border-box;
     }
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: radial-gradient(circle at center, #1b1a22 35%, #222533 95%);
-      color: #f0f0f3;
-      font-family: 'Space Grotesk', sans-serif;
+      background: radial-gradient(circle at center, #0c0a14 35%, #1a1a30 90%);
+      color: #f1eef1;
+      font-family: 'Cosmic Sans', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      user-select: none;
       overflow-x: hidden;
     }
     .container {
-      max-width: 1150px;
       width: 100%;
-      padding: 4rem 2rem 3rem 2rem;
-      margin: 1rem auto 0 auto;
+      max-width: 1150px;
+      padding: 4rem 2rem 2rem;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      box-sizing: border-box;
     }
     .title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 3.6rem;
-      letter-spacing: 0.11em;
-      color: #fffacd;
-      margin-bottom: 0.5rem;
+      font-family: 'Press Start 2P', monospace;
+      font-weight: 400;
+      font-size: 2.9rem;
+      letter-spacing: 0.18em;
+      color: #5eedf6;
       text-transform: uppercase;
-      text-shadow:
-        2px 3px 15px #f4ecb5aa,
-        0 0 25px #ebe98f77;
-      user-select: none;
+      margin-bottom: 0.6rem;
+      text-shadow: 
+        0 0 8px #44b5c1cc,
+        0 0 14px #5eedf6aa, 
+        0 0 28px #00ffe6bb;
     }
     .subtitle {
-      max-width: 650px;
-      font-weight: 500;
-      font-size: 1.21rem;
-      line-height: 1.65;
-      color: #c9c9c9cc;
+      font-family: 'Cosmic Sans', sans-serif;
+      max-width: 680px;
+      font-weight: 600;
+      font-size: 1.18rem;
+      line-height: 1.6;
       margin-bottom: 4rem;
-      letter-spacing: 0.012em;
-      font-family: 'Space Grotesk', sans-serif;
-      user-select: none;
+      color: #8ad6f0cc;
+      letter-spacing: 0.03em;
     }
     .split {
       display: flex;
       width: 100%;
-      min-height: 390px;
-      border-radius: 36px;
-      background: #23232b;
-      box-shadow:
-        0 0 110px 18px #f4eca730,
-        inset 0 0 60px 10px #e38b0f50;
+      min-height: 380px;
+      border-radius: 28px;
+      background: #13142a;
       overflow: hidden;
-      margin-top: 0.3rem;
-      margin-bottom: 3rem;
-      cursor: pointer;
+      box-shadow: 0 0 85px 17px #14d3f9aa;
       transition: box-shadow 0.3s ease;
+      user-select: none;
     }
     .panel {
       flex: 1;
-      padding: 3rem 2.8rem 2.2rem 2.8rem;
+      padding: 2.9rem 3rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.21s ease;
+      justify-content: center;
+      cursor: pointer;
       border: 2.5px solid transparent;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
       will-change: transform;
-      user-select: none;
     }
     .left-panel {
-      background: linear-gradient(145deg, #3c2b1d 60%, #7f500e 100%);
-      border-right: 2.5px solid #ffe27faa;
-      color: #f7efe5cc;
-      box-shadow: inset 0 0 40px 17px #bb9a6654;
+      background: linear-gradient(140deg, #073345 59%, #0b8eb8 102%);
+      border-right: 2.5px solid #35ddf083;
+      color: #addee7;
+      box-shadow: inset 0 0 40px 12px #0ab6ebcc;
     }
     .left-panel:hover, .left-panel:focus-within, .left-panel:active {
-      background: linear-gradient(145deg, #e3a609 90%, #4a2c14 105%);
+      background: linear-gradient(140deg, #02d7ffcc 90%, #05272c 105%);
       box-shadow:
-        0 0 80px 20px #f2bc3333,
-        inset 0 0 90px 20px #e9b116cc;
-      border-color: #f7d566;
-      transform: scale(1.04);
-      z-index: 3;
+        0 0 92px 26px #00c0e5cc,
+        inset 0 0 115px 24px #22cfffcc;
+      border-color: #19dcffcc;
+      transform: scale(1.05);
+      z-index: 2;
     }
     .right-panel {
-      background: linear-gradient(135deg, #202936 70%, #508da3 90%);
-      color: #b4d4deea;
-      box-shadow: inset 0 0 55px 18px #538ab871;
+      background: linear-gradient(135deg, #202c46 70%, #589cd3 90%);
+      border-left: none;
+      color: #b9dafecc;
+      box-shadow: inset 0 0 55px 15px #55baec88;
     }
     .right-panel:hover, .right-panel:focus-within, .right-panel:active {
-      background: linear-gradient(135deg, #61b3d0 95%, #23384a 105%);
+      background: linear-gradient(135deg, #59a4f6 90%, #12224a 105%);
       box-shadow:
-        0 0 80px 22px #67b6dc99,
-        inset 0 0 120px 26px #63c0e3bb;
-      border-color: #56bedec7;
-      transform: scale(1.04);
-      z-index: 3;
+        0 0 100px 22px #49a7ffcc,
+        inset 0 0 140px 30px #5db3ffcc;
+      border-color: #3baeefcc;
+      transform: scale(1.05);
+      z-index: 2;
     }
     .panel-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+      font-family: 'Cosmic Sans', sans-serif;
       font-weight: 700;
-      letter-spacing: 0.10em;
+      font-size: 2.4rem;
+      letter-spacing: 0.18em;
+      margin-bottom: 1.1rem;
       text-transform: uppercase;
-      margin-bottom: 1.3rem;
-      color: #fff7ca;
-      text-shadow: 0 0 15px #f9ddb71f;
+      color: #4fedff;
+      text-shadow: 0 0 15px #48d1ffff, 0 0 24px #00b9ffdd;
       user-select: none;
+    }
+    .left-panel .panel-title {
+      color: #00daff;
+      text-shadow: 0 0 18px #00ecffcc, 0 0 30px #00cfffcc;
     }
     .right-panel .panel-title {
-      color: #9bd0e6;
-      text-shadow: 0 0 19px #8ac9de8a;
+      color: #72b7ff;
+      text-shadow: 0 0 12px #7cc3ffc3, 0 0 22px #81b8ffcc;
     }
     .panel-desc {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 500;
-      max-width: 410px;
-      margin-bottom: 2.9rem;
-      line-height: 1.59;
+      font-family: 'Cosmic Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1.15rem;
+      max-width: 350px;
+      margin-bottom: 3rem;
+      line-height: 1.6;
       color: inherit;
+      letter-spacing: 0.03em;
       user-select: text;
-      letter-spacing: 0.01em;
     }
     .btn {
-      padding: 1rem 4rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 1.21rem;
-      border-radius: 38px;
-      border: 3px solid #ffdd64aa;
+      font-family: 'Press Start 2P', monospace;
+      font-weight: 400;
+      font-size: 1rem;
+      text-transform: uppercase;
+      color: #00ccff;
       background: transparent;
-      color: #ffdb67;
-      letter-spacing: 0.12em;
+      border: 2.5px solid #00ccff;
+      padding: 1.15em 3.4em;
+      border-radius: 38px;
       cursor: pointer;
-      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-      box-shadow: 0 0 40px 6px #ffc040bb inset;
+      transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 0 47px 10px #30e1ff44 inset;
       outline: none;
       user-select: none;
+      letter-spacing: 0.12em;
     }
     .btn:hover, .btn:focus {
-      background: #ffdb67dd;
-      color: #462f04;
-      box-shadow: 0 0 90px 18px #ffdb6766;
-      transform: scale(1.09);
+      background: #00cfffcc;
+      color: #0a2532;
+      box-shadow: 0 0 90px 22px #00dcffaa;
+      transform: scale(1.07);
     }
-    .right-panel .btn {
-      border-color: #6bc1efb9;
-      color: #7bcee7;
-      box-shadow: 0 0 30px 6px #7bd8ff7d inset;
-    }
-    .right-panel .btn:hover, .right-panel .btn:focus {
-      background: #52d0ffcc;
-      color: #02222e;
-      box-shadow: 0 0 85px 20px #52d0ffcc;
-      transform: scale(1.09);
-    }
-    @media (max-width: 880px) {
+    @media (max-width: 900px) {
       .container {
-        padding: 1.6rem 1rem 1rem 1rem;
+        padding: 2rem 1rem 1.2rem;
+        margin-top: 1.2rem;
       }
       .title {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
+        margin-top: 1rem;
       }
       .subtitle {
-        font-size: 1.1rem;
-        max-width: 85vw;
+        font-size: 1rem;
+        max-width: 90vw;
+        margin-bottom: 3.2rem;
       }
       .split {
         flex-direction: column;
         min-height: auto;
-        border-radius: 22px;
-        margin: 0 auto 1.2rem auto;
-        box-shadow: 0 0 70px 14px #ffe27f33, inset 0 0 28px 15px #e8b62785;
+        border-radius: 24px;
+        margin-bottom: 1rem;
+        box-shadow: 0 0 70px 17px #00bbff88;
       }
       .panel {
         border-right: none !important;
-        border-bottom: 2px solid #ffd24c41;
-        max-width: 95vw;
-        padding: 2.5rem 1.8rem 1.7rem 1.8rem;
-        margin: 0.9rem auto;
-        box-shadow: 0 11px 50px -15px rgba(0,0,0,0.72);
+        border-bottom: 2px solid #008be6aa;
+        max-width: 90vw;
+        padding: 2.5rem 2rem 2rem 2rem;
+        margin: 1rem auto;
+        box-shadow: 0 12px 32px -7px rgba(0,0,0,0.69);
         transition: none !important;
         transform: none !important;
       }
@@ -208,8 +202,8 @@
         border-bottom: none;
       }
       .btn {
-        padding: 1rem 3rem;
-        font-size: 1.05rem;
+        font-size: 0.95rem;
+        padding: 1em 3rem;
       }
     }
   </style>
@@ -220,7 +214,7 @@
     <p class="subtitle" aria-label="Artist description">
       Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. With a keen ear for rhythm, texture, and sonic storytelling, Yash has cultivated a distinct presence in the electronic music scene, blending underground energy with immersive melodic experiences.
     </p>
-    <section class="split" aria-label="Alias selection">
+    <section class="split" aria-label="Alias selection between raiBeat and Яsh">
       <article class="panel left-panel" tabindex="0" role="button" aria-pressed="false" onclick="window.location.href='raiBeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raiBeat.html'">
         <h2 class="panel-title">raiBeat</h2>
         <p class="panel-desc">Raw, rebellious energy; high-octane beats and heavy basslines. Perfect for clubs and festivals.</p>
