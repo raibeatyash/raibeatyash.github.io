@@ -4,235 +4,288 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yash Raipure – Dual Alias Artist</title>
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-      background-color: #000;
+      background: #14131a;
       color: #fff;
       overflow-x: hidden;
     }
-
-    /* ---------- GLOBAL ANIMATIONS ---------- */
+    /* ---------- GLOBAL KEYFRAMES ---------- */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(30px);}
+      to { opacity:1; transform:translateY(0);}
     }
-
-    @keyframes backgroundShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes popBtn {
+      50% { transform: scale(1.08) rotate(-2deg);}
     }
-
-    /* ---------- INTRO ---------- */
+    @keyframes shine {
+      0% { background-position:-120px;}
+      50% { background-position:220px;}
+      100%{background-position:-120px;}
+    }
+    @keyframes auraBubbleFloat {
+      0% { transform:translateY(0px);}
+      100% {transform:translateY(-30px);}
+    }
+    /* -------------- INTRO GLASSY HEADER -------------- */
     .intro {
       text-align: center;
-      padding: 10vh 5vw;
-      background: radial-gradient(circle at center, #111 0%, #000 100%);
-      animation: fadeIn 1.5s ease-out forwards;
+      padding: 8vh 5vw 5vh 5vw;
+      background: linear-gradient(120deg, #e4f0ffcc 0%, #ece1faf2 50%, #f7f3fdcc 100%);
+      backdrop-filter: blur(12px) saturate(145%);
+      border-bottom-left-radius: 45px 55px;
+      border-bottom-right-radius: 45px 45px;
+      box-shadow: 0 10px 80px #cfcde7aa;
+      margin-bottom:3vh;
+      animation: fadeIn 1.2s cubic-bezier(0.5,1.3,0.5,1) forwards;
     }
-
     .intro h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 4rem;
-      letter-spacing: 5px;
+      font-size: 3.2rem;
+      letter-spacing: 6.3px;
       margin: 0;
-      background: linear-gradient(90deg, #fff, #aaa);
+      color:#110f18;
+      position:relative;
+      z-index:2;
+      background: linear-gradient(90deg,#252356 0%,#60a2a8 40%,#c0528b 80%);
+      background-size:125%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 6px 13px #e4deff6a);
+      animation: fadeIn 1.3s cubic-bezier(0.53,1.7,0.2,1) 0.2s both;
     }
-
     .intro p {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       margin-top: 1rem;
-      letter-spacing: 2px;
-      color: #ccc;
-      animation: fadeIn 2s ease;
+      letter-spacing: 1.5px;
+      color: #3a345c;
+      font-weight:600;
+      animation: fadeIn 1.1s cubic-bezier(.42,2,.67,.94) both;
+      animation-delay: 0.4s;
+      background: rgba(255,255,255,0.3);
+      border-radius: 14px;
+      display: inline-block;
+      padding: 0 17px 2px 17px;
+      box-shadow: 0 0 22px #dde6ff11;
     }
 
     /* ---------- SPLIT SCREEN ---------- */
     .split {
       display: flex;
       flex-direction: row;
-      width: 100%;
-      height: 100vh;
+      width: 100vw; max-width:100vw;
+      min-height: 82vh;
+      height: 590px;
       overflow: hidden;
-      perspective: 1000px;
+      perspective: 1800px;
+      box-sizing:border-box;
+      margin-bottom:2.5vh;
     }
-
     .alias {
       flex: 1;
-      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      overflow: hidden;
+      position: relative;
       cursor: pointer;
-      transform-style: preserve-3d;
+      transition: box-shadow 0.45s, transform 0.23s;
+      z-index: 1;
+      overflow: hidden;
+      min-width:0;
+      min-height:0;
+    }
+    /* ----- Side backgrounds and auras ----- */
+    .raibeat {
+      background: linear-gradient(-45deg, #2b0000 0%, #6b0022 60%, #1a0000 100%);
+      box-shadow: inset -18px 0 60px 0 #ff326b36;
+      color: #f8d7d7;
+    }
+    .raibeat .aura-bubble {
+      background: radial-gradient(circle at 70% 53%,rgba(246,40,82,0.2) 65%,transparent 100%);
+      left:15%; top:30%; width:170px; height:170px;
+      opacity:0.38; filter:blur(14px);
+      animation: auraBubbleFloat 5.3s alternate infinite cubic-bezier(.72,.3,.63,.94);
+    }
+    .yash {
+      background:linear-gradient(135deg, #b2f9f6 10%, #40e3e9 70%, #236e89 100%);
+      box-shadow: inset 18px 0 62px #82f9e611;
+      color:#0e3f46;
+    }
+    .yash .aura-bubble {
+      background: radial-gradient(circle at 10% 70%,rgba(110,255,236,0.29) 70%,transparent 100%);
+      right:11%; top:42%; width:185px; height:120px;
+      opacity:0.34; filter:blur(16px);
+      animation: auraBubbleFloat 6.7s alternate-reverse infinite cubic-bezier(.72,.3,.63,.94);
     }
 
-    .alias:hover {
-      transform: scale(1.05) rotateY(5deg);
+    .alias:after {
+      content:"";
+      display:block; 
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode: lighten;
+    }
+    .raibeat:after {
+      background: url('https://svgshare.com/i/17wv.svg'); /* abstract noise SVG (red tone) */
+      opacity:0.18;
+      background-size: 350px 350px;
+      background-repeat:repeat;
+    }
+    .yash:after {
+      background: url('https://svgshare.com/i/17wx.svg'); /* abstract noise SVG (blue/teal tone) */
+      opacity:0.15;
+      background-size: 350px 400px;
+      background-repeat:repeat;
     }
 
+    /* On hover, highlight & bring forward like a game-like selection */
+    .alias:hover, .alias:focus-within {
+      z-index:2;
+      box-shadow: 0 0 34px 10px #fffadf33, 0 0 98px 12px #62f9d79a inset;
+      transform: scale(1.03) rotateY(2.5deg);
+    }
+
+    /* Main alias headers */
     .alias h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: 3.2rem;
       letter-spacing: 4px;
       margin: 0;
-      animation: fadeIn 1.5s ease forwards;
+      margin-bottom: 0.15em;
+      background: linear-gradient(90deg,#fff 0%,#e34dd3 40%, #fd7e7e 70%, #aef6fd 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeIn 1.6s cubic-bezier(.23,1.22,.17,.89) .1s both,shine 3.5s linear infinite;
+      filter: drop-shadow(0 2px 9px #fff2fa77);
+    }
+
+    .yash h2 {
+      background: linear-gradient(90deg, #fff 0%, #21b8dd 50%, #53fadf 100%);
+      background-size: 215% auto;
+      filter: drop-shadow(0 3px 7px #eaffff99);
+      animation: fadeIn 1.7s cubic-bezier(.23,1.22,.17,.89) .15s both, shine 3.5s linear infinite reverse;
     }
 
     .alias p {
-      font-size: 1.1rem;
-      margin: 1rem 0 2rem 0;
-      letter-spacing: 1px;
+      font-size: 1.16rem;
+      margin: .1em 0 2.1em 0;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      animation: fadeIn 2s ease forwards;
+      color: #ffe9e6;
+      font-weight: 700;
+      animation: fadeIn 2.1s cubic-bezier(.42,2,.67,.94) .32s both;
+      text-shadow: 0 2px 8px #6e131777;
     }
-
+    .yash p { color: #063b40; text-shadow: 0 2px 13px #baffff66;}
+    /* Button Styling with animated gradient shine */
     .alias button {
-      background: none;
-      border: 2px solid currentColor;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      animation: fadeIn 2.5s ease forwards;
-    }
-
-    .alias button:hover {
-      background-color: currentColor;
+      background: linear-gradient(105deg, #ff7bad 10%, #fd624c 40%, #ff9939 80%);
+      border: none;
       color: #fff;
-      transform: scale(1.1);
-      box-shadow: 0 0 20px currentColor;
-    }
-
-    /* ---------- RAI BEAT ---------- */
-    .raibeat {
-      background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
-      background-size: 400% 400%;
-      animation: backgroundShift 15s ease infinite;
-      color: #f8d7d7;
-      box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2);
-    }
-
-    .raibeat::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.15), transparent 60%);
-      animation: pulseRed 6s infinite alternate;
-      transform: translate(-25%, -25%);
-      z-index: 0;
-    }
-
-    @keyframes pulseRed {
-      0% { opacity: 0.3; transform: translate(-25%, -25%) scale(1); }
-      100% { opacity: 0.8; transform: translate(-25%, -25%) scale(1.2); }
-    }
-
-    .raibeat h2, .raibeat p, .raibeat button {
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: .93em 2.2em;
+      border-radius: 34px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      box-shadow: 0 0 32px 8px #ff83a580, 0 3px 16px #40110520;
       position: relative;
-      z-index: 2;
-      text-shadow: 0 0 25px rgba(255,0,0,0.3);
+      overflow: hidden;
+      z-index: 1;
+      animation: fadeIn 2.3s cubic-bezier(.7,2,.37,.99) .7s both;
+      transition:background 0.23s, box-shadow 0.18s, color 0.13s;
+      outline: none;
+    }
+    .alias button:before {
+      content:"";
+      position:absolute; left:-120px; top:0; height:100%; width:80px;
+      background: linear-gradient(120deg,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0.07) 100%);
+      filter: blur(0.5px);
+      z-index:3;
+      pointer-events:none;
+      transition:.4s;
+    }
+    .alias button:hover:before {
+      animation: shine 1.2s;
+    }
+    .alias button:active {
+      animation: popBtn 0.22s;
+      box-shadow: 0 0 40px #fff2, 0 2px 8px #f8e1aa80;
+      filter: brightness(1.02);
     }
 
-    /* ---------- ЯSH ---------- */
-    .yash {
-      background: linear-gradient(135deg, #aaf2f5, #59d3ce, #7be8df, #3aa7b8);
-      background-size: 300% 300%;
-      animation: backgroundShift 18s ease infinite;
-      color: #053236;
-      box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
+    /* Unique YASH button */
+    .yash button {
+      background: linear-gradient(98deg, #34c9e0 10%, #68e0b9 60%, #b0f4fe 100%);
+      color:#063345;
+      box-shadow: 0 0 18px 5px #6fe6ef7a, 0 3px 19px #00262c12;
     }
-
-    .yash::before {
-      content: "";
-      position: absolute;
-      width: 150%;
-      height: 150%;
-      background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 60%);
-      filter: blur(60px);
-      animation: waveLight 8s infinite alternate;
-      transform: translate(-25%, -25%);
-      z-index: 0;
+    .yash button:hover, .yash button:focus {
+      background: linear-gradient(98deg, #1effd4 0%, #24cdf2 90%, #91ffe6 100%);
+      color:#175564;
+      box-shadow: 0 0 32px 9px #baffff90;
+      filter: brightness(1.04);
     }
-
-    @keyframes waveLight {
-      0% { opacity: 0.4; transform: translate(-25%, -25%) scale(1); }
-      100% { opacity: 0.8; transform: translate(-20%, -20%) scale(1.1); }
+    .raibeat button:hover, .raibeat button:focus {
+      background: linear-gradient(105deg, #fd5b8e 30%, #f3a36a 100%);
+      color:#fff8fc;
+      box-shadow: 0 0 44px 10px #ff2d6785;
+      filter: brightness(1.07);
     }
-
-    .yash h2, .yash p, .yash button {
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    /* Animated aura bubbles (for liveliness) */
+    .aura-bubble {
+      position:absolute;
+      border-radius:50%;
+      pointer-events: none;
+      z-index:1;
     }
-
-    /* ---------- MOBILE RESPONSIVENESS ---------- */
-    @media (max-width: 900px) {
+    /* Mobile Responsive */
+    @media (max-width:900px) {
       .split {
-        flex-direction: column;
-        height: auto;
+        flex-direction:column;
+        height: auto; min-height: 0; margin-bottom:0;
+        box-shadow: none;
       }
-
       .alias {
-        height: 50vh;
-        transform: none !important;
-      }
-
-      .alias:hover {
-        transform: none;
-      }
-
-      .alias h2 {
-        font-size: 2.5rem;
-      }
-
-      .alias button {
-        font-size: 0.9rem;
+        min-height: 38vh;
+        padding:3.5vh 0; font-size:2rem;
       }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Intro -->
+  <!-- Glassy pleasant intro -->
   <div class="intro">
     <h1>YASH RAIPURE</h1>
-    <p>Dual Alias Artist | Producer | DJ</p>
+    <p>Dual Alias Artist &middot; Producer &middot; DJ</p>
   </div>
 
-  <!-- Split screen -->
+  <!-- Split, animated, gaming-inspired interaction -->
   <div class="split">
-    <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
+    <div class="alias raibeat" tabindex="0" role="button" aria-label="Enter raiBeat profile" onclick="window.location.href='raibeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raibeat.html'">
+      <div class="aura-bubble"></div>
       <h2>raiBeat</h2>
-      <p>Raw. Rebellious. Bloody.</p>
+      <p>Raw. Rebellious. Rumble.</p>
       <button>Enter</button>
     </div>
-    <div class="alias yash" onclick="window.location.href='yash.html'">
+    <div class="alias yash" tabindex="0" role="button" aria-label="Enter Яsh profile" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
+      <div class="aura-bubble"></div>
       <h2>Яsh</h2>
       <p>Melodic. Rhythm. Therapy.</p>
       <button>Enter</button>
     </div>
   </div>
-
 </body>
 </html>
