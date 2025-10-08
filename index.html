@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yash Raipure – Dual Alias Artist</title>
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
   <style>
     html, body {
       margin: 0;
@@ -29,7 +27,7 @@
     }
     .intro {
       text-align: center;
-      padding: 10vh 5vw;
+      padding: 8vh 5vw 2vh 5vw;
       background: radial-gradient(circle at center, #111 0%, #000 100%);
       animation: fadeIn 1.5s ease-out forwards;
     }
@@ -45,10 +43,26 @@
     }
     .intro p {
       font-size: 1.2rem;
-      margin-top: 1rem;
-      letter-spacing: 2px;
+      margin: 1.4rem auto 0.7rem auto;
+      letter-spacing: 1.3px;
       color: #ccc;
       animation: fadeIn 2s ease;
+      max-width: 540px;
+    }
+    .artist-desc {
+      max-width: 580px;
+      margin: 0.7rem auto 1.5rem auto;
+      color: #b5b5d1;
+      font-size: 1.09rem;
+      line-height: 1.6;
+      font-family: 'Poppins',sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.03rem;
+      border-left: 4px solid #442f64;
+      padding-left: 1.2rem;
+      background: rgba(30,29,44,0.26);
+      border-radius: 11px 0 0 11px;
+      animation: fadeIn 2.1s ease;
     }
     .split {
       display: flex;
@@ -116,24 +130,24 @@
       color: #f8d7d7;
       box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2);
     }
-    .raibeat::before {
+    .glow-animated {
       content: "";
       position: absolute;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.15), transparent 60%);
-      animation: pulseRed 6s infinite alternate;
-      transform: translate(-25%, -25%);
+      pointer-events: none;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
       z-index: 0;
+      opacity: 0.5;
+      background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.13), transparent 70%);
+      animation: pulseRed 6s infinite alternate;
+      filter: blur(8px);
     }
     @keyframes pulseRed {
-      0% { opacity: 0.3; transform: translate(-25%, -25%) scale(1); }
-      100% { opacity: 0.8; transform: translate(-25%, -25%) scale(1.2); }
-    }
-    .raibeat h2, .raibeat p, .raibeat button {
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 0 25px rgba(255,0,0,0.3);
+      0% { opacity: 0.29; transform: translate(-50%, -50%) scale(1);}
+      100% { opacity: 0.84; transform: translate(-50%, -50%) scale(1.13);}
     }
     /* ---------- ЯSH ---------- */
     .yash {
@@ -143,26 +157,36 @@
       color: #053236;
       box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
     }
-    .yash::before {
+    .glow-animated-yash {
       content: "";
       position: absolute;
-      width: 150%;
-      height: 150%;
-      background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 60%);
-      filter: blur(60px);
-      animation: waveLight 8s infinite alternate;
-      transform: translate(-25%, -25%);
+      width: 180%;
+      height: 180%;
+      left: 50%; top: 50%;
+      pointer-events: none;
+      border-radius: 50%;
       z-index: 0;
+      opacity: 0.44;
+      background: radial-gradient(circle at 38% 48%, rgba(255,255,255,0.19), rgba(0,255,255,0.11) 65%, transparent 90%);
+      filter: blur(16px);
+      /* JS: animation will be randomized for delay/duration */
+      animation: pulseBlue 7.5s infinite alternate;
     }
-    @keyframes waveLight {
-      0% { opacity: 0.4; transform: translate(-25%, -25%) scale(1); }
-      100% { opacity: 0.8; transform: translate(-20%, -20%) scale(1.1); }
+    @keyframes pulseBlue {
+      0% { opacity: 0.13; transform: translate(-50%, -50%) scale(1);}
+      100% { opacity: 0.72; transform: translate(-50%, -50%) scale(1.12);}
+    }
+    .raibeat h2, .raibeat p, .raibeat button {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 25px rgba(255,0,0,0.23);
     }
     .yash h2, .yash p, .yash button {
       position: relative;
       z-index: 2;
-      text-shadow: 0 0 15px rgba(255,255,255,0.3);
+      text-shadow: 0 0 15px rgba(255,255,255,0.23);
     }
+    /* --- Responsive --- */
     @media (max-width: 900px) {
       .split {
         flex-direction: column;
@@ -189,19 +213,38 @@
   <div class="intro">
     <h1>YASH RAIPURE</h1>
     <p>Dual Alias Artist | Producer | DJ</p>
+    <div class="artist-desc">
+      Yash Raipure is a versatile electronic music producer and DJ, known for his dual-alias approach that showcases both the raw intensity and melodic depth of modern electronic music. Blending underground energy with immersive melodic experiences, he’s recognized for unique rhythm, creative texture, and boundary-pushing sound.
+    </div>
   </div>
   <!-- Split screen -->
   <div class="split">
     <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
+      <div class="glow-animated"></div>
       <h2>raiBeat</h2>
       <p>Raw. Rebellious. Rumble.</p>
       <button>Enter</button>
     </div>
     <div class="alias yash" onclick="window.location.href='yash.html'">
+      <div class="glow-animated-yash"></div>
       <h2>Яsh</h2>
       <p>Melodic. Rhythm. Therapy.</p>
       <button>Enter</button>
     </div>
   </div>
+  <script>
+    // Randomize glow loop for Яsh alias side (so it's not identical to raiBeat)
+    function randomizeGlow() {
+      const yashGlow = document.querySelector('.glow-animated-yash');
+      if (yashGlow) {
+        let duration = 6.5 + Math.random() * 3;
+        let delay = Math.random() * 2.9;
+        yashGlow.style.animationDuration = duration.toFixed(2) + "s";
+        yashGlow.style.animationDelay = delay.toFixed(2) + "s";
+      }
+    }
+    randomizeGlow();
+    setInterval(randomizeGlow, 12000);
+  </script>
 </body>
 </html>
