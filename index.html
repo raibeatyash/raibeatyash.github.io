@@ -4,152 +4,204 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yash Raipure – Dual Alias Artist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900;700&family=Poppins:wght@500;400&display=swap" rel="stylesheet" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: #18171a;
+      scroll-behavior: smooth;
+      background-color: #000;
       color: #fff;
-      height: 100%;
-      min-height: 100vh;
-      box-sizing: border-box;
       overflow-x: hidden;
     }
-    .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .main-title {
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .intro {
+      text-align: center;
+      padding: 10vh 5vw;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+    .intro h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 2.8rem;
-      letter-spacing: 4px;
-      margin-top: 5vh;
-      margin-bottom: 0.6em;
-      color: #fff;
-      text-align: center;
+      font-size: 4rem;
+      letter-spacing: 5px;
+      margin: 0;
+      background: linear-gradient(90deg, #fff, #aaa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .subtitle {
-      font-size: 1.13rem;
-      color: #d1d1d1;
-      text-align: center;
-      margin-bottom: 2.7em;
-      letter-spacing: 1px;
-      font-weight: 500;
-      max-width: 420px;
+    .intro p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      letter-spacing: 2px;
+      color: #ccc;
+      animation: fadeIn 2s ease;
     }
-    .split-block {
-      width: 630px;
-      max-width: 96vw;
-      min-height: 340px;
-      border-radius: 22px;
+    .split {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100vh;
       overflow: hidden;
-      display: flex;
-      box-shadow: 0 4px 40px #22262a38;
-      margin-bottom: 7vh;
+      perspective: 1000px;
     }
-    .split-half {
+    .alias {
       flex: 1;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 45px 20px 60px 20px;
-      transition: background 0.19s, box-shadow 0.19s, transform 0.15s;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      overflow: hidden;
       cursor: pointer;
-      position: relative;
+      transform-style: preserve-3d;
     }
-    .split-half:focus-within, .split-half:hover {
-      z-index:2;
-      box-shadow: 0 0 21px 6px #fcf7ea30;
-      transform: scale(1.035);
+    .alias:hover {
+      transform: scale(1.05) rotateY(5deg);
     }
-    .raibeat {
-      background: linear-gradient(110deg, #27131a 80%, #6a2231 120%);
-      color: #ffd6de;
-    }
-    .yash {
-      background: linear-gradient(110deg, #e5f8fa 70%, #2c637d 120%);
-      color: #21343c;
-    }
-    .split-title {
+    .alias h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 2rem;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      margin-bottom: 0.15em;
-      color: inherit;
+      font-size: 3.2rem;
+      letter-spacing: 4px;
+      margin: 0;
+      animation: fadeIn 1.5s ease forwards;
     }
-    .split-desc {
+    .alias p {
+      font-size: 1.1rem;
+      margin: 1rem 0 2rem 0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: fadeIn 2s ease forwards;
+    }
+    .alias button {
+      background: transparent;
+      border: 2px solid currentColor;
+      padding: 0.8rem 2rem;
       font-size: 1rem;
       font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 2.0em;
-      color: inherit;
-      text-align: center;
-    }
-    .split-btn {
-      appearance: none;
-      border: none;
-      padding: 0.85em 2.4em;
-      border-radius: 24px;
-      font-size: 1rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.12em;
       text-transform: uppercase;
+      border-radius: 30px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      animation: fadeIn 2.5s ease forwards;
+      color: inherit;
+      box-shadow: none;
+    }
+    .alias button:hover {
+      background-color: currentColor;
       color: #fff;
-      background: #BF274F;
-      transition: background 0.2s, color 0.16s, box-shadow 0.2s, transform 0.11s;
-      box-shadow: 0 1px 18px #21091316;
-      outline: none;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px currentColor;
     }
-    .yash .split-btn {
-      background: #43cbe8;
-      color: #1b3440;
-      box-shadow: 0 1px 18px #23708012;
+    /* ---------- RAI BEAT ---------- */
+    .raibeat {
+      background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
+      background-size: 400% 400%;
+      animation: backgroundShift 15s ease infinite;
+      color: #f8d7d7;
+      box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2);
     }
-    .split-btn:hover, .split-btn:focus {
-      background: #8a1f37;
-      color: #ffe5fa;
-      transform: scale(1.07);
+    .raibeat::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(255,0,0,0.15), transparent 60%);
+      animation: pulseRed 6s infinite alternate;
+      transform: translate(-25%, -25%);
+      z-index: 0;
     }
-    .yash .split-btn:hover, .yash .split-btn:focus {
-      background: #158aa7;
-      color: #c5fafe;
-      transform: scale(1.07);
+    @keyframes pulseRed {
+      0% { opacity: 0.3; transform: translate(-25%, -25%) scale(1); }
+      100% { opacity: 0.8; transform: translate(-25%, -25%) scale(1.2); }
     }
-    @media (max-width: 700px) {
-      .split-block { flex-direction: column; min-height:0; }
-      .split-half { padding: 40px 10px 40px 10px;}
-      .main-title { font-size:2.1rem;}
-      .split-title { font-size:1.14rem;}
+    .raibeat h2, .raibeat p, .raibeat button {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 25px rgba(255,0,0,0.3);
+    }
+    /* ---------- ЯSH ---------- */
+    .yash {
+      background: linear-gradient(135deg, #aaf2f5, #59d3ce, #7be8df, #3aa7b8);
+      background-size: 300% 300%;
+      animation: backgroundShift 18s ease infinite;
+      color: #053236;
+      box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
+    }
+    .yash::before {
+      content: "";
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 60%);
+      filter: blur(60px);
+      animation: waveLight 8s infinite alternate;
+      transform: translate(-25%, -25%);
+      z-index: 0;
+    }
+    @keyframes waveLight {
+      0% { opacity: 0.4; transform: translate(-25%, -25%) scale(1); }
+      100% { opacity: 0.8; transform: translate(-20%, -20%) scale(1.1); }
+    }
+    .yash h2, .yash p, .yash button {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+    @media (max-width: 900px) {
+      .split {
+        flex-direction: column;
+        height: auto;
+      }
+      .alias {
+        height: 50vh;
+        transform: none !important;
+      }
+      .alias:hover {
+        transform: none;
+      }
+      .alias h2 {
+        font-size: 2.5rem;
+      }
+      .alias button {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="main-title">Yash Raipure</div>
-    <div class="subtitle">
-      Dual Alias Artist: Explore <strong>raiBeat</strong> and <strong>Яsh</strong> profiles for distinct electronic music experiences.
+  <!-- Intro -->
+  <div class="intro">
+    <h1>YASH RAIPURE</h1>
+    <p>Dual Alias Artist | Producer | DJ</p>
+  </div>
+  <!-- Split screen -->
+  <div class="split">
+    <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
+      <h2>raiBeat</h2>
+      <p>Raw. Rebellious. Rumble.</p>
+      <button>Enter</button>
     </div>
-    <div class="split-block">
-      <div class="split-half raibeat" tabindex="0" role="button" aria-label="Enter raiBeat profile" onclick="window.location.href='raibeat.html'" onkeypress="if(event.key==='Enter') window.location.href='raibeat.html'">
-        <div class="split-title">raiBeat</div>
-        <div class="split-desc">Raw. Rebellious. Rumble.</div>
-        <button class="split-btn">Enter</button>
-      </div>
-      <div class="split-half yash" tabindex="0" role="button" aria-label="Enter Яsh profile" onclick="window.location.href='yash.html'" onkeypress="if(event.key==='Enter') window.location.href='yash.html'">
-        <div class="split-title">Яsh</div>
-        <div class="split-desc">Melodic. Rhythm. Therapy.</div>
-        <button class="split-btn">Enter</button>
-      </div>
+    <div class="alias yash" onclick="window.location.href='yash.html'">
+      <h2>Яsh</h2>
+      <p>Melodic. Rhythm. Therapy.</p>
+      <button>Enter</button>
     </div>
   </div>
+</body>
+</html>
