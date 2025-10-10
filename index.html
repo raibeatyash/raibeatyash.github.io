@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Yash Raipure – Dual Alias Artist</title>
+
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
     html, body {
       margin: 0;
@@ -16,46 +18,95 @@
       color: #fff;
       overflow-x: hidden;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes backgroundShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+
+    /* ---------- INTRO ---------- */
     .intro {
       text-align: center;
       padding: 8vh 5vw 2vh 5vw;
       background: radial-gradient(circle at center, #111 0%, #000 100%);
       animation: fadeIn 1.5s ease-out forwards;
     }
+
+    /* --- Title with elegant overlay “Dr” --- */
     .intro h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 4rem;
-      letter-spacing: 5px;
+      font-size: 4.5rem;
+      letter-spacing: 4px;
       margin: 0;
-      background: linear-gradient(90deg, #fff, #aaa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      text-transform: uppercase;
+      text-shadow: 0 0 3px rgba(255,255,255,0.2);
+      overflow: visible;
     }
+
+    .intro h1::after {
+      content: 'Dr';
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 3.8rem;
+      position: absolute;
+      top: -2rem;
+      right: -4.5rem;
+      color: #ffffff;
+      opacity: 0;
+      transform: translateY(20px) rotate(-2deg);
+      animation: floatThe 1.6s ease-out 0.8s forwards;
+    }
+
+    @keyframes floatThe {
+      0% {
+        opacity: 0;
+        transform: translateY(25px) rotate(-3deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+    }
+
+    /* Subtitle styling */
     .intro p {
-      font-size: 1.2rem;
-      margin: 1.4rem auto 0.7rem auto;
-      letter-spacing: 1.3px;
-      color: #ccc;
-      animation: fadeIn 2s ease;
-      max-width: 540px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: #dcdcdc;
+      margin: 1.8rem auto 0 auto;
+      letter-spacing: 1px;
+      line-height: 1.6;
+      max-width: 600px;
+      text-transform: none;
+      opacity: 0;
+      animation: fadeInSub 2.2s ease 1.2s forwards;
     }
+
+    @keyframes fadeInSub {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Artist description box --- */
     .artist-desc {
       max-width: 580px;
       margin: 0.7rem auto 1.5rem auto;
       color: #b5b5d1;
       font-size: 1.09rem;
       line-height: 1.6;
-      font-family: 'Poppins',sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: 500;
       letter-spacing: 0.03rem;
       border-left: 4px solid #442f64;
@@ -64,6 +115,8 @@
       border-radius: 11px 0 0 11px;
       animation: fadeIn 2.1s ease;
     }
+
+    /* ---------- SPLIT SECTIONS ---------- */
     .split {
       display: flex;
       flex-direction: row;
@@ -72,6 +125,7 @@
       overflow: hidden;
       perspective: 1000px;
     }
+
     .alias {
       flex: 1;
       position: relative;
@@ -84,9 +138,11 @@
       cursor: pointer;
       transform-style: preserve-3d;
     }
+
     .alias:hover {
       transform: scale(1.05) rotateY(5deg);
     }
+
     .alias h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
@@ -95,6 +151,7 @@
       margin: 0;
       animation: fadeIn 1.5s ease forwards;
     }
+
     .alias p {
       font-size: 1.1rem;
       margin: 1rem 0 2rem 0;
@@ -102,6 +159,7 @@
       text-transform: uppercase;
       animation: fadeIn 2s ease forwards;
     }
+
     .alias button {
       background: transparent;
       border: 2px solid currentColor;
@@ -116,12 +174,14 @@
       color: inherit;
       box-shadow: none;
     }
+
     .alias button:hover {
       background-color: currentColor;
       color: #fff;
       transform: scale(1.1);
       box-shadow: 0 0 20px currentColor;
     }
+
     /* ---------- RAI BEAT ---------- */
     .raibeat {
       background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
@@ -130,6 +190,7 @@
       color: #f8d7d7;
       box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2);
     }
+
     .glow-animated {
       content: "";
       position: absolute;
@@ -145,10 +206,12 @@
       animation: pulseRed 6s infinite alternate;
       filter: blur(8px);
     }
+
     @keyframes pulseRed {
       0% { opacity: 0.29; transform: translate(-50%, -50%) scale(1);}
       100% { opacity: 0.84; transform: translate(-50%, -50%) scale(1.13);}
     }
+
     /* ---------- ЯSH ---------- */
     .yash {
       background: linear-gradient(135deg, #aaf2f5, #59d3ce, #7be8df, #3aa7b8);
@@ -157,6 +220,7 @@
       color: #053236;
       box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.3);
     }
+
     .glow-animated-yash {
       content: "";
       position: absolute;
@@ -169,39 +233,62 @@
       opacity: 0.44;
       background: radial-gradient(circle at 38% 48%, rgba(255,255,255,0.19), rgba(0,255,255,0.11) 65%, transparent 90%);
       filter: blur(16px);
-      /* JS: animation will be randomized for delay/duration */
       animation: pulseBlue 7.5s infinite alternate;
     }
+
     @keyframes pulseBlue {
       0% { opacity: 0.13; transform: translate(-50%, -50%) scale(1);}
       100% { opacity: 0.72; transform: translate(-50%, -50%) scale(1.12);}
     }
+
     .raibeat h2, .raibeat p, .raibeat button {
       position: relative;
       z-index: 2;
       text-shadow: 0 0 25px rgba(255,0,0,0.23);
     }
+
     .yash h2, .yash p, .yash button {
       position: relative;
       z-index: 2;
       text-shadow: 0 0 15px rgba(255,255,255,0.23);
     }
-    /* --- Responsive --- */
+
+    /* --- Responsive adjustments --- */
     @media (max-width: 900px) {
+      .intro h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+      }
+
+      .intro h1::after {
+        font-size: 2.8rem;
+        top: -1.6rem;
+        right: -3rem;
+      }
+
+      .intro p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+
       .split {
         flex-direction: column;
         height: auto;
       }
+
       .alias {
         height: 50vh;
         transform: none !important;
       }
+
       .alias:hover {
         transform: none;
       }
+
       .alias h2 {
         font-size: 2.5rem;
       }
+
       .alias button {
         font-size: 0.9rem;
       }
@@ -211,25 +298,24 @@
 <body>
   <!-- Intro -->
   <div class="intro">
-    <h1>Dr. YASH RAIPURE</h1>
+    <h1>YASH RAIPURE</h1>
     <p>Dual Alias Artist | Producer | DJ</p>
     <div class="artist-desc">
       Yash Raipure – Where Medicine Meets Music
 
-By day, he reads heartbeats.
-By night, he makes them race.
+      <br><br>By day, he reads heartbeats.
+      <br>By night, he makes them race.
 
-Yash is more than a name — he’s a rare intersection of science and sound. A doctor with a deep understanding of rhythm, not just in pulse but in the energy that moves people. His world flows between calm precision and chaotic creativity — the sterile silence of hospital corridors transforming into the vibrant pulse of a late-night set.
+      <br><br>Yash is more than a name — he’s a rare intersection of science and sound. A doctor with a deep understanding of rhythm, not just in pulse but in the energy that moves people. His world flows between calm precision and chaotic creativity — the sterile silence of hospital corridors transforming into the vibrant pulse of a late-night set.
 
-Every diagnosis teaches him focus. Every drop teaches him freedom.
-It’s a balance few can hold — the discipline of medicine and the madness of music.
+      <br><br>Every diagnosis teaches him focus. Every drop teaches him freedom.
+      <br>It’s a balance few can hold — the discipline of medicine and the madness of music.
 
-Behind the console, Yash channels emotion like electricity, fusing melodic storytelling with the raw intensity of underground beats. Through his dual-alias artistry, he explores the full spectrum of feeling — from introspective and immersive to fierce and explosive.
-
-He heals. He creates. He connects.
-Yashlives where the pulse of life becomes the rhythm of sound.
+      <br><br>He heals. He creates. He connects.
+      <br>Yash lives where the pulse of life becomes the rhythm of sound.
     </div>
   </div>
+
   <!-- Split screen -->
   <div class="split">
     <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
@@ -245,8 +331,9 @@ Yashlives where the pulse of life becomes the rhythm of sound.
       <button>Enter</button>
     </div>
   </div>
+
   <script>
-    // Randomize glow loop for Яsh alias side (so it's not identical to raiBeat)
+    // Randomize glow loop for Яsh alias side
     function randomizeGlow() {
       const yashGlow = document.querySelector('.glow-animated-yash');
       if (yashGlow) {
