@@ -75,7 +75,9 @@
       letter-spacing: 1px;
       line-height: 1.6;
       max-width: 600px;
-      animation: fadeIn 2s ease 1s forwards;
+      opacity: 0;
+      animation: fadeIn 2s ease 0.5s forwards;
+      animation-fill-mode: forwards;
     }
 
     .artist-desc {
@@ -88,7 +90,13 @@
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
-      animation: fadeIn 2.2s ease 1.5s forwards;
+      transform: translateY(40px);
+      transition: all 1.2s ease;
+    }
+
+    .artist-desc.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -153,12 +161,13 @@
       box-shadow: 0 0 20px currentColor;
     }
 
-    /* ---------- RAI BEAT ---------- */
+    /* ---------- RAI BEAT (CRUEL & UNDERGROUND) ---------- */
     .raibeat {
-      background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
+      background: linear-gradient(135deg, #0a0000, #240000, #440000, #ff2400);
       background-size: 400% 400%;
-      animation: move 15s ease infinite;
-      color: #f8d7d7;
+      animation: move 18s ease infinite;
+      color: #ffbcbc;
+      box-shadow: inset 0 0 120px rgba(255, 0, 0, 0.2);
     }
 
     /* ---------- ЯSH (Oceanic-Sunset Gradient) ---------- */
@@ -185,12 +194,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="intro">
     <h1>YASH RAIPURE</h1>
-    <p>Dual Alias Artist | Producer | DJ</p>
+    <p id="subtitle">Dual Alias Artist | Producer | DJ</p>
 
-    <div class="artist-desc">
+    <div class="artist-desc" id="artistDesc">
       Yash Raipure – Where Medicine Meets Music<br><br>
       By day, he reads heartbeats.<br>
       By night, he makes them race.<br><br>
@@ -208,11 +218,31 @@
       <p>Raw. Rebellious. Rumble.</p>
       <button>Enter</button>
     </div>
+
     <div class="alias yash" onclick="window.location.href='yash.html'">
       <h2>Яsh</h2>
       <p>Melodic. Rhythm. Therapy.</p>
       <button>Enter</button>
     </div>
   </div>
+
+  <script>
+    // Ensure subtitle animation triggers only once
+    const subtitle = document.getElementById("subtitle");
+    subtitle.style.animationPlayState = "running";
+
+    // Scroll reveal for artist description
+    const desc = document.getElementById("artistDesc");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          desc.classList.add("visible");
+          observer.unobserve(desc);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(desc);
+  </script>
 </body>
 </html>
