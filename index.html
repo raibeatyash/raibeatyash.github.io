@@ -80,24 +80,20 @@
       animation-fill-mode: forwards;
     }
 
-    /* ---------- ARTIST DESCRIPTION (Scroll Reveal) ---------- */
+    /* ---------- ARTIST DESCRIPTION ---------- */
     .artist-desc {
       font-family: 'Manrope', sans-serif;
       font-weight: 400;
       font-size: 1.05rem;
       line-height: 1.75;
       max-width: 700px;
-      margin: 50vh auto 0 auto;
+      margin: 2rem auto 0 auto;
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
       transform: translateY(60px);
-      transition: all 1.2s ease;
-    }
-
-    .artist-desc.visible {
-      opacity: 1;
-      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      will-change: opacity, transform;
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -162,7 +158,7 @@
       box-shadow: 0 0 20px currentColor;
     }
 
-    /* ---------- RAI BEAT (Cruel + Underground) ---------- */
+    /* ---------- RAI BEAT ---------- */
     .raibeat {
       background: linear-gradient(135deg, #0a0000, #240000, #440000, #ff2400);
       background-size: 400% 400%;
@@ -171,7 +167,7 @@
       box-shadow: inset 0 0 120px rgba(255, 0, 0, 0.2);
     }
 
-    /* ---------- ЯSH (Oceanic-Sunset Gradient) ---------- */
+    /* ---------- ЯSH ---------- */
     .yash {
       background: linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f);
       background-size: 400% 400%;
@@ -189,7 +185,7 @@
     @media (max-width: 900px) {
       .intro h1 { font-size: 3rem; }
       .intro h1::before { font-size: 2.6rem; left: -3rem; top: -1.2rem; }
-      .artist-desc { font-size: 0.98rem; max-width: 90%; margin-top: 40vh; }
+      .artist-desc { font-size: 0.98rem; max-width: 90%; margin-top: 1.5rem; }
       .split { flex-direction: column; height: auto; }
       .alias { height: 50vh; }
     }
@@ -228,25 +224,29 @@
   </div>
 
   <script>
-    // Subtitle only animates once
-    const subtitle = document.getElementById("subtitle");
-    subtitle.style.animationPlayState = "running";
-
-    // Scroll-based fade-in for artist description
     const desc = document.getElementById("artistDesc");
+
     window.addEventListener("scroll", () => {
       const rect = desc.getBoundingClientRect();
-      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-      const visibleAmount = Math.max(0, windowHeight - rect.top);
-      const progress = Math.min(1, visibleAmount / (rect.height / 1.5)); // controls how fast it fades
+      const windowHeight = window.innerHeight;
+      const startPoint = windowHeight * 0.8;
+      const progress = Math.min(Math.max((startPoint - rect.top) / (startPoint * 0.8), 0), 1);
       desc.style.opacity = progress;
       desc.style.transform = `translateY(${60 - progress * 60}px)`;
     });
 
-    // Randomize animation time for both alias gradients
-    const randTime = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
-    document.getElementById("raibeat").style.animationDuration = randTime(14, 22) + "s";
-    document.getElementById("yash").style.animationDuration = randTime(15, 25) + "s";
+    // Randomize gradient movement
+    const raibeat = document.getElementById("raibeat");
+    const yash = document.getElementById("yash");
+
+    const randomDuration = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
+    const randomDelay = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
+
+    raibeat.style.animationDuration = randomDuration(15, 25) + "s";
+    raibeat.style.animationDelay = "-" + randomDelay(0, 10) + "s";
+
+    yash.style.animationDuration = randomDuration(15, 25) + "s";
+    yash.style.animationDelay = "-" + randomDelay(0, 10) + "s";
   </script>
 </body>
 </html>
