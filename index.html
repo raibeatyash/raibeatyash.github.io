@@ -20,8 +20,8 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes floatDr {
@@ -50,7 +50,7 @@
       text-shadow: 0 0 4px rgba(255,255,255,0.2);
     }
 
-    /* --- “Dr” prefix --- */
+    /* --- “Dr” positioned on LEFT side --- */
     .intro h1::before {
       content: 'Dr';
       font-family: 'Playfair Display', serif;
@@ -63,10 +63,10 @@
       color: #ffffff;
       opacity: 0;
       transform: translateY(20px);
-      animation: floatDr 1.2s ease-out 0.2s forwards;
+      animation: floatDr 1.6s ease-out forwards;
+      animation-delay: calc(0.8s + (0.5s * var(--randDr)));
     }
 
-    /* Subtitle appears after Dr finishes */
     .intro p {
       font-family: 'Manrope', sans-serif;
       font-weight: 500;
@@ -77,26 +77,22 @@
       line-height: 1.6;
       max-width: 600px;
       opacity: 0;
-      animation: fadeIn 1.6s ease 1.6s forwards;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: calc(1s + (0.4s * var(--randSub)));
     }
 
-    /* ---------- ARTIST DESCRIPTION ---------- */
     .artist-desc {
       font-family: 'Manrope', sans-serif;
       font-weight: 400;
       font-size: 1.05rem;
       line-height: 1.75;
       max-width: 700px;
-      margin: 2rem auto 0 auto;
+      margin: 0 auto;
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
-      transition: opacity 1.2s ease;
-      will-change: opacity;
-    }
-
-    .artist-desc.visible {
-      opacity: 1;
+      animation: fadeIn 2.2s ease forwards;
+      animation-delay: calc(1.5s + (0.4s * var(--randDesc)));
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -161,6 +157,23 @@
       box-shadow: 0 0 20px currentColor;
     }
 
+    /* ---------- RAI BEAT ---------- */
+    .raibeat {
+      background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
+      background-size: 400% 400%;
+      animation: move var(--moveTime1, 18s) ease infinite;
+      color: #f8d7d7;
+    }
+
+    /* ---------- ЯSH (Oceanic-Sunset Gradient) ---------- */
+    .yash {
+      background: linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f);
+      background-size: 400% 400%;
+      animation: move var(--moveTime2, 24s) ease infinite;
+      color: #042b33;
+      box-shadow: inset 0 0 120px rgba(255, 255, 255, 0.3);
+    }
+
     @keyframes move {
       0%,100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -170,19 +183,18 @@
     @media (max-width: 900px) {
       .intro h1 { font-size: 3rem; }
       .intro h1::before { font-size: 2.6rem; left: -3rem; top: -1.2rem; }
-      .artist-desc { font-size: 0.98rem; max-width: 90%; margin-top: 1.5rem; }
+      .artist-desc { font-size: 0.98rem; max-width: 90%; }
       .split { flex-direction: column; height: auto; }
       .alias { height: 50vh; }
     }
   </style>
 </head>
-
 <body>
-  <div class="intro">
+  <div class="intro" id="intro">
     <h1>YASH RAIPURE</h1>
-    <p id="subtitle">Dual Alias Artist | Producer | DJ</p>
+    <p>Dual Alias Artist | Producer | DJ</p>
 
-    <div class="artist-desc" id="artistDesc">
+    <div class="artist-desc">
       Yash Raipure – Where Medicine Meets Music<br><br>
       By day, he reads heartbeats.<br>
       By night, he makes them race.<br><br>
@@ -195,13 +207,12 @@
   </div>
 
   <div class="split">
-    <div class="alias raibeat" id="raibeat" onclick="window.location.href='raibeat.html'">
+    <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
       <h2>raiBeat</h2>
       <p>Raw. Rebellious. Rumble.</p>
       <button>Enter</button>
     </div>
-
-    <div class="alias yash" id="yash" onclick="window.location.href='yash.html'">
+    <div class="alias yash" onclick="window.location.href='yash.html'">
       <h2>Яsh</h2>
       <p>Melodic. Rhythm. Therapy.</p>
       <button>Enter</button>
@@ -209,41 +220,12 @@
   </div>
 
   <script>
-    // Fade in artist description on scroll
-    const desc = document.getElementById("artistDesc");
-    window.addEventListener("scroll", () => {
-      const rect = desc.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.85) {
-        desc.classList.add("visible");
-      }
-    });
-
-    // Gradient sets
-    const gradientSets = [
-      "linear-gradient(135deg, #0a0000, #240000, #440000, #8b0000)",
-      "linear-gradient(135deg, #100000, #200000, #3b0000, #ff2400)",
-      "linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f)",
-      "linear-gradient(135deg, #0099ff, #00ffc6, #ffaf7b, #ffe29f)",
-      "linear-gradient(135deg, #1e1e1e, #3a3a3a, #111, #000)",
-      "linear-gradient(135deg, #0f2027, #203a43, #2c5364)"
-    ];
-
-    // Random assignment
-    const rai = document.getElementById("raibeat");
-    const yash = document.getElementById("yash");
-
-    rai.style.background = gradientSets[Math.floor(Math.random() * gradientSets.length)];
-    yash.style.background = gradientSets[Math.floor(Math.random() * gradientSets.length)];
-
-    // Randomized movement
-    const randomDuration = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
-    const randomDelay = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
-
-    [rai, yash].forEach(el => {
-      el.style.backgroundSize = "400% 400%";
-      el.style.animation = `move ${randomDuration(15, 25)}s ease infinite`;
-      el.style.animationDelay = "-" + randomDelay(0, 10) + "s";
-    });
+    // Randomize animation timings
+    document.documentElement.style.setProperty('--moveTime1', (16 + Math.random() * 10) + 's');
+    document.documentElement.style.setProperty('--moveTime2', (16 + Math.random() * 10) + 's');
+    document.documentElement.style.setProperty('--randDr', Math.random());
+    document.documentElement.style.setProperty('--randSub', Math.random());
+    document.documentElement.style.setProperty('--randDesc', Math.random());
   </script>
 </body>
 </html>
