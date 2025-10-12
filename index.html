@@ -20,8 +20,8 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     @keyframes floatDr {
@@ -50,7 +50,7 @@
       text-shadow: 0 0 4px rgba(255,255,255,0.2);
     }
 
-    /* --- “Dr” positioned on LEFT side --- */
+    /* --- “Dr” prefix --- */
     .intro h1::before {
       content: 'Dr';
       font-family: 'Playfair Display', serif;
@@ -63,9 +63,10 @@
       color: #ffffff;
       opacity: 0;
       transform: translateY(20px);
-      animation: floatDr 1.6s ease-out 0.8s forwards;
+      animation: floatDr 1.2s ease-out 0.2s forwards;
     }
 
+    /* Subtitle appears after Dr finishes */
     .intro p {
       font-family: 'Manrope', sans-serif;
       font-weight: 500;
@@ -76,8 +77,7 @@
       line-height: 1.6;
       max-width: 600px;
       opacity: 0;
-      animation: fadeIn 2s ease 0.5s forwards;
-      animation-fill-mode: forwards;
+      animation: fadeIn 1.6s ease 1.6s forwards;
     }
 
     /* ---------- ARTIST DESCRIPTION ---------- */
@@ -91,9 +91,12 @@
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
-      transform: translateY(60px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      will-change: opacity, transform;
+      transition: opacity 1.2s ease;
+      will-change: opacity;
+    }
+
+    .artist-desc.visible {
+      opacity: 1;
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -158,24 +161,6 @@
       box-shadow: 0 0 20px currentColor;
     }
 
-    /* ---------- RAI BEAT ---------- */
-    .raibeat {
-      background: linear-gradient(135deg, #0a0000, #240000, #440000, #ff2400);
-      background-size: 400% 400%;
-      animation: move 18s ease infinite;
-      color: #ffbcbc;
-      box-shadow: inset 0 0 120px rgba(255, 0, 0, 0.2);
-    }
-
-    /* ---------- ЯSH ---------- */
-    .yash {
-      background: linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f);
-      background-size: 400% 400%;
-      animation: move 20s ease infinite;
-      color: #042b33;
-      box-shadow: inset 0 0 120px rgba(255, 255, 255, 0.3);
-    }
-
     @keyframes move {
       0%,100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -224,29 +209,48 @@
   </div>
 
   <script>
+    // Fade in artist description on scroll
     const desc = document.getElementById("artistDesc");
-
     window.addEventListener("scroll", () => {
       const rect = desc.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const startPoint = windowHeight * 0.8;
-      const progress = Math.min(Math.max((startPoint - rect.top) / (startPoint * 0.8), 0), 1);
-      desc.style.opacity = progress;
-      desc.style.transform = `translateY(${60 - progress * 60}px)`;
+      if (rect.top < window.innerHeight * 0.85) {
+        desc.classList.add("visible");
+      }
     });
 
-    // Randomize gradient movement
-    const raibeat = document.getElementById("raibeat");
+    // Define gradient sets: dark vs bright
+    const darkGradients = [
+      "linear-gradient(135deg, #0a0000, #240000, #440000, #8b0000)",
+      "linear-gradient(135deg, #100000, #200000, #3b0000, #ff2400)"
+    ];
+
+    const brightGradients = [
+      "linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f)",
+      "linear-gradient(135deg, #0099ff, #00ffc6, #ffaf7b, #ffe29f)"
+    ];
+
+    // Random assignment ensuring contrast
+    const isRaiDark = Math.random() > 0.5;
+    const rai = document.getElementById("raibeat");
     const yash = document.getElementById("yash");
 
+    rai.style.background = isRaiDark 
+      ? darkGradients[Math.floor(Math.random() * darkGradients.length)]
+      : brightGradients[Math.floor(Math.random() * brightGradients.length)];
+
+    yash.style.background = !isRaiDark 
+      ? darkGradients[Math.floor(Math.random() * darkGradients.length)]
+      : brightGradients[Math.floor(Math.random() * brightGradients.length)];
+
+    // Randomize gradient movement durations
     const randomDuration = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
     const randomDelay = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
-    raibeat.style.animationDuration = randomDuration(15, 25) + "s";
-    raibeat.style.animationDelay = "-" + randomDelay(0, 10) + "s";
-
-    yash.style.animationDuration = randomDuration(15, 25) + "s";
-    yash.style.animationDelay = "-" + randomDelay(0, 10) + "s";
+    [rai, yash].forEach(el => {
+      el.style.backgroundSize = "400% 400%";
+      el.style.animation = `move ${randomDuration(15, 25)}s ease infinite`;
+      el.style.animationDelay = "-" + randomDelay(0, 10) + "s";
+    });
   </script>
 </body>
 </html>
