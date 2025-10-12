@@ -218,31 +218,24 @@
       }
     });
 
-    // Define gradient sets: dark vs bright
-    const darkGradients = [
+    // Gradient sets
+    const gradientSets = [
       "linear-gradient(135deg, #0a0000, #240000, #440000, #8b0000)",
-      "linear-gradient(135deg, #100000, #200000, #3b0000, #ff2400)"
-    ];
-
-    const brightGradients = [
+      "linear-gradient(135deg, #100000, #200000, #3b0000, #ff2400)",
       "linear-gradient(135deg, #006994, #00b7c2, #ff8a5c, #ffd07f)",
-      "linear-gradient(135deg, #0099ff, #00ffc6, #ffaf7b, #ffe29f)"
+      "linear-gradient(135deg, #0099ff, #00ffc6, #ffaf7b, #ffe29f)",
+      "linear-gradient(135deg, #1e1e1e, #3a3a3a, #111, #000)",
+      "linear-gradient(135deg, #0f2027, #203a43, #2c5364)"
     ];
 
-    // Random assignment ensuring contrast
-    const isRaiDark = Math.random() > 0.5;
+    // Random assignment
     const rai = document.getElementById("raibeat");
     const yash = document.getElementById("yash");
 
-    rai.style.background = isRaiDark 
-      ? darkGradients[Math.floor(Math.random() * darkGradients.length)]
-      : brightGradients[Math.floor(Math.random() * brightGradients.length)];
+    rai.style.background = gradientSets[Math.floor(Math.random() * gradientSets.length)];
+    yash.style.background = gradientSets[Math.floor(Math.random() * gradientSets.length)];
 
-    yash.style.background = !isRaiDark 
-      ? darkGradients[Math.floor(Math.random() * darkGradients.length)]
-      : brightGradients[Math.floor(Math.random() * brightGradients.length)];
-
-    // Randomize gradient movement durations
+    // Randomized movement
     const randomDuration = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
     const randomDelay = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
 
