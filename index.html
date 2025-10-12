@@ -20,12 +20,12 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes floatDr {
-      0% { opacity: 0; transform: translateY(20px) rotate(-3deg); }
+      0% { opacity: 0; transform: translateY(10px) rotate(-3deg); }
       100% { opacity: 1; transform: translateY(0) rotate(0deg); }
     }
 
@@ -34,7 +34,9 @@
       text-align: center;
       padding: 10vh 5vw 6vh 5vw;
       background: radial-gradient(circle at center, #111 0%, #000 100%);
-      animation: fadeIn 1.5s ease-out forwards;
+      animation: fadeIn 1.2s ease-out forwards;
+      position: relative;
+      overflow: hidden;
     }
 
     .intro h1 {
@@ -47,24 +49,25 @@
       position: relative;
       display: inline-block;
       text-transform: uppercase;
-      text-shadow: 0 0 4px rgba(255,255,255,0.2);
+      text-shadow: 0 0 6px rgba(255,255,255,0.25);
     }
 
-    /* --- “Dr” positioned on LEFT side --- */
+    /* --- “Dr” positioned clearly on LEFT side --- */
     .intro h1::before {
       content: 'Dr';
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 600;
-      font-size: 3.5rem;
+      font-size: 3.8rem;
       position: absolute;
-      top: -1.6rem;
-      left: -4.2rem;
+      top: -1.5rem;
+      left: -5.2rem;
       color: #ffffff;
       opacity: 0;
       transform: translateY(20px);
       animation: floatDr 1.6s ease-out forwards;
-      animation-delay: calc(0.8s + (0.5s * var(--randDr)));
+      animation-delay: 0.4s;
+      text-shadow: 0 0 8px rgba(255,255,255,0.4);
     }
 
     .intro p {
@@ -77,8 +80,8 @@
       line-height: 1.6;
       max-width: 600px;
       opacity: 0;
-      animation: fadeIn 2s ease forwards;
-      animation-delay: calc(1s + (0.4s * var(--randSub)));
+      animation: fadeIn 1.6s ease forwards;
+      animation-delay: 2.2s; /* after “Dr” fully visible */
     }
 
     .artist-desc {
@@ -91,8 +94,8 @@
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
-      animation: fadeIn 2.2s ease forwards;
-      animation-delay: calc(1.5s + (0.4s * var(--randDesc)));
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 3.2s; /* comes after subtitle */
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -190,7 +193,7 @@
   </style>
 </head>
 <body>
-  <div class="intro" id="intro">
+  <div class="intro">
     <h1>YASH RAIPURE</h1>
     <p>Dual Alias Artist | Producer | DJ</p>
 
@@ -220,12 +223,9 @@
   </div>
 
   <script>
-    // Randomize animation timings
+    // Randomize gradient animation timings
     document.documentElement.style.setProperty('--moveTime1', (16 + Math.random() * 10) + 's');
     document.documentElement.style.setProperty('--moveTime2', (16 + Math.random() * 10) + 's');
-    document.documentElement.style.setProperty('--randDr', Math.random());
-    document.documentElement.style.setProperty('--randSub', Math.random());
-    document.documentElement.style.setProperty('--randDesc', Math.random());
   </script>
 </body>
 </html>
