@@ -80,17 +80,18 @@
       animation-fill-mode: forwards;
     }
 
+    /* ---------- ARTIST DESCRIPTION (Scroll Reveal) ---------- */
     .artist-desc {
       font-family: 'Manrope', sans-serif;
       font-weight: 400;
       font-size: 1.05rem;
       line-height: 1.75;
       max-width: 700px;
-      margin: 0 auto;
+      margin: 50vh auto 0 auto;
       color: #bdbdd3;
       letter-spacing: 0.03rem;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(60px);
       transition: all 1.2s ease;
     }
 
@@ -161,7 +162,7 @@
       box-shadow: 0 0 20px currentColor;
     }
 
-    /* ---------- RAI BEAT (CRUEL & UNDERGROUND) ---------- */
+    /* ---------- RAI BEAT (Cruel + Underground) ---------- */
     .raibeat {
       background: linear-gradient(135deg, #0a0000, #240000, #440000, #ff2400);
       background-size: 400% 400%;
@@ -188,7 +189,7 @@
     @media (max-width: 900px) {
       .intro h1 { font-size: 3rem; }
       .intro h1::before { font-size: 2.6rem; left: -3rem; top: -1.2rem; }
-      .artist-desc { font-size: 0.98rem; max-width: 90%; }
+      .artist-desc { font-size: 0.98rem; max-width: 90%; margin-top: 40vh; }
       .split { flex-direction: column; height: auto; }
       .alias { height: 50vh; }
     }
@@ -213,13 +214,13 @@
   </div>
 
   <div class="split">
-    <div class="alias raibeat" onclick="window.location.href='raibeat.html'">
+    <div class="alias raibeat" id="raibeat" onclick="window.location.href='raibeat.html'">
       <h2>raiBeat</h2>
       <p>Raw. Rebellious. Rumble.</p>
       <button>Enter</button>
     </div>
 
-    <div class="alias yash" onclick="window.location.href='yash.html'">
+    <div class="alias yash" id="yash" onclick="window.location.href='yash.html'">
       <h2>Яsh</h2>
       <p>Melodic. Rhythm. Therapy.</p>
       <button>Enter</button>
@@ -227,22 +228,25 @@
   </div>
 
   <script>
-    // Ensure subtitle animation triggers only once
+    // Subtitle only animates once
     const subtitle = document.getElementById("subtitle");
     subtitle.style.animationPlayState = "running";
 
-    // Scroll reveal for artist description
+    // Scroll-based fade-in for artist description
     const desc = document.getElementById("artistDesc");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          desc.classList.add("visible");
-          observer.unobserve(desc);
-        }
-      });
-    }, { threshold: 0.2 });
+    window.addEventListener("scroll", () => {
+      const rect = desc.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const visibleAmount = Math.max(0, windowHeight - rect.top);
+      const progress = Math.min(1, visibleAmount / (rect.height / 1.5)); // controls how fast it fades
+      desc.style.opacity = progress;
+      desc.style.transform = `translateY(${60 - progress * 60}px)`;
+    });
 
-    observer.observe(desc);
+    // Randomize animation time for both alias gradients
+    const randTime = (min, max) => (Math.random() * (max - min) + min).toFixed(1);
+    document.getElementById("raibeat").style.animationDuration = randTime(14, 22) + "s";
+    document.getElementById("yash").style.animationDuration = randTime(15, 25) + "s";
   </script>
 </body>
 </html>
