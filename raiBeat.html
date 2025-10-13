@@ -2,68 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>raiBeat – Yash Raipure Alias</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>raiBeat – Yash Raipure Alias</title>
+
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    body, html {
-      margin: 0; padding: 0;
-      background: linear-gradient(135deg, #2a0e17, #5c1826);
-      font-family: 'Open Sans', sans-serif;
-      color: #ffccd1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 3rem 1rem;
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Manrope', sans-serif;
+      background: linear-gradient(-45deg, #2b0000, #4b0000, #000000, #1a0000);
+      background-size: 400% 400%;
+      animation: move 18s ease infinite;
+      color: #f8d7d7;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
       text-align: center;
-      user-select: none;
     }
+
+    @keyframes move {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h1 {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 3rem;
-      letter-spacing: 0.1em;
-      color: #ff4d63;
-      margin-bottom: 0.5rem;
+      font-weight: 900;
+      font-size: 4rem;
+      letter-spacing: 4px;
+      margin: 3rem 0 0.5rem 0;
       text-transform: uppercase;
-      text-shadow: 0 0 15px #ff5570cc;
-      user-select: none;
+      text-shadow: 0 0 10px rgba(255, 77, 99, 0.45);
+      animation: fadeIn 1.2s ease forwards;
     }
+
     .tagline {
-      font-style: italic;
-      color: #ff9fa7cc;
-      margin-bottom: 2.5rem;
+      font-family: 'Manrope', sans-serif;
       font-size: 1.2rem;
-      user-select: text;
+      color: #f5b8c0;
+      margin-bottom: 2.5rem;
+      animation: fadeIn 1.6s ease forwards;
+      animation-delay: 0.5s;
     }
+
     section {
-      max-width: 900px;
-      width: 100%;
-      margin-bottom: 3rem;
-      user-select: text;
+      max-width: 850px;
+      width: 90%;
+      margin: 0 auto 3.5rem auto;
+      text-align: center;
+      animation: fadeIn 1.8s ease forwards;
+      animation-delay: 0.7s;
     }
+
     section h2 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 1.8rem;
-      color: #ffa3ad;
-      margin-bottom: 0.8rem;
       text-transform: uppercase;
+      color: #ffa3ad;
+      margin-bottom: 1rem;
       border-bottom: 2px solid #ff6980;
+      display: inline-block;
       padding-bottom: 0.3rem;
-      user-select: none;
+      text-shadow: 0 0 8px rgba(255, 90, 100, 0.3);
     }
+
     section p, section ul {
       font-size: 1.05rem;
-      line-height: 1.6;
-      color: #fed6db;
+      line-height: 1.7;
+      color: #f5d9db;
     }
+
     ul {
-      list-style: inside disc;
-      padding-left: 0;
-      margin-top: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    ul li strong {
+      color: #ff9fa7;
+    }
+
+    ul a {
+      color: #ff7b8c;
+      text-decoration: none;
+    }
+
+    ul a:hover {
+      text-decoration: underline;
     }
 
     /* Music player styling */
@@ -74,28 +110,7 @@
       width: 100%;
       max-width: 520px;
       height: 166px;
-      box-shadow: 0 0 15px #ff597080;
-      user-select: none;
-    }
-
-    /* Upcoming events */
-    .events-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      user-select: text;
-    }
-    .events-list li {
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: #ffc0c8;
-    }
-    .events-list a {
-      color: #ffa9b4;
-      text-decoration: none;
-    }
-    .events-list a:hover, .events-list a:focus {
-      text-decoration: underline;
+      box-shadow: 0 0 15px rgba(255, 77, 99, 0.4);
     }
 
     /* Media Gallery */
@@ -103,111 +118,111 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      user-select: none;
+      gap: 1.2rem;
+      margin-top: 1rem;
     }
+
     .gallery img, .gallery video {
       max-width: 280px;
       width: 100%;
       border-radius: 12px;
-      box-shadow: 0 0 18px #ff8699aa;
-      transition: transform 0.3s ease;
+      box-shadow: 0 0 18px rgba(255, 130, 140, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
+
     .gallery img:hover, .gallery video:hover {
       transform: scale(1.06);
+      box-shadow: 0 0 24px rgba(255, 100, 120, 0.6);
     }
 
-    /* Social & Contact */
+    /* Social links */
     .social-links {
       display: flex;
       justify-content: center;
       gap: 2rem;
       margin-top: 1rem;
     }
+
     .social-links a {
       color: #ff576d;
       font-size: 1.7rem;
       text-decoration: none;
       transition: color 0.25s ease;
     }
-    .social-links a:hover, .social-links a:focus {
-      color: #ff3200;
+
+    .social-links a:hover {
+      color: #ff3248;
     }
 
     /* Back button */
     .back-link {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
       display: inline-block;
-      background: #ff495e;
-      color: white;
-      padding: 0.8rem 3rem;
-      border-radius: 28px;
+      background: transparent;
+      border: 2px solid #ff4c61;
+      color: #ffb2bc;
+      padding: 0.8rem 2.5rem;
+      border-radius: 30px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      text-transform: uppercase;
       text-decoration: none;
-      box-shadow: 0 0 26px #ff495eaa;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .back-link:hover, .back-link:focus {
-      background: #ff2e48;
-      box-shadow: 0 0 44px #ff2e4888;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 76, 97, 0.3);
     }
 
-    /* Responsive */
+    .back-link:hover {
+      background: #ff4c61;
+      color: #fff;
+      box-shadow: 0 0 30px rgba(255, 76, 97, 0.7);
+    }
+
     @media (max-width: 720px) {
       h1 {
-        font-size: 2.4rem;
+        font-size: 3rem;
       }
-      section {
-        margin-bottom: 2rem;
-      }
-      .music-player {
-        height: 140px;
-        max-width: 100%;
+      section h2 {
+        font-size: 1.5rem;
       }
       .gallery img, .gallery video {
         max-width: 100%;
       }
-      .social-links {
-        gap: 1.5rem;
-      }
     }
   </style>
 </head>
+
 <body>
   <h1>raiBeat</h1>
   <p class="tagline">Raw, rebellious energy for underground clubs and festival stages.</p>
-  
-  <section aria-labelledby="about-title">
-    <h2 id="about-title">About / Bio</h2>
+
+  <section>
+    <h2>About / Bio</h2>
     <p>raiBeat embodies raw, rebellious electronic energy focused on high-octane beats and heavy basslines. The alias pushes rhythmic and sonic boundaries with experimental sound design to energize underground and festival crowds.</p>
   </section>
-  
-  <section aria-labelledby="music-title">
-    <h2 id="music-title">Music Showcase</h2>
-    <!-- Sample SoundCloud embed, replace link as needed -->
-    <iframe class="music-player" scrolling="no" frameborder="no" allow="autoplay" 
-       src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-123456789/sets/raibeat-ep&color=%23ff4c61&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+
+  <section>
+    <h2>Music Showcase</h2>
+    <iframe class="music-player" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-123456789/sets/raibeat-ep&color=%23ff4c61&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
     </iframe>
   </section>
-  
-  <section aria-labelledby="events-title">
-    <h2 id="events-title">Upcoming Events / Gigs</h2>
-    <ul class="events-list">
-      <li><strong>Oct 15, 2025</strong> – Underground Pulse Festival, New York, USA <a href="#" target="_blank" rel="noopener">Tickets</a></li>
+
+  <section>
+    <h2>Upcoming Events / Gigs</h2>
+    <ul>
+      <li><strong>Oct 15, 2025</strong> – Underground Pulse Festival, New York, USA <a href="#" target="_blank">Tickets</a></li>
       <li><strong>Nov 5, 2025</strong> – Bassline Club Night, Berlin, Germany</li>
       <li><strong>Dec 1, 2025</strong> – Rebel Waves Festival, London, UK</li>
     </ul>
   </section>
 
-  <section aria-labelledby="media-title">
-    <h2 id="media-title">Media Gallery</h2>
+  <section>
+    <h2>Media Gallery</h2>
     <div class="gallery">
-      <img alt="raiBeat live at Underground Pulse Festival" src="https://via.placeholder.com/280x160/ff4c61/fff?text=raiBeat+Live+1" />
-      <img alt="raiBeat studio session" src="https://via.placeholder.com/280x160/ff5668/fff?text=raiBeat+Studio" />
+      <img src="https://via.placeholder.com/280x160/ff4c61/fff?text=raiBeat+Live+1" alt="raiBeat live at Underground Pulse Festival" />
+      <img src="https://via.placeholder.com/280x160/ff5668/fff?text=raiBeat+Studio" alt="raiBeat studio session" />
       <video controls width="280" preload="none" poster="https://via.placeholder.com/280x160/ff4c61/fff?text=raiBeat+Video">
         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -215,15 +230,19 @@
     </div>
   </section>
 
-  <section aria-labelledby="social-title">
-    <h2 id="social-title">Social & Contact</h2>
-    <div class="social-links" role="navigation" aria-label="raiBeat social links">
-      <a href="https://soundcloud.com/raibeat" target="_blank" rel="noopener" aria-label="SoundCloud">🎵</a>
-      <a href="https://instagram.com/raibeat" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+  <section>
+    <h2>Social & Contact</h2>
+    <div class="social-links">
+      <a href="https://soundcloud.com/raibeat" target="_blank" aria-label="SoundCloud">🎵</a>
+      <a href="https://instagram.com/raibeat" target="_blank" aria-label="Instagram">📸</a>
       <a href="mailto:booking@raibeat.com" aria-label="Booking Email">✉️</a>
     </div>
   </section>
 
-  <a href="index.html" class="back-link" aria-label="Back to artist landing page">Back to Profiles</a>
+  <a href="index.html" class="back-link">Back to Profiles</a>
+
+  <script>
+    document.documentElement.style.setProperty('--moveTime', (16 + Math.random() * 10) + 's');
+  </script>
 </body>
 </html>
