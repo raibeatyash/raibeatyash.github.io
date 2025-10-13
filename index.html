@@ -6,13 +6,13 @@
   <title>Yash Raipure – Dual Alias Artist</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Playfair+Display:ital,wght@1,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Epilogue:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       background-color: #000;
       color: #fff;
       scroll-behavior: smooth;
@@ -24,9 +24,22 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes floatDr {
-      0% { opacity: 0; transform: translateY(10px) rotate(-3deg); }
-      100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    @keyframes cinematicDr {
+      0% {
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(12px) scale(0.95);
+      }
+      60% {
+        opacity: 0.8;
+        filter: blur(2px);
+        transform: translateY(0) scale(1.02);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+      }
     }
 
     /* ---------- INTRO ---------- */
@@ -40,8 +53,8 @@
     }
 
     .intro h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
+      font-family: 'Syncopate', sans-serif;
+      font-weight: 700;
       font-size: 4.3rem;
       letter-spacing: 4px;
       margin: 0;
@@ -52,26 +65,27 @@
       text-shadow: 0 0 6px rgba(255,255,255,0.25);
     }
 
-    /* --- “Dr.” positioned clearly on LEFT side --- */
+    /* --- Cinematic “Dr.” tag --- */
     .intro h1::before {
       content: 'Dr.';
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 3.8rem;
+      font-family: 'Epilogue', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      font-size: 3.4rem;
       position: absolute;
-      top: -1.5rem;
-      left: -5.2rem;
+      top: -1.4rem;
+      left: -5.1rem;
       color: #ffffff;
       opacity: 0;
       transform: translateY(20px);
-      animation: floatDr 1.6s ease-out forwards;
-      animation-delay: 0.4s;
-      text-shadow: 0 0 8px rgba(255,255,255,0.4);
+      animation: cinematicDr 2.2s ease-out forwards;
+      animation-delay: 0.6s;
+      text-shadow: 0 0 10px rgba(255,255,255,0.25);
+      filter: blur(4px);
     }
 
     .intro p {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-weight: 500;
       font-size: 1.15rem;
       color: #dcdcdc;
@@ -81,11 +95,11 @@
       max-width: 600px;
       opacity: 0;
       animation: fadeIn 1.6s ease forwards;
-      animation-delay: 1.6s; /* Slightly faster */
+      animation-delay: 1.6s;
     }
 
     .artist-desc {
-      font-family: 'Manrope', sans-serif;
+      font-family: 'Epilogue', sans-serif;
       font-weight: 400;
       font-size: 1.05rem;
       line-height: 1.75;
@@ -95,7 +109,7 @@
       letter-spacing: 0.03rem;
       opacity: 0;
       animation: fadeIn 2s ease forwards;
-      animation-delay: 2.4s; /* Slightly faster */
+      animation-delay: 2.4s;
     }
 
     /* ---------- SPLIT SECTIONS ---------- */
@@ -126,14 +140,15 @@
     }
 
     .alias h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
+      font-family: 'Syncopate', sans-serif;
+      font-weight: 700;
       font-size: 3.2rem;
       letter-spacing: 4px;
       margin: 0;
     }
 
     .alias p {
+      font-family: 'Epilogue', sans-serif;
       font-size: 1.1rem;
       margin: 1rem 0 2rem 0;
       letter-spacing: 1px;
@@ -151,6 +166,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       color: inherit;
+      font-family: 'Epilogue', sans-serif;
     }
 
     .alias button:hover {
@@ -185,7 +201,7 @@
     /* --- Responsive --- */
     @media (max-width: 900px) {
       .intro h1 { font-size: 3rem; }
-      .intro h1::before { font-size: 2.6rem; left: -3rem; top: -1.2rem; }
+      .intro h1::before { font-size: 2.4rem; left: -3rem; top: -1rem; }
       .artist-desc { font-size: 0.98rem; max-width: 90%; }
       .split { flex-direction: column; height: auto; }
       .alias { height: 50vh; }
